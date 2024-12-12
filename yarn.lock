@@ -1716,12 +1716,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^20":
-  version: 20.17.6
-  resolution: "@types/node@npm:20.17.6"
+"@types/node@npm:^22.10.2":
+  version: 22.10.2
+  resolution: "@types/node@npm:22.10.2"
   dependencies:
-    undici-types: "npm:~6.19.2"
-  checksum: 10c0/5918c7ff8368bbe6d06d5e739c8ae41a9db41628f28760c60cda797be7d233406f07c4d0e6fdd960a0a342ec4173c2217eb6624e06bece21c1f1dd1b92805c15
+    undici-types: "npm:~6.20.0"
+  checksum: 10c0/2c7b71a040f1ef5320938eca8ebc946e6905caa9bbf3d5665d9b3774a8d15ea9fab1582b849a6d28c7fc80756a62c5666bc66b69f42f4d5dafd1ccb193cdb4ac
   languageName: node
   linkType: hard
 
@@ -2797,7 +2797,7 @@ __metadata:
     "@pixi/devtools": "npm:^2.0.1"
     "@pixi/react": "npm:^8.0.0-beta.14"
     "@types/matter-js": "npm:^0"
-    "@types/node": "npm:^20"
+    "@types/node": "npm:^22.10.2"
     "@types/react": "npm:^18"
     "@types/react-dom": "npm:^18"
     eslint: "npm:^8"
@@ -2807,7 +2807,7 @@ __metadata:
     miniplex-react: "npm:^2.0.1"
     next: "npm:^14"
     pixi-ldtk-loader: "npm:^2.3.1"
-    pixi-tiled-loader: "npm:^0.0.0"
+    pixi-tiled-loader: "npm:^1.0.0"
     pixi.js: "npm:^8.2.6"
     poly-decomp: "npm:^0.3.0"
     react: "npm:^18"
@@ -5606,13 +5606,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"pixi-tiled-loader@portal:/Users/trezy/Development/libs/pixi-tiled-loader::locator=discord-activity%40workspace%3A.":
-  version: 0.0.0-use.local
-  resolution: "pixi-tiled-loader@portal:/Users/trezy/Development/libs/pixi-tiled-loader::locator=discord-activity%40workspace%3A."
+"pixi-tiled-loader@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "pixi-tiled-loader@npm:1.0.0"
   peerDependencies:
     pixi.js: ^8
+  checksum: 10c0/92a36ba4be586ef219e31bcd1841d1ca200642f907a28ef1b3516d4ecb062856cfb2d85ca1f421e8e161ce35273fd9cbce73904e8cde59ed9a5f8552560f07ac
   languageName: node
-  linkType: soft
+  linkType: hard
 
 "pixi.js@npm:^8.2.6":
   version: 8.5.2
@@ -6747,10 +6748,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"undici-types@npm:~6.19.2, undici-types@npm:~6.19.8":
+"undici-types@npm:~6.19.8":
   version: 6.19.8
   resolution: "undici-types@npm:6.19.8"
   checksum: 10c0/078afa5990fba110f6824823ace86073b4638f1d5112ee26e790155f481f2a868cc3e0615505b6f4282bdf74a3d8caad715fd809e870c2bb0704e3ea6082f344
+  languageName: node
+  linkType: hard
+
+"undici-types@npm:~6.20.0":
+  version: 6.20.0
+  resolution: "undici-types@npm:6.20.0"
+  checksum: 10c0/68e659a98898d6a836a9a59e6adf14a5d799707f5ea629433e025ac90d239f75e408e2e5ff086afc3cace26f8b26ee52155293564593fbb4a2f666af57fc59bf
   languageName: node
   linkType: hard
 
