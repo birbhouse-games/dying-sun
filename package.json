@@ -1,24 +1,44 @@
 {
   "name": "discord-activity",
   "version": "0.1.0",
+  "type": "module",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "prebuild": "assetpack",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
-    "react": "19.0.0-rc-66855b96-20241106",
-    "react-dom": "19.0.0-rc-66855b96-20241106",
-    "next": "15.0.3"
+    "@pixi/devtools": "^2.0.1",
+    "@pixi/react": "^8.0.0-beta.14",
+    "matter-js": "^0.20.0",
+    "miniplex": "^2.0.0",
+    "miniplex-react": "^2.0.1",
+    "next": "^14",
+    "pixi-ldtk-loader": "^2.3.1",
+    "pixi-tiled-loader": "^0.0.0",
+    "pixi.js": "^8.2.6",
+    "poly-decomp": "^0.3.0",
+    "react": "^18",
+    "react-dom": "^18",
+    "sass": "^1.81.0",
+    "statery": "^0.7.1",
+    "uuid": "^11.0.3"
   },
   "devDependencies": {
-    "typescript": "^5",
+    "@assetpack/core": "^1.2.2",
+    "@types/matter-js": "^0",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "eslint": "^8",
-    "eslint-config-next": "15.0.3"
+    "eslint-config-next": "^14",
+    "typescript": "^5"
+  },
+  "packageManager": "yarn@4.5.2",
+  "resolutions": {
+    "pixi-tiled-loader": "portal:/Users/trezy/Development/libs/pixi-tiled-loader"
   }
 }

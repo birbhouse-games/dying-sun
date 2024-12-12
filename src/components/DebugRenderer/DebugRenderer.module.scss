@@ -1,0 +1,12 @@
+.debug-info,
+.wireframes {
+	inset: 0;
+	position: absolute;
+}
+
+.debug-info {}
+
+.wireframes {
+	transform: scale(4);
+	transform-origin: 0 0;
+}
