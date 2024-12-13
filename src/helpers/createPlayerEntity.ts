@@ -18,6 +18,7 @@ import { store } from '@/store/store'
 
 
 
+/** Creates the Miniplex entity and Matter.js bodies for a player. */
 export function createPlayerEntity() {
 	const { physicsEngine } = store.state
 

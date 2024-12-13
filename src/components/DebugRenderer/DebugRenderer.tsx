@@ -20,6 +20,11 @@ import styles from './DebugRenderer.module.scss'
 
 
 
+/**
+ * Renders debug information. Enabled by adding `debug=1` query parameter.
+ *
+ * @component
+ */
 export function DebugRenderer() {
 	const searchParams = useSearchParams()
 	const {
@@ -36,10 +41,10 @@ export function DebugRenderer() {
 			const wireframeCanvas = wireframeCanvasRef.current
 
 			store.set(() => {
-				const debugRenderers = []
+				const lDebugRenderers = []
 
 				if (debugInfoCanvas) {
-					debugRenderers.push(Render.create({
+					lDebugRenderers.push(Render.create({
 						canvas: debugInfoCanvas,
 						engine: physicsEngine,
 						options: {
@@ -56,7 +61,7 @@ export function DebugRenderer() {
 				}
 
 				if (wireframeCanvas) {
-					debugRenderers.push(Render.create({
+					lDebugRenderers.push(Render.create({
 						canvas: wireframeCanvas,
 						engine: physicsEngine,
 						options: {
@@ -77,7 +82,7 @@ export function DebugRenderer() {
 					}))
 				}
 
-				return { debugRenderers }
+				return { debugRenderers: lDebugRenderers }
 			})
 		}
 	}, [

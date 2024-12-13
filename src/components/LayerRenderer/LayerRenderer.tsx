@@ -28,6 +28,11 @@ type Props = {
 
 
 
+/**
+ * Renders an individual layer. Mostly limited to background layers.
+ *
+ * @component
+ */
 export function LayerRenderer(props: Props) {
 	const {
 		layer,

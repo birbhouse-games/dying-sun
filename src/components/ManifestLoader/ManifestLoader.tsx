@@ -7,8 +7,8 @@ import { useStore } from 'statery'
 
 
 // Local imports
-import { store } from '@/store/store.ts'
-import { BundleLoader } from '@/components/BundleLoader/BundleLoader.tsx'
+import { BundleLoader } from '@/components/BundleLoader/BundleLoader'
+import { store } from '@/store/store'
 
 
 
@@ -20,15 +20,18 @@ let manifestLoadingPromise: Promise<unknown>
 
 
 
+/**
+ * Loads the manifest file, then starts the bundle loader.
+ *
+ * @component
+ */
 export function ManifestLoader() {
 	const { manifest } = useStore(store)
 
 	if (!manifest && !manifestLoadingPromise) {
 		manifestLoadingPromise = fetch('/assets/manifest.json')
 			.then(result => result.json())
-			.then(result => {
-				store.set(() => ({ manifest: result }))
-			})
+			.then(result => store.set(() => ({ manifest: result })))
 
 		throw manifestLoadingPromise
 	}

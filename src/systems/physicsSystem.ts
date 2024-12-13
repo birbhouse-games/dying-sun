@@ -1,8 +1,5 @@
 // Module imports
-import {
-	Engine,
-	Runner,
-} from 'matter-js'
+import { Engine } from 'matter-js'
 import { Ticker } from 'pixi.js'
 
 
@@ -16,6 +13,11 @@ import { store } from '@/store/store'
 
 
 
+/**
+ * Updates the physics engine.
+ *
+ * @param ticker The Pixi.js ticker.
+ */
 export function physicsSystem(ticker: Ticker) {
 	const { deltaMS } = ticker
 	const { physicsEngine } = store.state

@@ -14,10 +14,10 @@ import { useEffect } from 'react'
 import { actorSystem } from '@/systems/actorSystem'
 import { cameraSystem } from '@/systems/cameraSystem'
 import { controlsSystem } from '@/systems/controlsSystem'
-import { Renderer } from '@/components/Renderer/Renderer'
 import { entitySortSystem } from '@/systems/entitySortSystem'
 import { movementSystem } from '@/systems/movementSystem'
 import { physicsSystem } from '@/systems/physicsSystem'
+import { Renderer } from '@/components/Renderer/Renderer'
 import { timeSystem } from '@/systems/timeSystem'
 
 import { useKeyboardStateSystem } from '@/hooks/useKeyboardStateSystem'
@@ -26,6 +26,11 @@ import { useKeyboardStateSystem } from '@/hooks/useKeyboardStateSystem'
 
 
 
+/**
+ * Main game component. owns the renderer and runs all systems.
+ *
+ * @component
+ */
 export function Game() {
 	const { app } = useApplication()
 
@@ -41,6 +46,7 @@ export function Game() {
 	}, [app])
 
 	useTick({
+		// eslint-disable-next-line jsdoc/require-jsdoc
 		callback: ticker => {
 			timeSystem()
 			controlsSystem()

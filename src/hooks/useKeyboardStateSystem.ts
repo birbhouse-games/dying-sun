@@ -1,7 +1,7 @@
 // Module imports
 import {
-  useCallback,
-  useEffect,
+	useCallback,
+	useEffect,
 } from 'react'
 
 
@@ -16,13 +16,14 @@ import { store } from '@/store/store.ts'
 
 
 
+/** Tracks changes to the keyboard state. */
 export function useKeyboardStateSystem() {
-  const handleKeyDown = useCallback((event: KeyboardEvent) => {
+	const handleKeyDown = useCallback((event: KeyboardEvent) => {
 		if (!KEY_BINDINGS[event.key]) {
 			return
-    }
+		}
 
-    event.preventDefault()
+		event.preventDefault()
 
 		const { keyboardState } = store.state
 		let keyState = keyboardState.get(event.key)
@@ -32,51 +33,51 @@ export function useKeyboardStateSystem() {
 				activatedAt: null,
 				deactivatedAt: null,
 				isActive: false,
-				sinceLastActivated: null
+				sinceLastActivated: null,
 			}
 			keyboardState.set(event.key, keyState)
 		}
 
-    if (keyState.isActive) {
-      return
-    }
+		if (keyState.isActive) {
+			return
+		}
 
-    keyState.activatedAt = store.state.now
-    keyState.isActive = true
+		keyState.activatedAt = store.state.now
+		keyState.isActive = true
 
-    store.set(() => ({ keyboardState: new Map(keyboardState) }))
-  }, [])
+		store.set(() => ({ keyboardState: new Map(keyboardState) }))
+	}, [])
 
-  const handleKeyUp = useCallback((event: KeyboardEvent) => {
+	const handleKeyUp = useCallback((event: KeyboardEvent) => {
 		if (!KEY_BINDINGS[event.key]) {
 			return
-    }
+		}
 
-    event.preventDefault()
+		event.preventDefault()
 
 		const { keyboardState } = store.state
 		const keyState = keyboardState.get(event.key)
 
-    if (!keyState) {
-      return
-    }
+		if (!keyState) {
+			return
+		}
 
-    keyState.deactivatedAt = store.state.now
-    keyState.isActive = false
+		keyState.deactivatedAt = store.state.now
+		keyState.isActive = false
 
-    store.set(() => ({ keyboardState: new Map(keyboardState) }))
-  }, [])
+		store.set(() => ({ keyboardState: new Map(keyboardState) }))
+	}, [])
 
-  useEffect(() => {
-    document.addEventListener('keydown', handleKeyDown)
-    document.addEventListener('keyup', handleKeyUp)
+	useEffect(() => {
+		document.addEventListener('keydown', handleKeyDown)
+		document.addEventListener('keyup', handleKeyUp)
 
-    return () => {
-      document.removeEventListener('keydown', handleKeyDown)
-      document.removeEventListener('keyup', handleKeyUp)
-    }
-  }, [
-    handleKeyDown,
-    handleKeyUp,
-  ])
+		return () => {
+			document.removeEventListener('keydown', handleKeyDown)
+			document.removeEventListener('keyup', handleKeyUp)
+		}
+	}, [
+		handleKeyDown,
+		handleKeyUp,
+	])
 }

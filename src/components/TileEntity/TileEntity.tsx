@@ -14,6 +14,12 @@ import { Tile } from '@/components/Tile/Tile'
 
 
 
+/**
+ * Renders a Miniplex entity as a tile.
+ *
+ * @component
+ * @param entity The Miniplex entity.
+ */
 export function TileEntity(entity: With<Entity, 'position' | 'tile' | 'zIndex'>) {
 	const {
 		x: positionX,

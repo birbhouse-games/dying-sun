@@ -7,9 +7,9 @@ import { useStore } from 'statery'
 
 
 // Local imports
-import { WorldLoader } from '@/components/WorldLoader/WorldLoader'
 import { loadAssetBundles } from '@/helpers/loadAssetBundles'
-import { store } from '@/store/store.ts'
+import { store } from '@/store/store'
+import { WorldLoader } from '@/components/WorldLoader/WorldLoader'
 
 
 
@@ -22,6 +22,11 @@ let bundleLoadingPromise: Promise<unknown>
 
 
 
+/**
+ * Loads all asset bundles, then starts the world loader.
+ *
+ * @component
+ */
 export function BundleLoader() {
 	const {
 		areAssetsInitialised,

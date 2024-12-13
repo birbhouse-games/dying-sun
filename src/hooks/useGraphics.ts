@@ -6,10 +6,18 @@ import { useCallback } from 'react'
 
 
 
+/**
+ * React hook for creating a properly typed Pixi.js Graphics draw callback.
+ *
+ * @param callback The callback to be fired when the Graphics context is ready to be redrawn.
+ * @param dependencies An array of dependencies to watch.
+ * @returns The typed callback.
+ */
 export function useGraphics(
+	// eslint-disable-next-line no-unused-vars
 	callback: (graphics: Graphics, ...args: unknown[]) => unknown,
 	dependencies: unknown[],
 ) {
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  return useCallback(callback, dependencies)
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	return useCallback(callback, dependencies)
 }

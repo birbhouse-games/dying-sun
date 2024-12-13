@@ -1,12 +1,15 @@
 // Module imports
 import {
+	Common,
+	Composite,
+} from 'matter-js'
+import {
 	type GroupLayer,
 	type Layer,
 	type ObjectLayer,
 	type Tilemap,
 } from 'pixi-tiled-loader'
 import { Assets } from 'pixi.js'
-import { Common, Composite } from 'matter-js'
 import decomp from 'poly-decomp'
 import { useEffect } from 'react'
 import { useStore } from 'statery'
@@ -25,7 +28,12 @@ import { store } from '@/store/store'
 
 
 
-// Functions
+/**
+ * Filters an array of tilemap layers, returning only layers that have physics entities.
+ *
+ * @param layers The layers to be filtered.
+ * @returns An array of tilemap layers with physics entities.
+ */
 function getEntityLayers(layers: (GroupLayer | Layer | ObjectLayer)[]): (Layer | ObjectLayer)[] {
 	return layers
 		.map(layer => {
@@ -51,7 +59,12 @@ function getEntityLayers(layers: (GroupLayer | Layer | ObjectLayer)[]): (Layer |
 
 
 
-export function WorldLoader () {
+/**
+ * Initialises the world.
+ *
+ * @component
+ */
+export function WorldLoader() {
 	const {
 		isWorldInitialised,
 		physicsEngine,
@@ -94,7 +107,10 @@ export function WorldLoader () {
 
 			store.set(() => ({ isWorldInitialised: true }))
 		}
-	}, [isWorldInitialised])
+	}, [
+		isWorldInitialised,
+		physicsEngine.world,
+	])
 
 	return 'Loaded!'
 }

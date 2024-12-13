@@ -36,6 +36,14 @@ const PROP_COLLIDER_OPTIONS = {
 
 
 
+/**
+ * Creates Matter.js bodies from Tiled objects.
+ *
+ * @param object The Tiled object.
+ * @param baseX The base X position of the object (usually the position of the placement cell in the tilemap).
+ * @param baseY The base Y position of the object (usually the position of the placement cell in the tilemap).
+ * @returns The Matter.js body.
+ */
 export function createObjectBody(
 	object: Ellipse | Point | Polygon | Rectangle,
 	baseX: number = 0,
@@ -57,7 +65,7 @@ export function createObjectBody(
 		case 'point':
 			break
 
-		case 'polygon':
+		case 'polygon': {
 			body = Bodies.fromVertices(
 				0,
 				0,
@@ -73,6 +81,7 @@ export function createObjectBody(
 				y: baseY + object.y + (bodyHeight / 2),
 			})
 			break
+		}
 
 		case 'rectangle':
 			body = Bodies.rectangle(
@@ -83,6 +92,9 @@ export function createObjectBody(
 				PROP_COLLIDER_OPTIONS,
 			)
 			break
+
+		default:
+			console.error('unrecognised object type', object)
 	}
 
 	return body

@@ -14,6 +14,11 @@ import { store } from '@/store/store'
 
 
 
+/**
+ * World container that owns all subrenderers.
+ *
+ * @component
+ */
 export function Renderer() {
 	const {
 		worldPositionX,

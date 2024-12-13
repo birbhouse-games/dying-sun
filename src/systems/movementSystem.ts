@@ -19,6 +19,7 @@ const PLAYER_ENTITIES = ECS.world.with('bodies', 'isPlayer', 'position', 'veloci
 
 
 
+/** Moves physics bodies based on their owner entity's velocity. */
 export function movementSystem() {
 	for (const entity of PLAYER_ENTITIES) {
 		Body.setVelocity(entity.bodies.bodies[0], {

@@ -1,5 +1,5 @@
 // Module imports
-import createReactAPI from 'miniplex-react'
+import { createReactAPI } from 'miniplex-react'
 
 
 

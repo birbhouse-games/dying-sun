@@ -23,6 +23,7 @@
 
 
 
+/** Moves the camera based to follow the player character. */
 export function cameraSystem() {
 	// store.state.debugRenderers?.forEach(renderer => {
 	// 	Bounds.translate(renderer.bounds, {
