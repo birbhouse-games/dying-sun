@@ -12,6 +12,7 @@ import { store } from '@/store/store'
 
 
 
+/** Parses asset bundles from the manifest and loads all relevant files. */
 export async function loadAssetBundles() {
 	if (store.state.manifest && !store.state.areAssetsInitialised) {
 		await Assets.init({

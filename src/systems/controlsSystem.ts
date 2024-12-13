@@ -7,6 +7,7 @@ import { store } from '@/store/store.ts'
 
 
 
+/** Updates the state of input controls based on the current keyboard/gamepad state. */
 export function controlsSystem() {
 	const boundKeys = Object.keys(KEY_BINDINGS)
 
@@ -30,11 +31,9 @@ export function controlsSystem() {
 					keyState.sinceLastActivated = now
 					action?.onActivate?.()
 				}
-			} else {
-				if (typeof keyState.sinceLastActivated === 'number') {
-					keyState.sinceLastActivated = null
-					action?.onDeactivate?.()
-				}
+			} else if (typeof keyState.sinceLastActivated === 'number') {
+				keyState.sinceLastActivated = null
+				action?.onDeactivate?.()
 			}
 		}
 	}

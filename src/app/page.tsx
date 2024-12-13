@@ -2,10 +2,6 @@
 
 // Module imports
 import {
-	Application,
-	extend,
-} from '@pixi/react'
-import {
 	AnimatedSprite,
 	BitmapText,
 	Container,
@@ -14,6 +10,10 @@ import {
 	Sprite,
 	TextureStyle,
 } from 'pixi.js'
+import {
+	Application,
+	extend,
+} from '@pixi/react'
 import {
 	Suspense,
 	useMemo,
@@ -62,6 +62,11 @@ extensions.add(TiledTilesetLoader({ loadImages: true }))
 
 TextureStyle.defaultOptions.scaleMode = 'nearest'
 
+/**
+ * The main page.
+ *
+ * @component
+ */
 export default function HomePage() {
 	const {
 		areAssetsInitialised,

@@ -1549,19 +1549,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@pixi/react@npm:^8.0.0-beta.14":
-  version: 8.0.0-dev.fdeaea4
-  resolution: "@pixi/react@npm:8.0.0-dev.fdeaea4"
+"@pixi/react@npm:8.0.0-beta.14":
+  version: 8.0.0-beta.14
+  resolution: "@pixi/react@npm:8.0.0-beta.14"
   dependencies:
-    react-reconciler: "npm:^0.29.2"
+    react-reconciler: "npm:0.29.2"
   peerDependencies:
-    pixi.js: ^8.2.1
+    pixi.js: ^8.2.6
     react: ">=18.0.0"
     react-dom: ">=18.0.0"
   peerDependenciesMeta:
     react-dom:
       optional: true
-  checksum: 10c0/6bbd0bf877333d3aca02ef8792d39c4479702037301e64262e4386536c34c177db446f0826230f8b3f475665ac656c4a97f21ae5780ab0e4cfd50eb297377b6c
+  checksum: 10c0/23137c5b5726be0bcdd67458fe00dfbaedcc6912f74dc5f1dd02d9de437044506894e948d9eba0297858632c8d9a7e76fdc43399a1cfb86b55a551125d9bf1c2
   languageName: node
   linkType: hard
 
@@ -2942,7 +2942,7 @@ __metadata:
   dependencies:
     "@assetpack/core": "npm:^1.2.2"
     "@pixi/devtools": "npm:^2.0.1"
-    "@pixi/react": "npm:^8.0.0-beta.14"
+    "@pixi/react": "npm:8.0.0-beta.14"
     "@trezy-studios/eslint-config": "npm:^1.0.0"
     "@trezy-studios/eslint-config-react": "npm:^1.0.0"
     "@types/eslint-plugin-jsx-a11y": "npm:^6"
@@ -6100,7 +6100,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-reconciler@npm:^0.29.2":
+"react-reconciler@npm:0.29.2":
   version: 0.29.2
   resolution: "react-reconciler@npm:0.29.2"
   dependencies:

@@ -1,7 +1,7 @@
 // Module imports
 import {
-	AnimatedSprite as PixiAnimatedSprite,
 	Assets,
+	AnimatedSprite as PixiAnimatedSprite,
 	Spritesheet,
 } from 'pixi.js'
 // import {
@@ -35,6 +35,12 @@ import { Entity } from '@/typedefs/Entity'
 
 
 
+/**
+ * Renders a player entity.
+ *
+ * @component
+ * @param entity The Miniplex entity.
+ */
 export function Player(entity: With<Entity, 'isPlayer' | 'position' | 'velocity' | 'zIndex'>) {
 	const {
 		x: positionX,
@@ -106,7 +112,7 @@ export function Player(entity: With<Entity, 'isPlayer' | 'position' | 'velocity'
 					animationSpeed={0.2}
 					scale={{
 						x: isFlipped ? -1 : 1,
-						y: 1
+						y: 1,
 					}}
 					textures={textures} />
 			</container>

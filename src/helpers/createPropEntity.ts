@@ -21,6 +21,13 @@ import { store } from '@/store/store'
 
 
 
+/**
+ * Creates the Miniplex entity and Matter.js bodies for a prop.
+ *
+ * @param cell The cell within a tilemap.
+ * @param tile The tile within a tileset.
+ * @param tilemap The tilemap to which this prop belongs.
+ */
 export function createPropEntity(cell: Cell, tile: GridTile | ImageTile, tilemap: Tilemap) {
 	const { physicsEngine } = store.state
 

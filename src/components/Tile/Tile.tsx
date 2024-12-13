@@ -20,6 +20,11 @@ type Props = {
 
 
 
+/**
+ * Renders a tilemap tile with Pixi.js.
+ *
+ * @component
+ */
 export function Tile(props: Props) {
 	const {
 		tile,

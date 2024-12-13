@@ -1,3 +1,5 @@
+/* eslint-disable jsdoc/require-jsdoc */
+
 // Local imports
 import { ACTION_NAMES } from '@/constants/ACTION_NAMES.ts'
 import { type ActionHandler } from '@/typedefs/ActionHandler.ts'

@@ -19,6 +19,7 @@ const PLAYER_ENTITIES = ECS.world.with('bodies', 'isPlayer', 'position')
 
 
 
+/** Moves actor sprites based on their physics body's position. */
 export function actorSystem() {
 	for (const entity of PLAYER_ENTITIES) {
 		const collider = Composite

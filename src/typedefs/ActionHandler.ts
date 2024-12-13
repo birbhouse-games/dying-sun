@@ -1,6 +1,6 @@
 export type ActionHandler = {
-  isRepeatable: boolean,
-  onActivate: (...args: unknown[]) => void,
-  onDeactivate?: (...args: unknown[]) => void,
-  repeatFrequency?: number,
+	isRepeatable: boolean,
+	onActivate: (..._args: unknown[]) => void,
+	onDeactivate?: (..._args: unknown[]) => void,
+	repeatFrequency?: number,
 }

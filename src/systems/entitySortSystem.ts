@@ -28,6 +28,7 @@ type EntityWithComponents = With<Entity, 'position' | 'zIndex' | 'zOffset'>
 
 
 
+/** Sorts sprites based on where they should overlap. */
 export function entitySortSystem() {
 	const sortedEntities = quicksort<EntityWithComponents, number>(
 		ENTITIES_QUERY.entities,

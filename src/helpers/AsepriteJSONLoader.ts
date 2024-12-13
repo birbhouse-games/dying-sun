@@ -28,6 +28,14 @@ export const AsepriteJSONLoader = {
 		type: ExtensionType.LoadParser,
 	},
 
+	/**
+	 * Tests an asset to see if it should be parsed by this loader.
+	 *
+	 * @param asset The asset to be tested.
+	 * @param options Additional options.
+	 * @returns Whether the asset should be parsed by this loader.
+	 */
+	// eslint-disable-next-line require-await
 	async testParse(asset, options) {
 		if (!options?.src) {
 			return false
@@ -46,6 +54,13 @@ export const AsepriteJSONLoader = {
 		return /^https?:\/\/(?:www\.)?aseprite\.org\/$/iu.test(typedAsset.meta.app)
 	},
 
+	/**
+	 * Parses an asset.
+	 *
+	 * @param asset The asset to be parsed.
+	 * @returns The parsed asset.
+	 */
+	// eslint-disable-next-line require-await
 	async parse(asset): Promise<SpritesheetData> {
 		const typedAsset = asset as SpritesheetData
 

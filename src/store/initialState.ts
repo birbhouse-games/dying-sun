@@ -18,7 +18,7 @@ export const initialState: GlobalState = {
 	areBundlesLoaded: false,
 	bundles: {},
 	isWorldInitialised: false,
-  keyboardState: new Map,
+	keyboardState: new Map,
 	manifest: null,
 	physicsEngine: Engine.create({
 		gravity: {
