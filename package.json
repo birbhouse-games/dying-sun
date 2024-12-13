@@ -17,7 +17,7 @@
     "matter-js": "^0.20.0",
     "miniplex": "^2.0.0",
     "miniplex-react": "^2.0.1",
-    "next": "^14",
+    "next": "^14.2.20",
     "pixi-ldtk-loader": "^2.3.1",
     "pixi-tiled-loader": "^1.0.0",
     "pixi.js": "^8.2.6",
@@ -30,13 +30,33 @@
   },
   "devDependencies": {
     "@assetpack/core": "^1.2.2",
+    "@trezy-studios/eslint-config": "^1.0.0",
+    "@trezy-studios/eslint-config-react": "^1.0.0",
+    "@types/eslint-plugin-jsx-a11y": "^6",
+    "@types/eslint-plugin-security": "^3",
     "@types/matter-js": "^0",
     "@types/node": "^22.10.2",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@typescript-eslint/eslint-plugin": "7.8.0",
+    "@typescript-eslint/parser": "7.8.0",
     "eslint": "^8",
-    "eslint-config-next": "^14",
-    "typescript": "^5"
+    "eslint-config-next": "^15.1.0",
+    "eslint-plugin-editorconfig": "^4.0.3",
+    "eslint-plugin-jsdoc": "^50.6.1",
+    "eslint-plugin-optimize-regex": "^1.2.1",
+    "eslint-plugin-promise": "^7.2.1",
+    "eslint-plugin-security": "^3.0.1",
+    "eslint-plugin-sort-class-members": "^1.21.0",
+    "eslint-plugin-unused-imports": "^3",
+    "typescript": "5.5.x"
   },
-  "packageManager": "yarn@4.5.2"
+  "packageManager": "yarn@4.5.2",
+  "resolutions": {
+    "@birbhouse/eslint-config": "portal:/Users/trezy/Development/trezy-studios/eslint-config/packages/eslint-config",
+    "@birbhouse/eslint-config-electron": "portal:/Users/trezy/Development/trezy-studios/eslint-config/packages/eslint-config-electron",
+    "@birbhouse/eslint-config-react": "portal:/Users/trezy/Development/trezy-studios/eslint-config/packages/eslint-config-react",
+    "@typescript-eslint/eslint-plugin": "7.8.0",
+    "@typescript-eslint/parser": "7.8.0"
+  }
 }
