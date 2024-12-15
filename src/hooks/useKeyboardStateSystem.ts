@@ -19,7 +19,7 @@ import { store } from '@/store/store.ts'
 /** Tracks changes to the keyboard state. */
 export function useKeyboardStateSystem() {
 	const handleKeyDown = useCallback((event: KeyboardEvent) => {
-		if (!KEY_BINDINGS[event.key]) {
+		if (KEY_BINDINGS[event.key] === undefined) {
 			return
 		}
 
@@ -49,7 +49,7 @@ export function useKeyboardStateSystem() {
 	}, [])
 
 	const handleKeyUp = useCallback((event: KeyboardEvent) => {
-		if (!KEY_BINDINGS[event.key]) {
+		if (KEY_BINDINGS[event.key] === undefined) {
 			return
 		}
 
