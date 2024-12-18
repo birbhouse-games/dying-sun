@@ -5,4 +5,4 @@
  * activated within this window before the previous attack ends, or after the
  * previous attack ends.
  */
-export const COMBO_CONTINUE_WINDOW = 100
+export const COMBO_CONTINUE_WINDOW = 300

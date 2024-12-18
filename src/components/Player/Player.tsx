@@ -41,7 +41,11 @@ import { Entity } from '@/typedefs/Entity'
  * @component
  * @param entity The Miniplex entity.
  */
-export function Player(entity: With<Entity, 'isPlayer' | 'position' | 'velocity' | 'zIndex'>) {
+export function Player(entity: With<Entity, 'attack' | 'isPlayer' | 'position' | 'velocity' | 'zIndex'>) {
+	const {
+		currentStageIndex,
+		stages,
+	} = useStore(entity.attack)
 	const {
 		x: positionX,
 		y: positionY,
@@ -69,13 +73,25 @@ export function Player(entity: With<Entity, 'isPlayer' | 'position' | 'velocity'
 		return Assets.get<Spritesheet>('hero.json')
 	}, [])
 
+	const currentStage = useMemo(() => stages?.[currentStageIndex!], [
+		currentStageIndex,
+		stages,
+	])
+
+	const loop = useMemo(() => !currentStage, [currentStage])
+
 	const textures = useMemo(() => {
+		if (currentStage) {
+			return spritesheet.animations[currentStage.name]
+		}
+
 		if (velocityX || velocityY) {
 			return spritesheet.animations['run']
 		}
 
 		return spritesheet.animations['idle']
 	}, [
+		currentStage,
 		velocityX,
 		velocityY,
 		spritesheet,
@@ -93,7 +109,10 @@ export function Player(entity: With<Entity, 'isPlayer' | 'position' | 'velocity'
 		if (spriteRef.current) {
 			spriteRef.current.play()
 		}
-	}, [textures])
+	}, [
+		currentStage,
+		textures,
+	])
 
 	return (
 		<>
@@ -110,6 +129,7 @@ export function Player(entity: With<Entity, 'isPlayer' | 'position' | 'velocity'
 					}}
 					// @ts-expect-error `animationSpeed` is missing from the Pixi React types.
 					animationSpeed={0.2}
+					loop={loop}
 					scale={{
 						x: isFlipped ? -1 : 1,
 						y: 1,

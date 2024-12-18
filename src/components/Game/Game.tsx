@@ -12,6 +12,7 @@ import { useEffect } from 'react'
 
 // Local imports
 import { actorSystem } from '@/systems/actorSystem'
+import { attackSystem } from '@/systems/attackSystem'
 import { cameraSystem } from '@/systems/cameraSystem'
 import { controlsSystem } from '@/systems/controlsSystem'
 import { entitySortSystem } from '@/systems/entitySortSystem'
@@ -51,6 +52,7 @@ export function Game() {
 			timeSystem()
 			controlsSystem()
 			movementSystem()
+			attackSystem()
 			physicsSystem(ticker)
 			actorSystem()
 			entitySortSystem()

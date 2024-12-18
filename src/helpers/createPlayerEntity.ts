@@ -11,7 +11,7 @@ import { makeStore } from 'statery'
 
 // Local imports
 import { COLLISION_CATEGORIES } from '@/constants/COLLISION_CATEGORIES'
-import { createIsAttackingState } from '@/helpers/createIsAttackingState'
+import { createAttackState } from '@/helpers/createAttackState'
 import { ECS } from '@/helpers/ECS'
 import { store } from '@/store/store'
 
@@ -37,9 +37,10 @@ export function createPlayerEntity() {
 	}
 
 	const entity = ECS.world.add({
+		attack: createAttackState(),
 		bodies: Composite.create(),
 		health: makeStore({ value: 100 }),
-		isAttacking: createIsAttackingState(),
+		isActor: true,
 		isPlayer: true,
 		speed: 1,
 		position: makeStore({
