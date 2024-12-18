@@ -13,7 +13,7 @@ import { ECS } from '@/helpers/ECS'
 
 
 // Constants
-const PLAYER_ENTITIES = ECS.world.with('bodies', 'isPlayer', 'position')
+const ACTOR_ENTITIES = ECS.world.with('bodies', 'isActor', 'position')
 
 
 
@@ -21,7 +21,7 @@ const PLAYER_ENTITIES = ECS.world.with('bodies', 'isPlayer', 'position')
 
 /** Moves actor sprites based on their physics body's position. */
 export function actorSystem() {
-	for (const entity of PLAYER_ENTITIES) {
+	for (const entity of ACTOR_ENTITIES) {
 		const collider = Composite
 			.allBodies(entity.bodies)
 			.find(body => body.label === 'collider')!

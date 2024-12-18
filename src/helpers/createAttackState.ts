@@ -6,7 +6,7 @@ import { makeStore } from 'statery'
 
 
 // Local imports
-import { type IsAttackingState } from '@/typedefs/IsAttackingState'
+import { type AttackState } from '@/typedefs/AttackState'
 
 
 
@@ -17,8 +17,8 @@ import { type IsAttackingState } from '@/typedefs/IsAttackingState'
  *
  * @returns The attack state.
  */
-export function createIsAttackingState() {
-	return makeStore<IsAttackingState>({
+export function createAttackState() {
+	return makeStore<AttackState>({
 		continueCombo: null,
 		currentStageIndex: null,
 		stages: null,

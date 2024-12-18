@@ -11,8 +11,8 @@ import { type Store } from 'statery'
 
 
 // Local imports
+import { type AttackState } from '@/typedefs/AttackState'
 import { type HealthState } from '@/typedefs/HealthState'
-import { type IsAttackingState } from '@/typedefs/IsAttackingState'
 import { type PositionState } from '@/typedefs/PositionState'
 import { type UUID } from '@/typedefs/UUID'
 import { type VelocityState } from '@/typedefs/VelocityState'
@@ -23,10 +23,11 @@ import { type ZIndexState } from '@/typedefs/ZIndexState'
 
 
 export type Entity = {
+	attack?: Store<AttackState>,
 	bodies?: Composite,
 	health?: Store<HealthState>,
 	id?: UUID,
-	isAttacking?: Store<IsAttackingState>,
+	isActor?: boolean,
 	isPlayer?: boolean,
 	isProp?: boolean,
 	position?: Store<PositionState>,

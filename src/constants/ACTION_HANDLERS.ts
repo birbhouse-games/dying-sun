@@ -14,7 +14,7 @@ import { store } from '@/store/store'
 // Constants
 const FRAME_DURATION = 100
 const PLAYER_ENTITIES = ECS.world.with(
-	'isAttacking',
+	'attack',
 	'isPlayer',
 	'velocity',
 )
@@ -35,18 +35,45 @@ export const ACTION_HANDLERS: Record<string, ActionHandler> = {
 					currentStageIndex,
 					stages,
 					startedAt,
-				} = entity.isAttacking.state
+				} = entity.attack.state
 				const currentStage = stages?.[currentStageIndex!]
 
 				// Starting a new attack combo
 				if (startedAt === null) {
-					entity.isAttacking.set(() => ({
+					entity.attack.set(() => ({
 						continueCombo: false,
 						currentStageIndex: 0,
 						stages: [
-							{ duration: FRAME_DURATION * 7 },
-							{ duration: FRAME_DURATION * 5 },
-							{ duration: FRAME_DURATION * 5 },
+							{
+								duration: FRAME_DURATION * 7,
+								hitBoxes: [{
+									height: 25,
+									width: 25,
+									x: -5,
+									y: -19,
+								}],
+								name: 'attack-1',
+							},
+							{
+								duration: FRAME_DURATION * 5,
+								hitBoxes: [{
+									height: 22,
+									width: 37,
+									x: -18,
+									y: -16,
+								}],
+								name: 'attack-2',
+							},
+							{
+								duration: FRAME_DURATION * 5,
+								hitBoxes: [{
+									height: 23,
+									width: 40,
+									x: -14,
+									y: -17,
+								}],
+								name: 'attack-3',
+							},
 						],
 						startedAt: now,
 					}))
@@ -57,7 +84,7 @@ export const ACTION_HANDLERS: Record<string, ActionHandler> = {
 					&& now <= ((startedAt + currentStage!.duration) + COMBO_CONTINUE_WINDOW)
 					&& now >= ((startedAt + currentStage!.duration) - COMBO_CONTINUE_WINDOW)
 				) {
-					entity.isAttacking.set(() => ({ continueCombo: true }))
+					entity.attack.set(() => ({ continueCombo: true }))
 				}
 			}
 		},
