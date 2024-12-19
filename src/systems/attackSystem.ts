@@ -1,13 +1,6 @@
 // Local imports
-import { ECS } from '@/helpers/ECS'
+import { query } from '@/helpers/ECS'
 import { store } from '@/store/store'
-
-
-
-
-
-// Constants
-const ACTOR_ENTITIES = ECS.world.with('attack', 'bodies', 'isActor', 'position')
 
 
 
@@ -17,7 +10,7 @@ const ACTOR_ENTITIES = ECS.world.with('attack', 'bodies', 'isActor', 'position')
 export function attackSystem() {
 	const { now } = store.state
 
-	for (const entity of ACTOR_ENTITIES) {
+	for (const entity of query.actor) {
 		const {
 			continueCombo,
 			currentStageIndex,

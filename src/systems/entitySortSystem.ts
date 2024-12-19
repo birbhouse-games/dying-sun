@@ -6,16 +6,9 @@ import { type With } from 'miniplex'
 
 
 // Local imports
-import { ECS } from '@/helpers/ECS'
 import { type Entity } from '@/typedefs/Entity'
+import { query } from '@/helpers/ECS'
 import { quicksort } from '@/helpers/quicksort'
-
-
-
-
-
-// Constants
-const ENTITIES_QUERY = ECS.world.with('position', 'zIndex', 'zOffset')
 
 
 
@@ -31,7 +24,7 @@ type EntityWithComponents = With<Entity, 'position' | 'zIndex' | 'zOffset'>
 /** Sorts sprites based on where they should overlap. */
 export function entitySortSystem() {
 	const sortedEntities = quicksort<EntityWithComponents, number>(
-		ENTITIES_QUERY.entities,
+		query.sortable.entities,
 		entity => entity.position.state.y + entity.zOffset,
 	)
 

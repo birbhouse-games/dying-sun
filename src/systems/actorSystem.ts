@@ -6,14 +6,7 @@ import { Composite } from 'matter-js'
 
 
 // Local imports
-import { ECS } from '@/helpers/ECS'
-
-
-
-
-
-// Constants
-const ACTOR_ENTITIES = ECS.world.with('bodies', 'isActor', 'position')
+import { query } from '@/helpers/ECS'
 
 
 
@@ -21,7 +14,7 @@ const ACTOR_ENTITIES = ECS.world.with('bodies', 'isActor', 'position')
 
 /** Moves actor sprites based on their physics body's position. */
 export function actorSystem() {
-	for (const entity of ACTOR_ENTITIES) {
+	for (const entity of query.actor) {
 		const collider = Composite
 			.allBodies(entity.bodies)
 			.find(body => body.label === 'collider')!
