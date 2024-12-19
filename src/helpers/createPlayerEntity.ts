@@ -1,88 +1,35 @@
-// Module imports
-import {
-	Bodies,
-	Composite,
-} from 'matter-js'
-import { makeStore } from 'statery'
-
-
-
-
-
 // Local imports
-import { COLLISION_CATEGORIES } from '@/constants/COLLISION_CATEGORIES'
-import { createAttackState } from '@/helpers/createAttackState'
-import { ECS } from '@/helpers/ECS'
-import { store } from '@/store/store'
+import { createActorEntity } from '@/helpers/createActorEntity'
+import { ENTITY_CATALOGUE } from '@/constants/ENTITY_CATALOGUE'
 
 
 
 
 
-/** Creates the Miniplex entity and Matter.js bodies for a player. */
-export function createPlayerEntity() {
-	const { physicsEngine } = store.state
+/**
+ * Creates the Miniplex entity and Matter.js bodies for a player.
+ *
+ * @param startingX The X position at which this entity will start.
+ * @param startingY The Y position at which this entity will start.
+ * @param entityProps Additional props to be set on the entity.
+ * @returns The new entity.
+ */
+export function createPlayerEntity(
+	startingX: number,
+	startingY: number,
+	entityProps = {},
+) {
+	const entityDefinition = ENTITY_CATALOGUE['player']
 
-	const entityBoundingBox = {
-		height: 16,
-		width: 17,
-		x: 33,
-		y: 154,
-	}
-	const colliderBoundingBox = {
-		height: 2,
-		width: 4,
-		x: 0,
-		y: -5,
-	}
-
-	const entity = ECS.world.add({
-		attack: createAttackState(),
-		bodies: Composite.create(),
-		health: makeStore({ value: 100 }),
-		isActor: true,
-		isPlayer: true,
-		speed: 1,
-		position: makeStore({
-			x: entityBoundingBox.x,
-			y: entityBoundingBox.y,
-		}),
-		velocity: makeStore({
-			x: 0,
-			y: 0,
-		}),
-		zIndex: makeStore({ value: 0 }),
-		zOffset: 6,
-	})
-
-	const collider = Bodies.rectangle(
-		entityBoundingBox.x,
-		entityBoundingBox.y,
-		colliderBoundingBox.width,
-		colliderBoundingBox.height,
+	const entity = createActorEntity(
+		entityDefinition,
+		startingX,
+		startingY,
 		{
-			collisionFilter: {
-				category: COLLISION_CATEGORIES.ACTOR_COLLIDER,
-				mask: COLLISION_CATEGORIES.ACTOR_COLLIDER | COLLISION_CATEGORIES.PROP,
-			},
-			friction: 0,
-			inertia: Infinity,
-			label: 'collider',
-			render: {
-				sprite: {
-					texture: '',
-					// @ts-expect-error xOffset is missing from the Matter.js types.
-					xOffset: colliderBoundingBox.x + 1,
-					xScale: 1,
-					yOffset: colliderBoundingBox.y,
-					yScale: 1,
-				},
-			},
-			restitution: 0,
-			slop: 0,
+			...entityProps,
+			isPlayer: true,
 		},
 	)
 
-	Composite.add(entity.bodies!, collider)
-	Composite.add(physicsEngine.world, entity.bodies!)
+	return entity
 }

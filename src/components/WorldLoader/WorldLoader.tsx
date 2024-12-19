@@ -73,6 +73,7 @@ export function WorldLoader() {
 	useEffect(() => {
 		if (!isWorldInitialised) {
 			Common.setDecomp(decomp)
+
 			const tilemap = Assets.get<Tilemap>('level.tmx')
 
 			const tilesets = Object
@@ -101,7 +102,7 @@ export function WorldLoader() {
 				}
 			})
 
-			createPlayerEntity()
+			createPlayerEntity(33, 154)
 
 			Composite.allComposites(physicsEngine.world)
 
