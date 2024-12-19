@@ -5,6 +5,7 @@ import {
 } from 'matter-js'
 import {
 	type GroupLayer,
+	isPoint,
 	type Layer,
 	type ObjectLayer,
 	type Tilemap,
@@ -22,6 +23,8 @@ import { useStore } from 'statery'
 import { createObjectBody } from '@/helpers/createObjectBody'
 import { createPlayerEntity } from '@/helpers/createPlayerEntity'
 import { createPropEntity } from '@/helpers/createPropEntity'
+import { createSpawnEntity } from '@/helpers/createSpawnEntity'
+import { type SpawnPoint } from '@/typedefs/SpawnPoint'
 import { store } from '@/store/store'
 
 
@@ -96,9 +99,18 @@ export function WorldLoader() {
 						createPropEntity(cell, tile, tilemap)
 					}
 				} else if (layer.type === 'object') {
+					// Create bodies for world objects
 					Composite.add(physicsEngine.world, layer.objects
 						.map(object => createObjectBody(object))
 						.filter(body => !!body))
+
+					// Create spawn entities
+					layer.objects
+						.filter(object => isPoint(object))
+						.filter(object => object.class === 'spawn')
+						.forEach(object => {
+							createSpawnEntity(object as SpawnPoint)
+						})
 				}
 			})
 
