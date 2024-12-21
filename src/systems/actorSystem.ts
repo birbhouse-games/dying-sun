@@ -20,14 +20,9 @@ export function actorSystem() {
 			.find(body => body.label === 'collider')!
 
 		entity.position.set(() => {
-			// @ts-expect-error xOffset is missing from the Matter.js types.
-			const xOffset = collider.render.sprite?.xOffset ?? 0
-			// @ts-expect-error yOffset is missing from the Matter.js types.
-			const yOffset = collider.render.sprite?.yOffset ?? 0
-
 			return {
-				x: collider.bounds.min.x + xOffset,
-				y: collider.bounds.min.y + yOffset,
+				x: collider.bounds.min.x + ((collider.bounds.max.x - collider.bounds.min.x) / 2),
+				y: collider.bounds.min.y + ((collider.bounds.max.y - collider.bounds.min.y) / 2),
 			}
 		})
 	}

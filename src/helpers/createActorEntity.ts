@@ -39,10 +39,10 @@ export function createActorEntity(
 
 	const entity = ECS.world.add({
 		...entityProps,
+		actorType: entityDefinition.actorType,
 		attack: createAttackState(),
 		bodies: Composite.create(),
 		health: makeStore({ value: entityDefinition.health }),
-		isActor: true,
 		speed: entityDefinition.speed,
 		position: makeStore({
 			x: startingX,

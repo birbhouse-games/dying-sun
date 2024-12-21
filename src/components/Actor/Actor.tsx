@@ -4,16 +4,13 @@ import {
 	AnimatedSprite as PixiAnimatedSprite,
 	Spritesheet,
 } from 'pixi.js'
-// import {
-// 	useAssets,
-// 	useTick,
-// } from '@pixi/react'
 import {
 	useEffect,
 	useMemo,
 	useRef,
 	useState,
 } from 'react'
+import { Composite } from 'matter-js'
 import { useStore } from 'statery'
 import { type With } from 'miniplex'
 
@@ -28,27 +25,20 @@ import { Entity } from '@/typedefs/Entity'
 
 
 
-// Constants
-// const ASSET_PATHS = ['characters/hero/hero.json']
-
-
-
-
-
 /**
- * Renders a player entity.
+ * Renders an actor entity.
  *
  * @component
  * @param entity The Miniplex entity.
  */
-export function Player(entity: With<Entity, 'attack' | 'isPlayer' | 'position' | 'velocity' | 'zIndex'>) {
+export function Actor(entity: With<Entity, 'actorType' | 'attack' | 'bodies' | 'position' | 'velocity' | 'zIndex'>) {
 	const {
 		currentStageIndex,
 		stages,
 	} = useStore(entity.attack)
 	const {
-		x: positionX,
-		y: positionY,
+		x: entityPositionX,
+		y: entityPositionY,
 	} = useStore(entity.position)
 	const {
 		x: velocityX,
@@ -58,19 +48,28 @@ export function Player(entity: With<Entity, 'attack' | 'isPlayer' | 'position' |
 
 	const [isFlipped, setIsFlipped] = useState(false)
 
-	// // const {
-	// // 	assets: [
-	// // 		heroSpritesheet as Spritesheet,
-	// // 	],
-	// // 	isError,
-	// // 	isPending,
-	// // 	isSuccess,
-	// // } = useAssets(ASSET_PATHS)
-
 	const spriteRef = useRef<PixiAnimatedSprite>(null)
 
+	const position = useMemo(() => {
+		const collider = Composite
+			.allBodies(entity.bodies)
+			.find(body => body.label === 'collider')
+
+		return {
+			// @ts-expect-error xOffset is missing from the Matter.js types.
+			x: entityPositionX + ((collider?.render.sprite?.xOffset ?? 0) * (isFlipped ? -1 : 1)),
+			// @ts-expect-error yOffset is missing from the Matter.js types.
+			y: entityPositionY + (collider?.render.sprite?.yOffset ?? 0),
+		}
+	}, [
+		entity,
+		entityPositionX,
+		entityPositionY,
+		isFlipped,
+	])
+
 	const spritesheet = useMemo(() => {
-		return Assets.get<Spritesheet>('hero.json')
+		return Assets.get<Spritesheet>(`/assets/characters/${entity.actorType}/${entity.actorType}.json`)
 	}, [])
 
 	const currentStage = useMemo(() => stages?.[currentStageIndex!], [
@@ -86,7 +85,7 @@ export function Player(entity: With<Entity, 'attack' | 'isPlayer' | 'position' |
 		}
 
 		if (velocityX || velocityY) {
-			return spritesheet.animations['run']
+			return spritesheet.animations['move']
 		}
 
 		return spritesheet.animations['idle']
@@ -115,27 +114,25 @@ export function Player(entity: With<Entity, 'attack' | 'isPlayer' | 'position' |
 	])
 
 	return (
-		<>
-			<container
-				label={'player'}
-				x={positionX}
-				y={positionY}
-				zIndex={zIndex}>
-				<animatedSprite
-					ref={spriteRef}
-					anchor={{
-						x: 53 / 128,
-						y: 42 / 64,
-					}}
-					// @ts-expect-error `animationSpeed` is missing from the Pixi React types.
-					animationSpeed={0.2}
-					loop={loop}
-					scale={{
-						x: isFlipped ? -1 : 1,
-						y: 1,
-					}}
-					textures={textures} />
-			</container>
-		</>
+		<container
+			label={`actor::${entity.actorType}`}
+			x={position.x}
+			y={position.y}
+			zIndex={zIndex}>
+			<animatedSprite
+				ref={spriteRef}
+				anchor={{
+					x: 0.5,
+					y: 0.5,
+				}}
+				// @ts-expect-error `animationSpeed` is missing from the Pixi React types.
+				animationSpeed={0.15}
+				loop={loop}
+				scale={{
+					x: isFlipped ? -1 : 1,
+					y: 1,
+				}}
+				textures={textures} />
+		</container>
 	)
 }

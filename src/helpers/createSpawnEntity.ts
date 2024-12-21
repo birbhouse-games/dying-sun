@@ -7,7 +7,7 @@ import { makeStore } from 'statery'
 
 // Local imports
 import { ECS } from '@/helpers/ECS'
-import { SpawnPoint } from '@/typedefs/SpawnPoint'
+import { type SpawnPoint } from '@/typedefs/SpawnPoint'
 
 
 
@@ -33,7 +33,12 @@ export function createSpawnEntity(
 				y: object.y,
 			}),
 			spawn: makeStore({
+				delay: object.customProperties.delay?.value ?? 5 * 1000,
+				entityCount: 0,
 				entityType: object.customProperties.entityType.value,
+				frequency: object.customProperties.frequency?.value ?? 0,
+				maxEntityCount: object.customProperties.maxEntityCount?.value ?? 10,
+				lastSpawnAt: 0,
 				spawnsOn: object.customProperties.spawnsOn.value,
 			}),
 		})

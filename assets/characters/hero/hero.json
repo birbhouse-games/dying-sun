@@ -649,7 +649,7 @@
   "scale": "1",
   "frameTags": [
    { "name": "idle", "from": 0, "to": 0, "direction": "forward", "color": "#000000ff" },
-   { "name": "run", "from": 1, "to": 6, "direction": "forward", "color": "#000000ff" },
+   { "name": "move", "from": 1, "to": 6, "direction": "forward", "color": "#000000ff" },
    { "name": "dash", "from": 7, "to": 13, "direction": "forward", "color": "#000000ff" },
    { "name": "jump", "from": 14, "to": 18, "direction": "forward", "color": "#000000ff" },
    { "name": "fly", "from": 19, "to": 23, "direction": "forward", "color": "#000000ff" },

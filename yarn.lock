@@ -2967,7 +2967,7 @@ __metadata:
     miniplex-react: "npm:^2.0.1"
     next: "npm:^14.2.20"
     pixi-ldtk-loader: "npm:^2.3.3"
-    pixi-tiled-loader: "npm:^1.3.0"
+    pixi-tiled-loader: "npm:^1.3.1"
     pixi.js: "npm:^8.6.6"
     poly-decomp: "npm:^0.3.0"
     react: "npm:^18"
@@ -5927,13 +5927,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"pixi-tiled-loader@portal:/Users/trezy/Development/libs/pixi-tiled-loader::locator=discord-activity%40workspace%3A.":
-  version: 0.0.0-use.local
-  resolution: "pixi-tiled-loader@portal:/Users/trezy/Development/libs/pixi-tiled-loader::locator=discord-activity%40workspace%3A."
+"pixi-tiled-loader@npm:^1.3.1":
+  version: 1.3.1
+  resolution: "pixi-tiled-loader@npm:1.3.1"
   peerDependencies:
     pixi.js: ^8
+  checksum: 10c0/78452d820a8baf54073d84054fcb5ff80f1904a95680fc5ebfe53662ac6e533922b59d5c7e4cfa2fcc2306bd74d28f80275bdecff1b85fe4666cdc8ffcd5e75e
   languageName: node
-  linkType: soft
+  linkType: hard
 
 "pixi.js@npm:^8.6.6":
   version: 8.6.6

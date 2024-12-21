@@ -24,7 +24,11 @@ export const ACTION_HANDLERS: Record<string, ActionHandler> = {
 		onActivate() {
 			const { now } = store.state
 
-			for (const entity of query.player) {
+			for (const entity of query.actor) {
+				if (entity.actorType !== 'hero') {
+					continue
+				}
+
 				const {
 					continueCombo,
 					currentStageIndex,
@@ -88,14 +92,22 @@ export const ACTION_HANDLERS: Record<string, ActionHandler> = {
 	[ACTION_NAMES.MOVE_EAST]: {
 		isRepeatable: false,
 		onActivate() {
-			for (const entity of query.player) {
+			for (const entity of query.actor) {
+				if (entity.actorType !== 'hero') {
+					continue
+				}
+
 				entity.velocity.set(previousState => ({
 					x: previousState.x + 1,
 				}))
 			}
 		},
 		onDeactivate() {
-			for (const entity of query.player) {
+			for (const entity of query.actor) {
+				if (entity.actorType !== 'hero') {
+					continue
+				}
+
 				entity.velocity.set(previousState => ({
 					x: previousState.x - 1,
 				}))
@@ -106,14 +118,22 @@ export const ACTION_HANDLERS: Record<string, ActionHandler> = {
 	[ACTION_NAMES.MOVE_NORTH]: {
 		isRepeatable: false,
 		onActivate() {
-			for (const entity of query.player) {
+			for (const entity of query.actor) {
+				if (entity.actorType !== 'hero') {
+					continue
+				}
+
 				entity.velocity.set(previousState => ({
 					y: previousState.y - 1,
 				}))
 			}
 		},
 		onDeactivate() {
-			for (const entity of query.player) {
+			for (const entity of query.actor) {
+				if (entity.actorType !== 'hero') {
+					continue
+				}
+
 				entity.velocity.set(previousState => ({
 					y: previousState.y + 1,
 				}))
@@ -124,14 +144,22 @@ export const ACTION_HANDLERS: Record<string, ActionHandler> = {
 	[ACTION_NAMES.MOVE_SOUTH]: {
 		isRepeatable: false,
 		onActivate() {
-			for (const entity of query.player) {
+			for (const entity of query.actor) {
+				if (entity.actorType !== 'hero') {
+					continue
+				}
+
 				entity.velocity.set(previousState => ({
 					y: previousState.y + 1,
 				}))
 			}
 		},
 		onDeactivate() {
-			for (const entity of query.player) {
+			for (const entity of query.actor) {
+				if (entity.actorType !== 'hero') {
+					continue
+				}
+
 				entity.velocity.set(previousState => ({
 					y: previousState.y - 1,
 				}))
@@ -142,14 +170,22 @@ export const ACTION_HANDLERS: Record<string, ActionHandler> = {
 	[ACTION_NAMES.MOVE_WEST]: {
 		isRepeatable: false,
 		onActivate() {
-			for (const entity of query.player) {
+			for (const entity of query.actor) {
+				if (entity.actorType !== 'hero') {
+					continue
+				}
+
 				entity.velocity.set(previousState => ({
 					x: previousState.x - 1,
 				}))
 			}
 		},
 		onDeactivate() {
-			for (const entity of query.player) {
+			for (const entity of query.actor) {
+				if (entity.actorType !== 'hero') {
+					continue
+				}
+
 				entity.velocity.set(previousState => ({
 					x: previousState.x + 1,
 				}))

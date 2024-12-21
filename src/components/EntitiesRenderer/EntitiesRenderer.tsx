@@ -3,8 +3,8 @@ import {
 	ECS,
 	query,
 } from '@/helpers/ECS'
-import { Player } from '@/components/Player/Player'
-import { TileEntity } from '../TileEntity/TileEntity'
+import { Actor } from '@/components/Actor/Actor'
+import { TileEntity } from '@/components/TileEntity/TileEntity'
 
 
 
@@ -26,8 +26,8 @@ export function EntitiesRenderer() {
 				in={query.tile} />
 			<ECS.Entities
 				// eslint-disable-next-line react/no-children-prop
-				children={Player}
-				in={query.player} />
+				children={Actor}
+				in={query.actor} />
 		</container>
 	)
 }

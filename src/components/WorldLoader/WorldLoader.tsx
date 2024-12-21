@@ -21,7 +21,6 @@ import { useStore } from 'statery'
 
 // Local imports
 import { createObjectBody } from '@/helpers/createObjectBody'
-import { createPlayerEntity } from '@/helpers/createPlayerEntity'
 import { createPropEntity } from '@/helpers/createPropEntity'
 import { createSpawnEntity } from '@/helpers/createSpawnEntity'
 import { type SpawnPoint } from '@/typedefs/SpawnPoint'
@@ -108,13 +107,9 @@ export function WorldLoader() {
 					layer.objects
 						.filter(object => isPoint(object))
 						.filter(object => object.class === 'spawn')
-						.forEach(object => {
-							createSpawnEntity(object as SpawnPoint)
-						})
+						.forEach(object => createSpawnEntity(object as SpawnPoint))
 				}
 			})
-
-			createPlayerEntity(33, 154)
 
 			Composite.allComposites(physicsEngine.world)
 
