@@ -2966,13 +2966,13 @@ __metadata:
     miniplex: "npm:^2.0.0"
     miniplex-react: "npm:^2.0.1"
     next: "npm:^14.2.20"
-    pixi-ldtk-loader: "npm:^2.3.1"
-    pixi-tiled-loader: "npm:^1.0.0"
-    pixi.js: "npm:^8.2.6"
+    pixi-ldtk-loader: "npm:^2.3.3"
+    pixi-tiled-loader: "npm:^1.3.1"
+    pixi.js: "npm:^8.6.6"
     poly-decomp: "npm:^0.3.0"
     react: "npm:^18"
     react-dom: "npm:^18"
-    sass: "npm:^1.81.0"
+    sass: "npm:^1.83.0"
     statery: "npm:^0.7.1"
     typescript: "npm:5.5.x"
     uuid: "npm:^11.0.3"
@@ -5918,7 +5918,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"pixi-ldtk-loader@npm:^2.3.1":
+"pixi-ldtk-loader@npm:^2.3.3":
   version: 2.3.3
   resolution: "pixi-ldtk-loader@npm:2.3.3"
   peerDependencies:
@@ -5927,18 +5927,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"pixi-tiled-loader@npm:^1.0.0":
-  version: 1.0.0
-  resolution: "pixi-tiled-loader@npm:1.0.0"
+"pixi-tiled-loader@npm:^1.3.1":
+  version: 1.3.1
+  resolution: "pixi-tiled-loader@npm:1.3.1"
   peerDependencies:
     pixi.js: ^8
-  checksum: 10c0/92a36ba4be586ef219e31bcd1841d1ca200642f907a28ef1b3516d4ecb062856cfb2d85ca1f421e8e161ce35273fd9cbce73904e8cde59ed9a5f8552560f07ac
+  checksum: 10c0/78452d820a8baf54073d84054fcb5ff80f1904a95680fc5ebfe53662ac6e533922b59d5c7e4cfa2fcc2306bd74d28f80275bdecff1b85fe4666cdc8ffcd5e75e
   languageName: node
   linkType: hard
 
-"pixi.js@npm:^8.2.6":
-  version: 8.6.4
-  resolution: "pixi.js@npm:8.6.4"
+"pixi.js@npm:^8.6.6":
+  version: 8.6.6
+  resolution: "pixi.js@npm:8.6.6"
   dependencies:
     "@pixi/colord": "npm:^2.9.6"
     "@types/css-font-loading-module": "npm:^0.0.12"
@@ -5949,7 +5949,7 @@ __metadata:
     eventemitter3: "npm:^5.0.1"
     ismobilejs: "npm:^1.1.1"
     parse-svg-path: "npm:^0.1.2"
-  checksum: 10c0/1a28616caf176dc13187ab57ecf9cfc476b8bc2b09c5262c9e9aaf88fe0663ef965961461e12ef05668608a7397a77016aa82b933b8b7d68201ffe24ca47fbd4
+  checksum: 10c0/3623ca517ffd9ae1a371c03ac0ef4bf5ee3f9572a304e2ea113811572d2eaf7fbffd58c7e7529f5adca5d3db0c8757df8971f2f82a1941d8c53a7617453c6d84
   languageName: node
   linkType: hard
 
@@ -6380,7 +6380,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sass@npm:^1.81.0":
+"sass@npm:^1.83.0":
   version: 1.83.0
   resolution: "sass@npm:1.83.0"
   dependencies:

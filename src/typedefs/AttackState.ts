@@ -1,13 +1,18 @@
+// Local imports
+import { Vector2 } from '@/typedefs/Vector2'
+
+
+
+
+
 interface AttackStage {
 	/** @description The duration of the stage (in milliseconds). */
 	duration: number,
 
 	/** @description The bounding box within which attackable entities will take damage. */
-	hitBoxes: Array<{
+	hitBoxes: Array<Vector2 & {
 		height: number,
 		width: number,
-		x: number,
-		y: number,
 	}>,
 
 	/** @description The name of the animation to be played. */

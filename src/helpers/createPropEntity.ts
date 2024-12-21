@@ -38,7 +38,6 @@ export function createPropEntity(cell: Cell, tile: GridTile | ImageTile, tilemap
 
 	const entity = ECS.world.add({
 		bodies: Composite.create(),
-		isProp: true,
 		position: makeStore({
 			x: tileX,
 			y: tileY,

@@ -6,14 +6,7 @@ import { Body } from 'matter-js'
 
 
 // Local imports
-import { ECS } from '@/helpers/ECS'
-
-
-
-
-
-// Constants
-const PLAYER_ENTITIES = ECS.world.with('bodies', 'isPlayer', 'position', 'velocity', 'speed')
+import { query } from '@/helpers/ECS'
 
 
 
@@ -21,10 +14,12 @@ const PLAYER_ENTITIES = ECS.world.with('bodies', 'isPlayer', 'position', 'veloci
 
 /** Moves physics bodies based on their owner entity's velocity. */
 export function movementSystem() {
-	for (const entity of PLAYER_ENTITIES) {
-		Body.setVelocity(entity.bodies.bodies[0], {
-			x: entity.velocity.state.x,
-			y: entity.velocity.state.y,
-		})
+	for (const entity of query.actor) {
+		for (const body of entity.bodies.bodies) {
+			Body.setVelocity(body, {
+				x: entity.velocity.state.x,
+				y: entity.velocity.state.y,
+			})
+		}
 	}
 }

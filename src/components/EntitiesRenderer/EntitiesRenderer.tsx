@@ -1,15 +1,10 @@
 // Local imports
-import { ECS } from '@/helpers/ECS'
-import { Player } from '@/components/Player/Player'
-import { TileEntity } from '../TileEntity/TileEntity'
-
-
-
-
-
-// Constants
-const playerEntities = ECS.world.with('isPlayer', 'position', 'velocity', 'zIndex')
-const tileEntities = ECS.world.with('position', 'tile', 'zIndex')
+import {
+	ECS,
+	query,
+} from '@/helpers/ECS'
+import { Actor } from '@/components/Actor/Actor'
+import { TileEntity } from '@/components/TileEntity/TileEntity'
 
 
 
@@ -28,11 +23,11 @@ export function EntitiesRenderer() {
 			<ECS.Entities
 				// eslint-disable-next-line react/no-children-prop
 				children={TileEntity}
-				in={tileEntities} />
+				in={query.tile} />
 			<ECS.Entities
 				// eslint-disable-next-line react/no-children-prop
-				children={Player}
-				in={playerEntities} />
+				children={Actor}
+				in={query.actor} />
 		</container>
 	)
 }

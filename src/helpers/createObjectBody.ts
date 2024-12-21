@@ -16,6 +16,7 @@ import {
 
 // Local imports
 import { COLLISION_CATEGORIES } from '@/constants/COLLISION_CATEGORIES'
+import { DEFAULT_BODY_OPTIONS } from '@/constants/DEFAULT_BODY_OPTIONS'
 
 
 
@@ -23,13 +24,13 @@ import { COLLISION_CATEGORIES } from '@/constants/COLLISION_CATEGORIES'
 
 // Constants
 const PROP_COLLIDER_OPTIONS = {
+	...DEFAULT_BODY_OPTIONS,
 	collisionFilter: {
 		category: COLLISION_CATEGORIES.PROP,
 		mask: COLLISION_CATEGORIES.ACTOR_COLLIDER,
 	},
 	isStatic: true,
 	label: 'collider',
-	slop: 0,
 }
 
 

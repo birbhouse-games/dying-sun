@@ -11,15 +11,8 @@ import { useEffect } from 'react'
 
 
 // Local imports
-import { actorSystem } from '@/systems/actorSystem'
-import { attackSystem } from '@/systems/attackSystem'
-import { cameraSystem } from '@/systems/cameraSystem'
-import { controlsSystem } from '@/systems/controlsSystem'
-import { entitySortSystem } from '@/systems/entitySortSystem'
-import { movementSystem } from '@/systems/movementSystem'
-import { physicsSystem } from '@/systems/physicsSystem'
 import { Renderer } from '@/components/Renderer/Renderer'
-import { timeSystem } from '@/systems/timeSystem'
+import { runSystems } from '@/helpers/runSystems'
 
 import { useKeyboardStateSystem } from '@/hooks/useKeyboardStateSystem'
 
@@ -46,19 +39,7 @@ export function Game() {
 		initDevtools({ app })
 	}, [app])
 
-	useTick({
-		// eslint-disable-next-line jsdoc/require-jsdoc
-		callback: ticker => {
-			timeSystem()
-			controlsSystem()
-			movementSystem()
-			attackSystem()
-			physicsSystem(ticker)
-			actorSystem()
-			entitySortSystem()
-			cameraSystem()
-		},
-	})
+	useTick({ callback: runSystems })
 
 	useKeyboardStateSystem()
 

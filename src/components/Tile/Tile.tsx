@@ -8,11 +8,16 @@ import {
 
 
 
+// Local imports
+import { type Vector2 } from '@/typedefs/Vector2'
+
+
+
+
+
 // Types
-type Props = {
+type Props = Vector2 & {
 	tile: GridTile | ImageTile,
-	x: number,
-	y: number,
 	zIndex?: number,
 }
 
