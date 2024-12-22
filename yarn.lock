@@ -2324,6 +2324,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"behaviortree@npm:^3.0.0-beta.1":
+  version: 3.0.0-beta.1
+  resolution: "behaviortree@npm:3.0.0-beta.1"
+  dependencies:
+    core-js: "npm:^3.20.2"
+  checksum: 10c0/9862d1ae35db5844fc8a83abeabf246b03174184c87e0e2e9a877b5e8a618947e8290439dd42322b121cade62b81302b2efa4e244c3a780781b85f701d25e50e
+  languageName: node
+  linkType: hard
+
 "binary-extensions@npm:^2.0.0":
   version: 2.3.0
   resolution: "binary-extensions@npm:2.3.0"
@@ -2722,6 +2731,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"core-js@npm:^3.20.2":
+  version: 3.39.0
+  resolution: "core-js@npm:3.39.0"
+  checksum: 10c0/f7602069b6afb2e3298eec612a5c1e0c3e6a458930fbfc7a4c5f9ac03426507f49ce395eecdd2d9bae9024f820e44582b67ffe16f2272395af26964f174eeb6b
+  languageName: node
+  linkType: hard
+
 "cpu-features@npm:^0.0.10":
   version: 0.0.10
   resolution: "cpu-features@npm:0.0.10"
@@ -2953,6 +2969,7 @@ __metadata:
     "@types/react-dom": "npm:^18"
     "@typescript-eslint/eslint-plugin": "npm:7.8.0"
     "@typescript-eslint/parser": "npm:7.8.0"
+    behaviortree: "npm:^3.0.0-beta.1"
     eslint: "npm:^8"
     eslint-config-next: "npm:^15.1.0"
     eslint-plugin-editorconfig: "npm:^4.0.3"
