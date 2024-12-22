@@ -3,6 +3,7 @@ import {
 	type GridTile,
 	type ImageTile,
 } from 'pixi-tiled-loader'
+import { BehaviorTree } from 'behaviortree'
 import { Composite } from 'matter-js'
 import { type Store } from 'statery'
 
@@ -27,6 +28,7 @@ import { type ZIndexState } from '@/typedefs/ZIndexState'
 export type Entity = {
 	actorType?: keyof typeof ENTITY_CATALOGUE,
 	attack?: Store<AttackState>,
+	behaviorTree?: BehaviorTree,
 	bodies?: Composite,
 	health?: Store<HealthState>,
 	id?: UUID,

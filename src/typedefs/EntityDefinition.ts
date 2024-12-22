@@ -1,4 +1,5 @@
 // Local imports
+import { Node as BehaviorNode } from 'behaviortree'
 import { COLLISION_CATEGORIES } from '@/constants/COLLISION_CATEGORIES'
 import { ENTITY_CATALOGUE } from '@/constants/ENTITY_CATALOGUE'
 import { type Vector2 } from '@/typedefs/Vector2'
@@ -9,6 +10,7 @@ import { type Vector2 } from '@/typedefs/Vector2'
 
 export interface EntityDefinition {
 	actorType: keyof typeof ENTITY_CATALOGUE,
+	behaviorTree?: BehaviorNode,
 	boundingBox: {
 		height: number,
 		width: number,
