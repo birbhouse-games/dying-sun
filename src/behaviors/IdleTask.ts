@@ -64,7 +64,7 @@ export const IdleTask = new Task({
 			min: minIdle,
 		} = blackboard.entity.idle!
 
-		blackboard.idleDuration = minIdle + ((maxIdle - minIdle) * Math.random())
+		blackboard.idleDuration = Math.round(minIdle + ((maxIdle - minIdle) * Math.random()))
 		blackboard.idleStartedAt = store.state.now
 	},
 })

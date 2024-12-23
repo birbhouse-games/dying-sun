@@ -47,8 +47,8 @@ export const ChooseLocationTask = new Task({
 
 		entity.destination!.set(() => ({
 			value: {
-				x: ((Math.random() * wanderRadius) * xDirection) + home.x,
-				y: ((Math.random() * wanderRadius) * yDirection) + home.y,
+				x: Math.round(((Math.random() * wanderRadius) * xDirection) + home.x),
+				y: Math.round(((Math.random() * wanderRadius) * yDirection) + home.y),
 			},
 		}))
 
