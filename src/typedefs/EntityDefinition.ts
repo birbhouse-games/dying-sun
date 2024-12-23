@@ -22,9 +22,7 @@ export interface EntityDefinition {
 		render?: {
 			sprite: {
 				xOffset: number,
-				xScale: number,
 				yOffset: number,
-				yScale: number,
 			},
 		},
 		width: number,
