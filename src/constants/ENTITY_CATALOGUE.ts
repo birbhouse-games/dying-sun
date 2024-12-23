@@ -22,9 +22,7 @@ export const ENTITY_CATALOGUE: Record<string, EntityDefinition> = {
 			render: {
 				sprite: {
 					xOffset: 18,
-					xScale: 1,
 					yOffset: -15,
-					yScale: 1,
 				},
 			},
 			width: 5,
@@ -33,7 +31,7 @@ export const ENTITY_CATALOGUE: Record<string, EntityDefinition> = {
 		}],
 		health: 100,
 		speed: 0.7,
-		zOffset: 6,
+		zOffset: 0,
 	},
 
 	'merchant': {
@@ -50,9 +48,7 @@ export const ENTITY_CATALOGUE: Record<string, EntityDefinition> = {
 			render: {
 				sprite: {
 					xOffset: 1,
-					xScale: 1,
 					yOffset: -15,
-					yScale: 1,
 				},
 			},
 			width: 8,
@@ -65,6 +61,31 @@ export const ENTITY_CATALOGUE: Record<string, EntityDefinition> = {
 			min: 2 * 1000,
 		},
 		speed: 0.5,
-		zOffset: 7,
+		zOffset: 0,
+	},
+
+	'war-droid': {
+		actorType: 'war-droid',
+		boundingBox: {
+			height: 21,
+			width: 30,
+		},
+		colliders: [{
+			collisionCategory: COLLISION_CATEGORIES.ACTOR_COLLIDER,
+			collisionMask: COLLISION_CATEGORIES.PROP,
+			height: 4,
+			render: {
+				sprite: {
+					xOffset: 23,
+					yOffset: -9,
+				},
+			},
+			width: 17,
+			x: 12,
+			y: 22,
+		}],
+		health: 100,
+		speed: 1,
+		zOffset: 11,
 	},
 }

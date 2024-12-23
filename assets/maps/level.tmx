@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="82" height="15" tilewidth="16" tileheight="16" infinite="0" nextlayerid="13" nextobjectid="9">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="82" height="15" tilewidth="16" tileheight="16" infinite="0" nextlayerid="13" nextobjectid="14">
  <tileset firstgid="1" source="../tilesets/background.tsx"/>
  <tileset firstgid="81" source="../tilesets/props.tsx"/>
  <group id="10" name="All">
@@ -109,11 +109,19 @@
     </properties>
     <point/>
    </object>
-   <object id="8" type="spawn" x="120" y="170">
+   <object id="8" type="spawn" x="56" y="200">
     <properties>
      <property name="entityType" value="merchant"/>
      <property name="maxEntityCount" type="int" value="1"/>
      <property name="spawnsOn" value="instant"/>
+    </properties>
+    <point/>
+   </object>
+   <object id="13" type="spawn" x="120" y="168">
+    <properties>
+     <property name="entityType" value="war-droid"/>
+     <property name="maxEntityCount" type="int" value="2"/>
+     <property name="spawnsOn" value="visible"/>
     </properties>
     <point/>
    </object>
@@ -122,7 +130,7 @@
    <object id="3" x="0" y="112" width="1312" height="16"/>
    <object id="5" x="0" y="240" width="1312" height="16"/>
    <object id="6" x="-16" y="112" width="16" height="144"/>
-   <object id="7" x="1337.22" y="91.3195" width="16" height="144"/>
+   <object id="7" x="1312" y="112" width="16" height="144"/>
   </objectgroup>
  </group>
 </map>
