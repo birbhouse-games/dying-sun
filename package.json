@@ -30,7 +30,7 @@
     "uuid": "^11.0.3"
   },
   "devDependencies": {
-    "@assetpack/core": "^1.2.2",
+    "@assetpack/core": "^1.2.3",
     "@trezy-studios/eslint-config": "^1.0.0",
     "@trezy-studios/eslint-config-react": "^1.0.0",
     "@types/eslint-plugin-jsx-a11y": "^6",

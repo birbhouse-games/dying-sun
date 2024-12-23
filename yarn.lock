@@ -5,9 +5,9 @@ __metadata:
   version: 8
   cacheKey: 10c0
 
-"@assetpack/core@npm:^1.2.2":
-  version: 1.2.2
-  resolution: "@assetpack/core@npm:1.2.2"
+"@assetpack/core@npm:^1.2.3":
+  version: 1.2.3
+  resolution: "@assetpack/core@npm:1.2.3"
   dependencies:
     "@ffmpeg-installer/ffmpeg": "npm:^1.1.0"
     "@napi-rs/woff-build": "npm:^0.2.0"
@@ -45,7 +45,7 @@ __metadata:
     upath: "npm:^2.0.1"
   bin:
     assetpack: bin/index.js
-  checksum: 10c0/2143a8dfc7336552d108c77220e4ecb8f28f5fb7649bc7344a8f3d45f02879e90000378a197b8d820be62329618aecaf45409e4c343b349c87ea20677a6aa965
+  checksum: 10c0/db87bd4ee1fb708812d75008bf319a1302f9c247dfcad58de844384a63d2987f51bc2edde893a9a80e1e81e3d33f2f4b01533cd0f2297893b0bff15b6d65e017
   languageName: node
   linkType: hard
 
@@ -2956,7 +2956,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "discord-activity@workspace:."
   dependencies:
-    "@assetpack/core": "npm:^1.2.2"
+    "@assetpack/core": "npm:^1.2.3"
     "@pixi/devtools": "npm:^2.0.1"
     "@pixi/react": "npm:8.0.0-beta.14"
     "@trezy-studios/eslint-config": "npm:^1.0.0"
