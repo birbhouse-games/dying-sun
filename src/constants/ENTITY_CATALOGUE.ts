@@ -60,7 +60,11 @@ export const ENTITY_CATALOGUE: Record<string, EntityDefinition> = {
 			y: 22,
 		}],
 		health: 100,
-		speed: 1,
+		idle: {
+			max: 10 * 1000,
+			min: 2 * 1000,
+		},
+		speed: 0.5,
 		zOffset: 7,
 	},
 }

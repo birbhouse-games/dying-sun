@@ -30,6 +30,10 @@ export interface EntityDefinition {
 		width: number,
 	}],
 	health: number,
+	idle?: {
+		max: number,
+		min: number,
+	},
 	speed: number,
 	zOffset: number,
 }

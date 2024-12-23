@@ -67,6 +67,10 @@ export function createActorEntity(
 		})
 	}
 
+	if (entityDefinition.idle) {
+		entity.idle = entityDefinition.idle
+	}
+
 	entityDefinition.colliders.forEach(colliderDefinition => {
 		const colliderOptions = {
 			...DEFAULT_BODY_OPTIONS,

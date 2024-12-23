@@ -34,6 +34,10 @@ export type Entity = {
 	destination?: Store<DestinationState>,
 	health?: Store<HealthState>,
 	id?: UUID,
+	idle?: {
+		max: number,
+		min: number,
+	},
 	position?: Store<PositionState>,
 	spawn?: Store<SpawnState>,
 	speed?: number,

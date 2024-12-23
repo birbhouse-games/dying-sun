@@ -11,6 +11,7 @@ import {
 
 
 // Local imports
+import { isEntityNearDestination } from '@/helpers/isEntityNearDestination'
 import { type NPCType } from '@/typedefs/NPCType'
 
 
@@ -55,6 +56,10 @@ export const MoveToTask = new Task({
 			return FAILURE
 		}
 
+		if (isEntityNearDestination(entity)) {
+			return SUCCESS
+		}
+
 		const {
 			x: entityX,
 			y: entityY,
@@ -68,15 +73,6 @@ export const MoveToTask = new Task({
 		const dy = destinationY - entityY
 
 		const magnitude = Math.sqrt((dx ** 2) + (dy ** 2))
-
-		if (magnitude === 0) {
-			entity.destination.set(() => ({ value: null }))
-			entity.velocity.set(() => ({
-				x: 0,
-				y: 0,
-			}))
-			return SUCCESS
-		}
 
 		entity.velocity.set(() => ({
 			x: (dx / magnitude) * entity.speed,
