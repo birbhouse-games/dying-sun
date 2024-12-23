@@ -13,6 +13,7 @@ import { type Store } from 'statery'
 
 // Local imports
 import { type AttackState } from '@/typedefs/AttackState'
+import { type DestinationState } from './DestinationState'
 import { ENTITY_CATALOGUE } from '@/constants/ENTITY_CATALOGUE'
 import { type HealthState } from '@/typedefs/HealthState'
 import { type PositionState } from '@/typedefs/PositionState'
@@ -30,6 +31,7 @@ export type Entity = {
 	attack?: Store<AttackState>,
 	behaviorTree?: BehaviorTree,
 	bodies?: Composite,
+	destination?: Store<DestinationState>,
 	health?: Store<HealthState>,
 	id?: UUID,
 	position?: Store<PositionState>,

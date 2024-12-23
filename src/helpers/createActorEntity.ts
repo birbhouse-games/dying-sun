@@ -3,7 +3,7 @@ import {
 	Bodies,
 	Composite,
 } from 'matter-js'
-import { makeStore } from 'statery'
+import { BehaviorTree } from 'behaviortree'
 
 
 
@@ -11,6 +11,7 @@ import { makeStore } from 'statery'
 
 // Local imports
 import { createAttackState } from '@/helpers/createAttackState'
+import { createDestinationState } from '@/helpers/createDestinationState'
 import { createHealthState } from '@/helpers/createHealthState'
 import { createPositionState } from '@/helpers/createPositionState'
 import { createVelocityState } from '@/helpers/createVelocityState'
@@ -43,7 +44,7 @@ export function createActorEntity(
 		actorType: entityDefinition.actorType,
 		attack: createAttackState(),
 		bodies: Composite.create(),
-		health: makeStore({ value: entityDefinition.health }),
+		destination: createDestinationState(),
 		health: createHealthState(entityDefinition.health),
 		speed: entityDefinition.speed,
 		position: createPositionState(startingX, startingY),
@@ -51,6 +52,20 @@ export function createActorEntity(
 		zIndex: createZIndexState(0),
 		zOffset: entityDefinition.zOffset,
 	})
+
+	if (entityDefinition.behaviorTree) {
+		entity.behaviorTree = new BehaviorTree({
+			tree: entityDefinition.behaviorTree,
+			blackboard: {
+				entity,
+				home: {
+					x: startingX,
+					y: startingY,
+				},
+				wanderRadius: 10,
+			},
+		})
+	}
 
 	entityDefinition.colliders.forEach(colliderDefinition => {
 		const colliderOptions = {

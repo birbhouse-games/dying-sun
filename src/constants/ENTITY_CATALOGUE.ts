@@ -1,6 +1,7 @@
 // Local imports
 import { COLLISION_CATEGORIES } from '@/constants/COLLISION_CATEGORIES'
 import { type EntityDefinition } from '@/typedefs/EntityDefinition'
+import { WanderSequence } from '@/behaviors/WanderSequence'
 
 
 
@@ -37,6 +38,7 @@ export const ENTITY_CATALOGUE: Record<string, EntityDefinition> = {
 
 	'merchant': {
 		actorType: 'merchant',
+		behaviorTree: WanderSequence,
 		boundingBox: {
 			height: 25,
 			width: 38,
@@ -59,6 +61,6 @@ export const ENTITY_CATALOGUE: Record<string, EntityDefinition> = {
 		}],
 		health: 100,
 		speed: 1,
-		zOffset: 7
+		zOffset: 7,
 	},
 }
