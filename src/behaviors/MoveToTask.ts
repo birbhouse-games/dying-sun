@@ -29,11 +29,11 @@ type MoveToBlackboard = {
 
 export const MoveToTask = new Task({
 	/**
-	 * The core of the task.
+	 * Stops the entity's movement when the movement is complete.
 	 *
 	 * @param blackboard The behavior tree's data store.
 	 */
-	end: (blackboard: MoveToBlackboard) => {
+	end(blackboard: MoveToBlackboard) {
 		const { entity } = blackboard
 
 		entity.destination.set(() => ({ value: null }))
@@ -44,12 +44,12 @@ export const MoveToTask = new Task({
 	},
 
 	/**
-	 * The core of the task.
+	 * Keeps the entity moving towards its destination.
 	 *
 	 * @param blackboard The behavior tree's data store.
 	 * @returns The status of the task.
 	 */
-	run: (blackboard: MoveToBlackboard) => {
+	run(blackboard: MoveToBlackboard) {
 		const { entity } = blackboard
 
 		if (!entity.destination.state.value) {
