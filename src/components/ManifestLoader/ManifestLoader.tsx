@@ -1,14 +1,15 @@
 // Module imports
 import { Suspense } from 'react'
-import { useStore } from 'statery'
 
 
 
 
 
 // Local imports
-import { BundleLoader } from '@/components/BundleLoader/BundleLoader'
-import { store } from '@/store/store'
+import { AssetRegistry } from '@/store/traits'
+import { BundleLoader } from '../BundleLoader/BundleLoader'
+import { useTrait } from 'koota/react'
+import { world } from '@/store/world'
 
 
 
@@ -26,12 +27,12 @@ let manifestLoadingPromise: Promise<unknown>
  * @component
  */
 export function ManifestLoader() {
-	const { manifest } = useStore(store)
+	const { manifest } = useTrait(world, AssetRegistry)!
 
 	if (!manifest && !manifestLoadingPromise) {
 		manifestLoadingPromise = fetch('/assets/manifest.json')
 			.then(result => result.json())
-			.then(result => store.set(() => ({ manifest: result })))
+			.then(result => world.set(AssetRegistry, { manifest: result }))
 
 		throw manifestLoadingPromise
 	}

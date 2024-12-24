@@ -36,6 +36,8 @@ import { AssetsLoader } from '@/components/AssetsLoader/AssetsLoader'
 import { DebugRenderer } from '@/components/DebugRenderer/DebugRenderer'
 import { Game } from '@/components/Game/Game'
 import { store } from '@/store/store'
+import { world } from '@/store/world'
+import { WorldProvider } from 'koota/react'
 
 import styles from './page.module.scss'
 
@@ -86,29 +88,31 @@ export default function HomePage() {
 	])
 
 	return (
-		<main
-			className={styles['container']}
-			ref={resizeToRef}>
-			{isLoadingAssets && (
-				<AssetsLoader />
-			)}
+		<WorldProvider world={world}>
+			<main
+				className={styles['container']}
+				ref={resizeToRef}>
+				{isLoadingAssets && (
+					<AssetsLoader />
+				)}
 
-			{!isLoadingAssets && (
-				<Application
-					ref={applicationRef}
-					antialias={false}
-					attachToDevTools
-					autoDensity={true}
-					resizeTo={resizeToRef}
-					resolution={window.devicePixelRatio ?? 1}
-					roundPixels={true}>
-					<Suspense fallback={<pixiText text={'Loading...'} />}>
-						<Game />
-					</Suspense>
-				</Application>
-			)}
+				{!isLoadingAssets && (
+					<Application
+						ref={applicationRef}
+						antialias={false}
+						attachToDevTools
+						autoDensity={true}
+						resizeTo={resizeToRef}
+						resolution={window.devicePixelRatio ?? 1}
+						roundPixels={true}>
+						<Suspense fallback={<pixiText text={'Loading...'} />}>
+							<Game />
+						</Suspense>
+					</Application>
+				)}
 
-			<DebugRenderer />
-		</main>
+				<DebugRenderer />
+			</main>
+		</WorldProvider>
 	)
 }

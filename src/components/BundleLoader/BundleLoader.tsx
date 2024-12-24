@@ -1,22 +1,54 @@
 // Module imports
+import { Assets } from 'pixi.js'
 import { Suspense } from 'react'
-import { useStore } from 'statery'
-
 
 
 
 
 // Local imports
-import { loadAssetBundles } from '@/helpers/loadAssetBundles'
-import { store } from '@/store/store'
-import { WorldLoader } from '@/components/WorldLoader/WorldLoader'
-
+import { AssetRegistry } from '@/store/traits'
+import { LevelLoader } from '../LevelLoader/LevelLoader'
+import { useTrait } from 'koota/react'
+import { world } from '@/store/world'
 
 
 
 
 // Variables
 let bundleLoadingPromise: Promise<unknown>
+
+/** Parses asset bundles from the manifest and loads all relevant files. */
+async function loadAssetBundles() {
+	const assetRegistry = world.get(AssetRegistry)!
+
+	// Initialise bundle registry
+	if (assetRegistry.manifest && !assetRegistry.areBundlesInitialised) {
+		await Assets.init({
+			basePath: '/assets',
+			manifest: assetRegistry.manifest,
+		})
+
+		assetRegistry.areBundlesInitialised = true
+
+		assetRegistry.bundles = Object.fromEntries(
+			assetRegistry.manifest.bundles.map(bundle => [bundle.name, null]),
+		)
+
+		world.set(AssetRegistry, assetRegistry)
+	}
+
+	// Load bundles
+	if (assetRegistry.areBundlesInitialised) {
+		for (const bundleName in assetRegistry.bundles) {
+			const bundle = await Assets.loadBundle(bundleName)
+			assetRegistry.bundles[bundleName] = bundle
+		}
+
+		assetRegistry.areBundlesLoaded = true
+
+		world.set(AssetRegistry, assetRegistry)
+	}
+}
 
 
 
@@ -29,10 +61,10 @@ let bundleLoadingPromise: Promise<unknown>
  */
 export function BundleLoader() {
 	const {
-		areAssetsInitialised,
+		areBundlesInitialised: areAssetsInitialised,
 		areBundlesLoaded,
 		manifest,
-	} = useStore(store)
+	} = useTrait(world, AssetRegistry)!
 
 	if (!manifest || !areAssetsInitialised || !areBundlesLoaded) {
 		if (!bundleLoadingPromise) {
@@ -44,7 +76,7 @@ export function BundleLoader() {
 
 	return (
 		<Suspense fallback={'Initialising the world...'}>
-			<WorldLoader />
+			<LevelLoader />
 		</Suspense>
 	)
 }

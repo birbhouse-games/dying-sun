@@ -45,7 +45,7 @@ const PROP_COLLIDER_OPTIONS = {
  * @param baseY The base Y position of the object (usually the position of the placement cell in the tilemap).
  * @returns The Matter.js body.
  */
-export function createObjectBody(
+export function createPhysicsBody(
 	object: Ellipse | Point | Polygon | Rectangle,
 	baseX: number = 0,
 	baseY: number = 0,

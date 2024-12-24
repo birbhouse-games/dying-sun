@@ -2962,6 +2962,7 @@ __metadata:
     eslint-plugin-security: "npm:^3.0.1"
     eslint-plugin-sort-class-members: "npm:^1.21.0"
     eslint-plugin-unused-imports: "npm:^3"
+    koota: "npm:^0.1.7"
     matter-js: "npm:^0.20.0"
     miniplex: "npm:^2.0.0"
     miniplex-react: "npm:^2.0.1"
@@ -4946,6 +4947,25 @@ __metadata:
   version: 2.0.6
   resolution: "klona@npm:2.0.6"
   checksum: 10c0/94eed2c6c2ce99f409df9186a96340558897b3e62a85afdc1ee39103954d2ebe1c1c4e9fe2b0952771771fa96d70055ede8b27962a7021406374fdb695fd4d01
+  languageName: node
+  linkType: hard
+
+"koota@npm:^0.1.7":
+  version: 0.1.7
+  resolution: "koota@npm:0.1.7"
+  peerDependencies:
+    "@react-three/fiber": ^8.17.10
+    react: ^18.3.1
+    react-dom: ^18.3.1
+    three: ">=0.159"
+  peerDependenciesMeta:
+    "@react-three/fiber":
+      optional: true
+    react-dom:
+      optional: true
+    three:
+      optional: true
+  checksum: 10c0/e2b45ef54a534fd7aa54232f84725710cae1e03e76197e7a0122bad9fe17c156fca66fd32ffa12b5d8fc038e4eac7a25e4336bcbcedd546206dbb4d3242f18f7
   languageName: node
   linkType: hard
 
