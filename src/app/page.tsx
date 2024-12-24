@@ -69,18 +69,11 @@ TextureStyle.defaultOptions.scaleMode = 'nearest'
  * @component
  */
 export default function HomePage() {
-	return (
-		<WorldProvider world={world}>
-			<Inner />
-		</WorldProvider>
-	)
-}
-
-function Inner() {
 	const resizeToRef = useRef(null)
 	const {	isLevelLoaded } = useTrait(world, AssetRegistry)!
 
 	return (
+		<WorldProvider world={world}>
 			<main
 				className={styles['container']}
 				ref={resizeToRef}>
@@ -94,5 +87,6 @@ function Inner() {
 
 				<DebugRenderer />
 			</main>
+		</WorldProvider>
 	)
 }

@@ -1,10 +1,13 @@
 // Module imports
 import {
+	useActions,
+	useWorld,
+} from 'koota/react'
+import {
 	useApplication,
 	useTick,
 } from '@pixi/react'
 import { initDevtools } from '@pixi/devtools'
-import { useActions, useWorld } from 'koota/react'
 import { useEffect } from 'react'
 
 

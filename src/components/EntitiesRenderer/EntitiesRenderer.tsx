@@ -8,7 +8,7 @@ import {
 	query,
 } from '@/helpers/ECS'
 import { Actor } from '@/components/Actor/Actor'
-import { TileEntity } from '@/components/TileEntity/TileEntity'
+import { TileView } from '@/components/TileView/TileView'
 
 
 
@@ -26,7 +26,7 @@ export const EntitiesRenderer = memo(() => {
 			sortableChildren>
 			<ECS.Entities
 				// eslint-disable-next-line react/no-children-prop
-				children={TileEntity}
+				children={TileView}
 				in={query.tile} />
 			<ECS.Entities
 				// eslint-disable-next-line react/no-children-prop

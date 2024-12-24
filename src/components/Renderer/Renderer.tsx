@@ -5,13 +5,16 @@ import {
 } from 'koota/react'
 import { Entity } from 'koota'
 
+
+
+
+
 // Local imports
 import {
 	IsCamera,
 	Position,
 } from '@/store/traits'
-import { BackgroundRenderer } from '@/components/BackgroundRenderer/BackgroundRenderer'
-import { EntitiesRenderer } from '@/components/EntitiesRenderer/EntitiesRenderer'
+import { TileRenderer } from '@/components/TileRenderer/TileRenderer'
 
 
 
@@ -22,7 +25,7 @@ import { EntitiesRenderer } from '@/components/EntitiesRenderer/EntitiesRenderer
  * @component
  */
 export function Renderer() {
-	// A little hack to get around useTrait requiring and entity, but in this case it might not exist
+	// A little hack to get around useTrait requiring an entity, but in this case it might not exist
 	const camera = useQueryFirst(IsCamera, Position) ?? 11111 as Entity
 	const position = useTrait(camera, Position)
 
@@ -34,8 +37,7 @@ export function Renderer() {
 		<container
 			x={position.x}
 			y={position.y}>
-			<BackgroundRenderer />
-			<EntitiesRenderer />
+			<TileRenderer />
 		</container>
 	)
 }

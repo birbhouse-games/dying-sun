@@ -1,7 +1,7 @@
 // Module imports
 import { Application } from '@pixi/react'
 import { Suspense } from 'react'
-import { useWorld, WorldProvider } from 'koota/react'
+import { WorldProvider } from 'koota/react'
 
 
 

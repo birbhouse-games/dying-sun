@@ -41,7 +41,7 @@ import { world } from '@/store/world'
 
 
 
-type PropData = [Cell, GridTile | ImageTile, Tilemap]
+type TileData = [Cell, GridTile | ImageTile, Tilemap]
 
 /**
  * Gets the props from the tilemap.
@@ -50,7 +50,7 @@ type PropData = [Cell, GridTile | ImageTile, Tilemap]
  * @returns An array of prop data.
  */
 function getPropsFromTilemap(tilemap: Tilemap) {
-	const props = [] as PropData[]
+	const props = [] as TileData[]
 
 	const tilesets = Object
 		.values(tilemap.tilesets)
@@ -132,7 +132,42 @@ function getSpawnPointsFromTilemap(tilemap: Tilemap) {
 	return spawnPoints
 }
 
+/**
+ * Gets the backgrounds from the tilemap.
+ *
+ * @param tilemap The tilemap to get backgrounds from.
+ * @returns An array of backgrounds.
+ */
+function getBackgroundsFromTilemap(tilemap: Tilemap) {
+	const backgrounds = [] as TileData[]
 
+	const tilesets = Object
+		.values(tilemap.tilesets)
+		.reverse()
+
+	// eslint-disable-next-line jsdoc/require-jsdoc
+	function processLayers(layers: (GroupLayer | Layer | ObjectLayer)[]) {
+		for (const layer of layers) {
+			if (layer.type === 'layer' && layer.metadata.name !== 'Entities') {
+				for (const cell of Object.values(layer.data.cells)) {
+					const tilesetDefinition = tilesets.find(tilesetData => tilesetData.firstGid <= cell.id)!
+					const tileset = tilesetDefinition.tileset!
+					const tile = tileset.tiles[cell.id - tilesetDefinition.firstGid]
+
+					backgrounds.push([cell, tile, tilemap])
+				}
+			} else if (layer.type === 'group') {
+				processLayers(layer.layers)
+			}
+		}
+	}
+
+	processLayers(tilemap.layers)
+
+	return backgrounds
+
+
+}
 
 
 
@@ -148,6 +183,7 @@ export function LevelLoader() {
 	const {
 		createPropEntity,
 		createSpawnEntity,
+		createBackgroundEntity,
 	} = useActions(actions)
 
 	useEffect(() => {
@@ -164,6 +200,11 @@ export function LevelLoader() {
 		// Create prop entities
 		for (const prop of getPropsFromTilemap(tilemap)) {
 			createPropEntity(...prop)
+		}
+
+		// Create background entities
+		for (const background of getBackgroundsFromTilemap(tilemap)) {
+			createBackgroundEntity(...background)
 		}
 
 		// Create spawn entities
@@ -188,7 +229,7 @@ export function LevelLoader() {
 
 		// Set the level as loaded
 		world.set(AssetRegistry, { isLevelLoaded: true })
-	}, [createPropEntity, createSpawnEntity, isLevelLoaded, physicsEngine])
+	}, [createBackgroundEntity, createPropEntity, createSpawnEntity, isLevelLoaded, physicsEngine])
 
 	return 'Loaded!'
 }

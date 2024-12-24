@@ -14,6 +14,7 @@ import { createActions } from 'koota'
 
 // Local imports
 import {
+	IsBackground,
 	IsCamera,
 	PhysicsBody,
 	PhysicsEngine,
@@ -55,6 +56,24 @@ export const actions = createActions(world => ({
 		// Spawn entity
 		return world.spawn(
 			PhysicsBody(bodies),
+			Position({
+				x: tileX,
+				y: tileY,
+			}),
+			Rendering({
+				tile,
+				zIndex: 0,
+				zOffset: zOffsetProperty?.type === 'int' ? zOffsetProperty.value : 0,
+			}),
+		)
+	},
+	createBackgroundEntity: (cell: Cell, tile: GridTile | ImageTile, tilemap: Tilemap) => {
+		const tileX = cell.x * tilemap.metadata.tileWidth
+		const tileY = (cell.y * tilemap.metadata.tileHeight) - (tile.height - tilemap.metadata.tileHeight)
+		const zOffsetProperty = tile.customProperties?.zOffset
+
+		return world.spawn(
+			IsBackground,
 			Position({
 				x: tileX,
 				y: tileY,
