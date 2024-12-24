@@ -14,11 +14,12 @@ import { createActions } from 'koota'
 
 // Local imports
 import {
+	IsCamera,
 	PhysicsBody,
 	PhysicsEngine,
+	Position,
 	Rendering,
 	Spawner,
-	Transform,
 } from '@/store/traits'
 import { Composite } from 'matter-js'
 import { createPhysicsBody } from './createPhysicsBody'
@@ -52,29 +53,27 @@ export const actions = createActions(world => ({
 		}
 
 		// Spawn entity
-		return world.spawn(PhysicsBody(bodies),
-			Transform({
-				position: {
-					x: tileX,
-					y: tileY,
-				},
+		return world.spawn(
+			PhysicsBody(bodies),
+			Position({
+				x: tileX,
+				y: tileY,
 			}),
 			Rendering({
 				tile,
 				zIndex: 0,
 				zOffset: zOffsetProperty?.type === 'int' ? zOffsetProperty.value : 0,
-			}))
+			}),
+		)
 	},
 	createSpawnEntity: (object: SpawnPoint) => {
 		if (object.customProperties
 			&& object.customProperties.entityType
 			&& object.customProperties.spawnsOn) {
 			return world.spawn(
-				Transform({
-					position: {
-						x: object.x,
-						y: object.y,
-					},
+				Position({
+					x: object.x,
+					y: object.y,
 				}),
 				Spawner({
 					delay: object.customProperties.delay?.value ?? 5 * 1000,
@@ -89,5 +88,10 @@ export const actions = createActions(world => ({
 
 		return null
 	},
-
+	createCamera: (initialPosition = {
+		x: 0,
+		y: 0,
+	}) => {
+		return world.spawn(IsCamera, Position(initialPosition))
+	},
 }))

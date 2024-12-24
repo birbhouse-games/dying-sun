@@ -1,6 +1,7 @@
 // Module imports
 import { Application } from '@pixi/react'
 import { Suspense } from 'react'
+import { useWorld, WorldProvider } from 'koota/react'
 
 
 
@@ -8,6 +9,7 @@ import { Suspense } from 'react'
 
 // Local imports
 import { Game } from '@/components/Game/Game'
+import { world } from '@/store/world'
 
 
 
@@ -26,9 +28,12 @@ export default function GameEntryPoint({ resizeToRef }: { resizeToRef: React.Ref
 			resizeTo={resizeToRef}
 			resolution={window.devicePixelRatio ?? 1}
 			roundPixels={true}>
-			<Suspense fallback={<pixiText text={'Loading...'} />}>
-				<Game />
-			</Suspense>
+			{/* We do this since there is no context forwarding for Pixi React */}
+			<WorldProvider world={world}>
+				<Suspense fallback={<pixiText text={'Loading...'} />}>
+					<Game />
+				</Suspense>
+			</WorldProvider>
 		</Application>
 	)
 }

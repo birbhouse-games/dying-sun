@@ -20,7 +20,6 @@ import { timeSystem } from '@/systems/timeSystem'
 
 
 
-
 /**
  * Runs each system in order.
  *

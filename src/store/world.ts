@@ -10,10 +10,11 @@ import {
 	AssetRegistry,
 	PhysicsEngine,
 	Time,
+	Viewport,
 } from './traits'
 
 
 
 
 
-export const world = createWorld(AssetRegistry, Time, PhysicsEngine)
+export const world = createWorld(AssetRegistry, Time, PhysicsEngine, Viewport)

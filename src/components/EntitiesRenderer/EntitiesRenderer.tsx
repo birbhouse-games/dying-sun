@@ -1,3 +1,7 @@
+// Module imports
+import { memo } from 'react'
+
+
 // Local imports
 import {
 	ECS,
@@ -15,7 +19,7 @@ import { TileEntity } from '@/components/TileEntity/TileEntity'
  *
  * @component
  */
-export function EntitiesRenderer() {
+export const EntitiesRenderer = memo(() => {
 	return (
 		<container
 			label={'entities'}
@@ -30,4 +34,4 @@ export function EntitiesRenderer() {
 				in={query.actor} />
 		</container>
 	)
-}
+})
