@@ -66,6 +66,7 @@ export const ENTITY_CATALOGUE: Record<string, EntityDefinition> = {
 
 	'war-droid': {
 		actorType: 'war-droid',
+		behaviorTree: WanderSequence,
 		boundingBox: {
 			height: 21,
 			width: 30,
@@ -85,7 +86,11 @@ export const ENTITY_CATALOGUE: Record<string, EntityDefinition> = {
 			y: 22,
 		}],
 		health: 100,
-		speed: 1,
+		idle: {
+			max: 6 * 1000,
+			min: 1 * 1000,
+		},
+		speed: 0.3,
 		zOffset: 11,
 	},
 }
