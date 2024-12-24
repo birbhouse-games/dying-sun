@@ -151,41 +151,43 @@ export function LevelLoader() {
 	} = useActions(actions)
 
 	useEffect(() => {
-		if (!isLevelLoaded) {
-			// Set the decomp library for the physics engine
-			Common.setDecomp(decomp)
-
-			// Load the tilemap
-			const tilemap = Assets.get<Tilemap>('level.tmx')
-
-			// Create prop entities
-			for (const prop of getPropsFromTilemap(tilemap)) {
-				createPropEntity(...prop)
-			}
-
-			// Create spawn entities
-			for (const spawnPoint of getSpawnPointsFromTilemap(tilemap)) {
-				createSpawnEntity(spawnPoint)
-			}
-
-			// Create boundaries
-			for (const boundary of getBoundariesFromTilemap(tilemap)) {
-				const bodies = [] as Body[]
-
-				for (const object of boundary) {
-					const body = createPhysicsBody(object)
-
-					if (body) {
-						bodies.push(body)
-					}
-				}
-
-				Composite.add(physicsEngine.world, bodies)
-			}
-
-			// Set the level as loaded
-			world.set(AssetRegistry, { isLevelLoaded: true })
+		if (isLevelLoaded) {
+			return
 		}
+
+		// Set the decomp library for the physics engine
+		Common.setDecomp(decomp)
+
+		// Load the tilemap
+		const tilemap = Assets.get<Tilemap>('level.tmx')
+
+		// Create prop entities
+		for (const prop of getPropsFromTilemap(tilemap)) {
+			createPropEntity(...prop)
+		}
+
+		// Create spawn entities
+		for (const spawnPoint of getSpawnPointsFromTilemap(tilemap)) {
+			createSpawnEntity(spawnPoint)
+		}
+
+		// Create boundaries
+		for (const boundary of getBoundariesFromTilemap(tilemap)) {
+			const bodies = [] as Body[]
+
+			for (const object of boundary) {
+				const body = createPhysicsBody(object)
+
+				if (body) {
+					bodies.push(body)
+				}
+			}
+
+			Composite.add(physicsEngine.world, bodies)
+		}
+
+		// Set the level as loaded
+		world.set(AssetRegistry, { isLevelLoaded: true })
 	}, [createPropEntity, createSpawnEntity, isLevelLoaded, physicsEngine])
 
 	return 'Loaded!'
