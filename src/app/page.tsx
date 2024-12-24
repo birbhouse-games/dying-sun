@@ -11,20 +11,17 @@ import {
 	TextureStyle,
 } from 'pixi.js'
 import {
-	Application,
-	extend,
-} from '@pixi/react'
-import {
-	Suspense,
-	useMemo,
-	useRef,
-} from 'react'
-import {
 	TiledTilemapLoader,
 	TiledTilesetLoader,
 } from 'pixi-tiled-loader'
+import {
+	useTrait,
+	WorldProvider,
+} from 'koota/react'
+import dynamic from 'next/dynamic'
+import { extend } from '@pixi/react'
 import { LDTKLoader } from 'pixi-ldtk-loader'
-import { useStore } from 'statery'
+import { useRef } from 'react'
 
 
 
@@ -32,14 +29,16 @@ import { useStore } from 'statery'
 
 // Local imports
 import { AsepriteJSONLoader } from '@/helpers/AsepriteJSONLoader'
+import { AssetRegistry } from '@/store/traits'
 import { AssetsLoader } from '@/components/AssetsLoader/AssetsLoader'
 import { DebugRenderer } from '@/components/DebugRenderer/DebugRenderer'
-import { Game } from '@/components/Game/Game'
-import { store } from '@/store/store'
 import { world } from '@/store/world'
-import { WorldProvider } from 'koota/react'
 
 import styles from './page.module.scss'
+
+const GameEntryPoint = dynamic(() => import('@/components/GameEntryPoint/GameEntryPoint'), {
+	ssr: false,
+})
 
 
 
@@ -70,45 +69,20 @@ TextureStyle.defaultOptions.scaleMode = 'nearest'
  * @component
  */
 export default function HomePage() {
-	const {
-		areAssetsInitialised,
-		areBundlesLoaded,
-		isWorldInitialised,
-		manifest,
-	} = useStore(store)
-
-	const applicationRef = useRef(null)
 	const resizeToRef = useRef(null)
-
-	const isLoadingAssets = useMemo(() => !manifest || !areAssetsInitialised || !areBundlesLoaded || !isWorldInitialised, [
-		areAssetsInitialised,
-		areBundlesLoaded,
-		isWorldInitialised,
-		manifest,
-	])
+	const {	isLevelLoaded } = useTrait(world, AssetRegistry)!
 
 	return (
 		<WorldProvider world={world}>
 			<main
 				className={styles['container']}
 				ref={resizeToRef}>
-				{isLoadingAssets && (
+				{!isLevelLoaded && (
 					<AssetsLoader />
 				)}
 
-				{!isLoadingAssets && (
-					<Application
-						ref={applicationRef}
-						antialias={false}
-						attachToDevTools
-						autoDensity={true}
-						resizeTo={resizeToRef}
-						resolution={window.devicePixelRatio ?? 1}
-						roundPixels={true}>
-						<Suspense fallback={<pixiText text={'Loading...'} />}>
-							<Game />
-						</Suspense>
-					</Application>
+				{isLevelLoaded && (
+					<GameEntryPoint resizeToRef={resizeToRef} />
 				)}
 
 				<DebugRenderer />
