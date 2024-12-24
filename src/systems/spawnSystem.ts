@@ -8,6 +8,7 @@ import { store } from '@/store/store'
 
 
 
+/** Creates spawner entities. */
 export function spawnSystem() {
 	const {
 		now,
