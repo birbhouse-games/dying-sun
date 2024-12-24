@@ -61,12 +61,12 @@ async function loadAssetBundles() {
  */
 export function BundleLoader() {
 	const {
-		areBundlesInitialised: areAssetsInitialised,
+		areBundlesInitialised,
 		areBundlesLoaded,
 		manifest,
 	} = useTrait(world, AssetRegistry)!
 
-	if (!manifest || !areAssetsInitialised || !areBundlesLoaded) {
+	if (!manifest || !areBundlesInitialised || !areBundlesLoaded) {
 		if (!bundleLoadingPromise) {
 			bundleLoadingPromise = loadAssetBundles()
 		}
