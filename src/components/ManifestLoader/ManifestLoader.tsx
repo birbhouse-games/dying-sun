@@ -29,10 +29,12 @@ let manifestLoadingPromise: Promise<unknown>
 export function ManifestLoader() {
 	const { manifest } = useTrait(world, AssetRegistry)!
 
-	if (!manifest && !manifestLoadingPromise) {
-		manifestLoadingPromise = fetch('/assets/manifest.json')
-			.then(result => result.json())
-			.then(result => world.set(AssetRegistry, { manifest: result }))
+	if (!manifest) {
+		if (!manifestLoadingPromise) {
+			manifestLoadingPromise = fetch('/assets/manifest.json')
+				.then(result => result.json())
+				.then(result => world.set(AssetRegistry, { manifest: result }))
+		}
 
 		throw manifestLoadingPromise
 	}
