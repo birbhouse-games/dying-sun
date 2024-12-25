@@ -13,7 +13,7 @@ import { makeStore } from 'statery'
 import { createAttackState } from '@/helpers/createAttackState'
 import { DEFAULT_BODY_OPTIONS } from '@/constants/DEFAULT_BODY_OPTIONS'
 import { ECS } from '@/helpers/ECS'
-import { type EntityDefinition } from '@/typedefs/EntityDefinition'
+import { type ActorDefinition } from '@/typedefs/EntityDefinition'
 import { store } from '@/store/store'
 
 
@@ -30,7 +30,7 @@ import { store } from '@/store/store'
  * @returns The new entity.
  */
 export function createActorEntity(
-	entityDefinition: EntityDefinition,
+	entityDefinition: ActorDefinition,
 	startingX: number,
 	startingY: number,
 	entityProps = {},

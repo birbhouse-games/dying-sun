@@ -1,5 +1,6 @@
 // Local imports
-import { store } from '@/store/store.ts'
+import { Time } from '@/store/traits'
+import { world } from '@/store/world'
 
 
 
@@ -7,5 +8,15 @@ import { store } from '@/store/store.ts'
 
 /** Updates the global state with the time at the beginning of each frame. */
 export function timeSystem() {
-	store.set(() => ({ now: performance.now() }))
+	const time = world.get(Time)
+
+	if (time.now === 0) {
+		time.now = performance.now()
+	}
+
+	const now = performance.now()
+	time.deltaTime = now - time.now
+	time.now = now
+
+	world.set(Time, time)
 }

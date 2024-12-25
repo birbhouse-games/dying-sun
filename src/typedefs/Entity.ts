@@ -12,7 +12,7 @@ import { type Store } from 'statery'
 
 // Local imports
 import { type AttackState } from '@/typedefs/AttackState'
-import { ENTITY_CATALOGUE } from '@/constants/ENTITY_CATALOGUE'
+import { ACTOR_CATALOGUE } from '@/constants/ENTITY_CATALOGUE'
 import { type HealthState } from '@/typedefs/HealthState'
 import { type PositionState } from '@/typedefs/PositionState'
 import { type SpawnState } from '@/typedefs/SpawnState'
@@ -25,7 +25,7 @@ import { type ZIndexState } from '@/typedefs/ZIndexState'
 
 
 export type Entity = {
-	actorType?: keyof typeof ENTITY_CATALOGUE,
+	actorType?: keyof typeof ACTOR_CATALOGUE,
 	attack?: Store<AttackState>,
 	bodies?: Composite,
 	health?: Store<HealthState>,

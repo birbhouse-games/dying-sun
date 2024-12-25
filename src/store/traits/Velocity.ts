@@ -5,7 +5,7 @@ import { trait } from 'koota'
 
 
 
-export const Time = trait({
-	now: 0,
-	deltaTime: 0,
+export const Velocity = trait({
+	x: 0,
+	y: 0,
 })

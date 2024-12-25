@@ -1,13 +1,12 @@
 // Local imports
+import { type ActorDefinition } from '@/typedefs/ActorDefinition'
 import { COLLISION_CATEGORIES } from '@/constants/COLLISION_CATEGORIES'
-import { type EntityDefinition } from '@/typedefs/EntityDefinition'
-
 
 
 
 
 /** A catalogue of all non-prop entities and their base values. */
-export const ENTITY_CATALOGUE: Record<string, EntityDefinition> = {
+export const ACTOR_CATALOGUE: Record<string, ActorDefinition> = {
 	'hero': {
 		actorType: 'hero',
 		boundingBox: {
@@ -59,6 +58,6 @@ export const ENTITY_CATALOGUE: Record<string, EntityDefinition> = {
 		}],
 		health: 100,
 		speed: 1,
-		zOffset: 7
+		zOffset: 7,
 	},
 }

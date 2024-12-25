@@ -1,14 +1,14 @@
 // Local imports
+import { ACTOR_CATALOGUE } from '@/constants/ACTOR_CATALOGUE'
 import { COLLISION_CATEGORIES } from '@/constants/COLLISION_CATEGORIES'
-import { ENTITY_CATALOGUE } from '@/constants/ENTITY_CATALOGUE'
 import { type Vector2 } from '@/typedefs/Vector2'
 
 
 
 
 
-export interface EntityDefinition {
-	actorType: keyof typeof ENTITY_CATALOGUE,
+export interface ActorDefinition {
+	actorType: keyof typeof ACTOR_CATALOGUE,
 	boundingBox: {
 		height: number,
 		width: number,

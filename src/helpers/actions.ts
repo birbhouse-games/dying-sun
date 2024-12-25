@@ -23,8 +23,9 @@ import {
 	Spawner,
 } from '@/store/traits'
 import { Composite } from 'matter-js'
-import { createPhysicsBody } from './createPhysicsBody'
+import { createPhysicsBody } from '@/helpers/createPhysicsBody'
 import { SpawnPoint } from '@/typedefs/SpawnPoint'
+import { ActorDefinition } from '@/typedefs/ActorDefinition'
 
 
 
@@ -86,31 +87,36 @@ export const actions = createActions(world => ({
 		)
 	},
 	createSpawnEntity: (object: SpawnPoint) => {
-		if (object.customProperties
-			&& object.customProperties.entityType
-			&& object.customProperties.spawnsOn) {
-			return world.spawn(
-				Position({
-					x: object.x,
-					y: object.y,
-				}),
-				Spawner({
-					delay: object.customProperties.delay?.value ?? 5 * 1000,
-					entityCount: 0,
-					entityType: object.customProperties.entityType.value,
-					frequency: object.customProperties.frequency?.value ?? 0,
-					maxEntityCount: object.customProperties.maxEntityCount?.value ?? 10,
-					spawnsOn: object.customProperties.spawnsOn.value,
-				}),
-			)
+		const { customProperties } = object
+
+		if (!customProperties?.entityType || !customProperties?.spawnsOn) {
+			return null
 		}
 
-		return null
+		return world.spawn(
+			Position({
+				x: object.x,
+				y: object.y,
+			}),
+			Spawner({
+				delay: customProperties.delay?.value ?? 5000,
+				entityType: customProperties.entityType.value,
+				frequency: customProperties.frequency?.value ?? 0,
+				maxEntityCount: customProperties.maxEntityCount?.value ?? 10,
+				spawnsOn: customProperties.spawnsOn.value,
+			}),
+		)
 	},
 	createCamera: (initialPosition = {
 		x: 0,
 		y: 0,
 	}) => {
 		return world.spawn(IsCamera, Position(initialPosition))
+	},
+	createActorEntity: (actorDefinition: ActorDefinition, position = {
+		x: 0,
+		y: 0,
+	}) => {
+
 	},
 }))

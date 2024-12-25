@@ -11,15 +11,15 @@ import {
 	useState,
 } from 'react'
 import { Composite } from 'matter-js'
-import { useStore } from 'statery'
-import { type With } from 'miniplex'
+import { Entity } from 'koota'
+import { useTrait } from 'koota/react'
 
 
 
 
 
 // Local imports
-import { Entity } from '@/typedefs/Entity'
+import { Position, Rendering, Velocity } from '@/store/traits'
 
 
 
@@ -29,26 +29,29 @@ import { Entity } from '@/typedefs/Entity'
  * Renders an actor entity.
  *
  * @component
- * @param entity The Miniplex entity.
+ * @param entity The entity.
  */
-export function Actor(entity: With<Entity, 'actorType' | 'attack' | 'bodies' | 'position' | 'velocity' | 'zIndex'>) {
-	const {
-		currentStageIndex,
-		stages,
-	} = useStore(entity.attack)
+export function ActorView({ entity }: { entity: Entity }) {
+	const spriteRef = useRef<PixiAnimatedSprite>(null)
+
+	// const {
+	// 	currentStageIndex,
+	// 	stages,
+	// } = useStore(entity.attack)
+
 	const {
 		x: entityPositionX,
 		y: entityPositionY,
-	} = useStore(entity.position)
+	} = useTrait(entity, Position)!
+
 	const {
 		x: velocityX,
 		y: velocityY,
-	} = useStore(entity.velocity)
-	const { value: zIndex } = useStore(entity.zIndex)
+	} = useTrait(entity, Velocity)!
+
+	const { zIndex } = useTrait(entity, Rendering)!
 
 	const [isFlipped, setIsFlipped] = useState(false)
-
-	const spriteRef = useRef<PixiAnimatedSprite>(null)
 
 	const position = useMemo(() => {
 		const collider = Composite

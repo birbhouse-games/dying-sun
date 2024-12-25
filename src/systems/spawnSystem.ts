@@ -1,28 +1,39 @@
 // Local imports
-import { createActorEntity } from '@/helpers/createActorEntity'
-import { ENTITY_CATALOGUE } from '@/constants/ENTITY_CATALOGUE'
-import { query } from '@/helpers/ECS'
-import { store } from '@/store/store'
+import {
+	IsCamera,
+	Position,
+	Spawner,
+	Time,
+	Viewport,
+} from '@/store/traits'
+import { ACTOR_CATALOGUE } from '@/constants/ACTOR_CATALOGUE'
+import { world } from '@/store/world'
 
 
 
 
 
+/** Spawns entities based on the spawn entity's state. */
 export function spawnSystem() {
-	const {
-		now,
-		viewport,
-		worldPositionX,
-		worldPositionY,
-	} = store.state
+	// const {
+	// 	now,
+	// 	viewport,
+	// 	worldPositionX,
+	// 	worldPositionY,
+	// } = store.state
 
-	const spawnEntities = query.spawn
+	// Get world state
+	const { now } = world.get(Time)!
+	const viewport = world.get(Viewport)!
 
-	for (const spawnEntity of spawnEntities) {
-		const {
-			x: spawnX,
-			y: spawnY,
-		} = spawnEntity.position.state
+	// Get camera state
+	const camera = world.queryFirst(IsCamera, Position)
+	if (!camera) {
+		return
+	}
+	const cameraPosition = camera.get(Position)!
+
+	world.query(Spawner, Position).updateEach(([spawner, spawnPosition]) => {
 		const {
 			delay,
 			entityCount,
@@ -30,37 +41,36 @@ export function spawnSystem() {
 			lastSpawnAt,
 			maxEntityCount,
 			spawnsOn,
-		} = spawnEntity.spawn.state
+		} = spawner
 
 		// Skip if we have the maximum number of entities for this spawn
 		if (maxEntityCount <= entityCount) {
-			continue
+			return
 		}
 
 		// Skip if the spawn isn't on screen but starts on visible
 		if (spawnsOn === 'visible') {
 			if (
-				spawnX < worldPositionX
-				|| spawnX > worldPositionX + viewport.width
-				|| spawnY < worldPositionY
-				|| spawnY > worldPositionY + viewport.height
+				spawnPosition.x < cameraPosition.x
+				|| spawnPosition.x > cameraPosition.x + viewport.width
+				|| spawnPosition.y < cameraPosition.y
+				|| spawnPosition.y > cameraPosition.y + viewport.height
 			) {
-				continue
+				return
 			}
 		}
 
 		// Skip if not enough time has passed since the last time this spawn created an entity
 		if (now < lastSpawnAt + (entityCount > 0 ? delay : 0)) {
-			continue
+			return
 		}
 
-		const entityDefinition = ENTITY_CATALOGUE[entityType]
+		const actorDefinition = ACTOR_CATALOGUE[entityType]
 
-		createActorEntity(entityDefinition, spawnX, spawnY)
+		// createActorEntity(entityDefinition, spawnX, spawnY)
 
-		spawnEntity.spawn.set(previousState => ({
-			entityCount: previousState.entityCount + 1,
-			lastSpawnAt: now,
-		}))
-	}
+		// Update the spawner's state
+		spawner.entityCount = entityCount + 1
+		spawner.lastSpawnAt = now
+	})
 }

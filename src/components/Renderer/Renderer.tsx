@@ -14,7 +14,9 @@ import {
 	IsCamera,
 	Position,
 } from '@/store/traits'
+import { ActorRenderer } from '@/components/ActorRenderer/ActorRenderer'
 import { TileRenderer } from '@/components/TileRenderer/TileRenderer'
+
 
 
 
@@ -38,6 +40,7 @@ export function Renderer() {
 			x={position.x}
 			y={position.y}>
 			<TileRenderer />
+			<ActorRenderer />
 		</container>
 	)
 }
