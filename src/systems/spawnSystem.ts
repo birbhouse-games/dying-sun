@@ -6,6 +6,7 @@ import {
 	Time,
 	Viewport,
 } from '@/store/traits'
+import { actions } from '@/helpers/actions'
 import { ACTOR_CATALOGUE } from '@/constants/ACTOR_CATALOGUE'
 import { world } from '@/store/world'
 
@@ -15,24 +16,25 @@ import { world } from '@/store/world'
 
 /** Spawns entities based on the spawn entity's state. */
 export function spawnSystem() {
-	// const {
-	// 	now,
-	// 	viewport,
-	// 	worldPositionX,
-	// 	worldPositionY,
-	// } = store.state
-
 	// Get world state
 	const { now } = world.get(Time)!
 	const viewport = world.get(Viewport)!
 
 	// Get camera state
 	const camera = world.queryFirst(IsCamera, Position)
+
+	// Skip if there is no camera
 	if (!camera) {
 		return
 	}
+
+	// Get camera position
 	const cameraPosition = camera.get(Position)!
 
+	// Get bound action
+	const { createActorEntity } = actions(world)
+
+	// Run spawner logic for each spawner
 	world.query(Spawner, Position).updateEach(([spawner, spawnPosition]) => {
 		const {
 			delay,
@@ -48,16 +50,16 @@ export function spawnSystem() {
 			return
 		}
 
+		const isOffScreen = (
+			spawnPosition.x < cameraPosition.x
+			|| spawnPosition.x > cameraPosition.x + viewport.width
+			|| spawnPosition.y < cameraPosition.y
+			|| spawnPosition.y > cameraPosition.y + viewport.height
+		)
+
 		// Skip if the spawn isn't on screen but starts on visible
-		if (spawnsOn === 'visible') {
-			if (
-				spawnPosition.x < cameraPosition.x
-				|| spawnPosition.x > cameraPosition.x + viewport.width
-				|| spawnPosition.y < cameraPosition.y
-				|| spawnPosition.y > cameraPosition.y + viewport.height
-			) {
-				return
-			}
+		if (spawnsOn === 'visible' && isOffScreen) {
+			return
 		}
 
 		// Skip if not enough time has passed since the last time this spawn created an entity
@@ -65,9 +67,8 @@ export function spawnSystem() {
 			return
 		}
 
-		const actorDefinition = ACTOR_CATALOGUE[entityType]
-
-		// createActorEntity(entityDefinition, spawnX, spawnY)
+		// Create the actor from its definition at the spawner's position
+		createActorEntity(ACTOR_CATALOGUE[entityType], spawnPosition)
 
 		// Update the spawner's state
 		spawner.entityCount = entityCount + 1

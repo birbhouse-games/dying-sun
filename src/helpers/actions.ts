@@ -1,6 +1,10 @@
 /* eslint-disable jsdoc/require-jsdoc */
 // Module imports
 import {
+	Bodies,
+	Composite,
+} from 'matter-js'
+import {
 	Cell,
 	GridTile,
 	ImageTile,
@@ -14,6 +18,8 @@ import { createActions } from 'koota'
 
 // Local imports
 import {
+	Actor,
+	Attacker,
 	IsBackground,
 	IsCamera,
 	PhysicsBody,
@@ -21,11 +27,12 @@ import {
 	Position,
 	Rendering,
 	Spawner,
+	Velocity,
 } from '@/store/traits'
-import { Composite } from 'matter-js'
-import { createPhysicsBody } from '@/helpers/createPhysicsBody'
-import { SpawnPoint } from '@/typedefs/SpawnPoint'
 import { ActorDefinition } from '@/typedefs/ActorDefinition'
+import { createPhysicsBody } from '@/helpers/createPhysicsBody'
+import { DEFAULT_BODY_OPTIONS } from '@/constants/DEFAULT_BODY_OPTIONS'
+import { SpawnPoint } from '@/typedefs/SpawnPoint'
 
 
 
@@ -113,10 +120,56 @@ export const actions = createActions(world => ({
 	}) => {
 		return world.spawn(IsCamera, Position(initialPosition))
 	},
-	createActorEntity: (actorDefinition: ActorDefinition, position = {
+	createActorEntity: ({
+		actorType,
+		colliders,
+		health,
+		speed,
+		zOffset,
+	}: ActorDefinition,
+	position = {
 		x: 0,
 		y: 0,
 	}) => {
+		const physicsEngine = world.get(PhysicsEngine)
+		const bodies = Composite.create()
 
+		// Create physics bodies from the actor
+		colliders.forEach(colliderDefinition => {
+			const colliderOptions = {
+				...DEFAULT_BODY_OPTIONS,
+				collisionFilter: {
+					category: colliderDefinition.collisionCategory,
+					mask: colliderDefinition.collisionMask,
+				},
+				label: 'collider',
+				render: (colliderDefinition.render ?? {}),
+			}
+
+			const collider = Bodies.rectangle(
+				position.x + colliderDefinition.x,
+				position.y + colliderDefinition.y,
+				colliderDefinition.width,
+				colliderDefinition.height,
+				colliderOptions,
+			)
+
+			Composite.add(bodies, collider)
+		})
+
+		Composite.add(physicsEngine.world, bodies!)
+
+		return world.spawn(
+			Actor({
+				actorType,
+				bodies,
+				health,
+				speed,
+			}),
+			Attacker,
+			Position(position),
+			Velocity,
+			Rendering({ zOffset }),
+		)
 	},
 }))

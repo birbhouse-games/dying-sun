@@ -7,9 +7,10 @@ import { useQuery } from 'koota/react'
 
 // Local imports
 import {
+	Actor,
 	Position,
-	Spawner,
 } from '@/store/traits'
+import { ActorView } from '@/components/ActorView/ActorView'
 
 
 
@@ -21,24 +22,11 @@ import {
  * @returns The actors in the scene.
  */
 export function ActorRenderer() {
-	const spawners = useQuery(Spawner, Position)
+	const actors = useQuery(Actor, Position)
 
-	return spawners.map(spawner => {
-		const position = spawner.get(Position)!
-
-		return (
-			<container
-				key={spawner.id()}
-				x={position.x}
-				y={position.y}
-				zIndex={100}
-			>
-				<graphics draw={graphics => {
-					// Draw a circle
-					graphics.circle(0, 0, 10)
-					graphics.fill('red')
-				}} />
-			</container>
-		)
-	})
+	return actors.map(actor => (
+		<ActorView
+			key={actor.id()}
+			entity={actor} />
+	))
 }

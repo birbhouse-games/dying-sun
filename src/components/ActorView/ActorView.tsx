@@ -19,7 +19,13 @@ import { useTrait } from 'koota/react'
 
 
 // Local imports
-import { Position, Rendering, Velocity } from '@/store/traits'
+import {
+	Actor,
+	Attacker,
+	Position,
+	Rendering,
+	Velocity,
+} from '@/store/traits'
 
 
 
@@ -29,51 +35,56 @@ import { Position, Rendering, Velocity } from '@/store/traits'
  * Renders an actor entity.
  *
  * @component
- * @param entity The entity.
+ * @param {Entity} entity - The entity.
  */
 export function ActorView({ entity }: { entity: Entity }) {
 	const spriteRef = useRef<PixiAnimatedSprite>(null)
 
-	// const {
-	// 	currentStageIndex,
-	// 	stages,
-	// } = useStore(entity.attack)
+	// Get actor state
+	const {
+		actorType,
+		bodies,
+	} = useTrait(entity, Actor)!
 
+	// Get attacker state
+	const {
+		currentStageIndex,
+		stages,
+	} = useTrait(entity, Attacker)!
+
+	// Get position state
 	const {
 		x: entityPositionX,
 		y: entityPositionY,
 	} = useTrait(entity, Position)!
 
+	// Get velocity state
 	const {
 		x: velocityX,
 		y: velocityY,
 	} = useTrait(entity, Velocity)!
 
+	// Get rendering state
 	const { zIndex } = useTrait(entity, Rendering)!
 
 	const [isFlipped, setIsFlipped] = useState(false)
 
 	const position = useMemo(() => {
 		const collider = Composite
-			.allBodies(entity.bodies)
+			.allBodies(bodies)
 			.find(body => body.label === 'collider')
 
 		return {
-			// @ts-expect-error xOffset is missing from the Matter.js types.
+			// @ts-expect-error - xOffset is missing from the Matter.js types.
 			x: entityPositionX + ((collider?.render.sprite?.xOffset ?? 0) * (isFlipped ? -1 : 1)),
-			// @ts-expect-error yOffset is missing from the Matter.js types.
+			// @ts-expect-error - yOffset is missing from the Matter.js types.
 			y: entityPositionY + (collider?.render.sprite?.yOffset ?? 0),
 		}
-	}, [
-		entity,
-		entityPositionX,
-		entityPositionY,
-		isFlipped,
-	])
+	}, [bodies, entityPositionX, entityPositionY, isFlipped])
 
 	const spritesheet = useMemo(() => {
-		return Assets.get<Spritesheet>(`/assets/characters/${entity.actorType}/${entity.actorType}.json`)
-	}, [])
+		return Assets.get<Spritesheet>(`/assets/characters/${actorType}/${actorType}.json`)
+	}, [actorType])
 
 	const currentStage = useMemo(() => stages?.[currentStageIndex!], [
 		currentStageIndex,
@@ -118,7 +129,7 @@ export function ActorView({ entity }: { entity: Entity }) {
 
 	return (
 		<container
-			label={`actor::${entity.actorType}`}
+			label={`actor::${actorType}`}
 			x={position.x}
 			y={position.y}
 			zIndex={zIndex}>
@@ -128,7 +139,7 @@ export function ActorView({ entity }: { entity: Entity }) {
 					x: 0.5,
 					y: 0.5,
 				}}
-				// @ts-expect-error `animationSpeed` is missing from the Pixi React types.
+				// @ts-expect-error - `animationSpeed` is missing from the Pixi React types.
 				animationSpeed={0.15}
 				loop={loop}
 				scale={{
