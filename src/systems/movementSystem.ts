@@ -6,7 +6,11 @@ import { Body } from 'matter-js'
 
 
 // Local imports
-import { query } from '@/helpers/ECS'
+import {
+	Actor,
+	Velocity,
+} from '@/store/traits'
+import { world } from '@/store/world'
 
 
 
@@ -14,12 +18,10 @@ import { query } from '@/helpers/ECS'
 
 /** Moves physics bodies based on their owner entity's velocity. */
 export function movementSystem() {
-	for (const entity of query.actor) {
-		for (const body of entity.bodies.bodies) {
-			Body.setVelocity(body, {
-				x: entity.velocity.state.x,
-				y: entity.velocity.state.y,
-			})
-		}
-	}
+	world.query(Actor, Velocity).updateEach(([actor, velocity]) => {
+		Body.setVelocity(actor.bodies.bodies[0], {
+			x: velocity.x,
+			y: velocity.y,
+		})
+	})
 }

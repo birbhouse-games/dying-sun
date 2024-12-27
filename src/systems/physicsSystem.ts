@@ -7,7 +7,8 @@ import { Ticker } from 'pixi.js'
 
 
 // Local imports
-import { store } from '@/store/store'
+import { PhysicsEngine } from '@/store/traits'
+import { world } from '@/store/world'
 
 
 
@@ -20,7 +21,7 @@ import { store } from '@/store/store'
  */
 export function physicsSystem(ticker: Ticker) {
 	const { deltaMS } = ticker
-	const { physicsEngine } = store.state
+	const physicsEngine = world.get(PhysicsEngine)!
 
 	Engine.update(physicsEngine, deltaMS)
 }

@@ -1,7 +1,11 @@
 // Local imports
+import {
+	Input,
+	Time,
+} from '@/store/traits'
 import { ACTION_HANDLERS } from '@/constants/ACTION_HANDLERS'
 import { KEY_BINDINGS } from '@/constants/KEY_BINDINGS.ts'
-import { store } from '@/store/store.ts'
+import { world } from '@/store/world'
 
 
 
@@ -10,15 +14,12 @@ import { store } from '@/store/store.ts'
 /** Updates the state of input controls based on the current keyboard/gamepad state. */
 export function controlsSystem() {
 	const boundKeys = Object.keys(KEY_BINDINGS)
-
-	const {
-		keyboardState,
-		now,
-	} = store.state
+	const { now } = world.get(Time)!
+	const input = world.get(Input)!
 
 	for (const key of boundKeys) {
-		if (keyboardState.has(key)) {
-			const keyState = keyboardState.get(key)
+		if (input.has(key)) {
+			const keyState = input.get(key)
 			const actionName = KEY_BINDINGS[key]
 			const action = ACTION_HANDLERS[actionName]
 

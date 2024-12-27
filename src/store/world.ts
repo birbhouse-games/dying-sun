@@ -8,6 +8,7 @@ import { createWorld } from 'koota'
 // Local imports
 import {
 	AssetRegistry,
+	Input,
 	PhysicsEngine,
 	Time,
 	Viewport,
@@ -17,4 +18,4 @@ import {
 
 
 
-export const world = createWorld(AssetRegistry, Time, PhysicsEngine, Viewport)
+export const world = createWorld(AssetRegistry, Time, PhysicsEngine, Viewport, Input)

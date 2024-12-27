@@ -15,7 +15,7 @@ import { Composite } from 'matter-js'
 
 
 export const Actor = trait({
-	actorType: 'player' as keyof typeof ACTOR_CATALOGUE,
+	actorType: 'hero' as keyof typeof ACTOR_CATALOGUE,
 	bodies: () => Composite.create(),
 	health: 0,
 	speed: 0,

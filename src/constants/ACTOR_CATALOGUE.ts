@@ -6,7 +6,7 @@ import { COLLISION_CATEGORIES } from '@/constants/COLLISION_CATEGORIES'
 
 
 /** A catalogue of all non-prop entities and their base values. */
-export const ACTOR_CATALOGUE: Record<string, ActorDefinition> = {
+export const ACTOR_CATALOGUE: Record<'hero' | 'merchant', ActorDefinition> = {
 	'hero': {
 		actorType: 'hero',
 		boundingBox: {
