@@ -5,6 +5,7 @@ import {
 	Spritesheet,
 } from 'pixi.js'
 import {
+	memo,
 	useEffect,
 	useMemo,
 	useRef,
@@ -37,7 +38,7 @@ import {
  * @component
  * @param {Entity} entity - The entity.
  */
-export function ActorView({ entity }: { entity: Entity }) {
+export const ActorView = memo(({ entity }: { entity: Entity }) => {
 	const spriteRef = useRef<PixiAnimatedSprite>(null)
 
 	// Get actor state
@@ -149,4 +150,6 @@ export function ActorView({ entity }: { entity: Entity }) {
 				textures={textures} />
 		</container>
 	)
-}
+})
+
+ActorView.displayName = 'ActorView'

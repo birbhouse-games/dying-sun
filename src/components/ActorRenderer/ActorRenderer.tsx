@@ -1,4 +1,5 @@
 // Module imports
+import { memo } from 'react'
 import { useQuery } from 'koota/react'
 
 
@@ -21,12 +22,12 @@ import { ActorView } from '@/components/ActorView/ActorView'
  *
  * @returns The actors in the scene.
  */
-export function ActorRenderer() {
+export const ActorRenderer = memo(() => {
 	const actors = useQuery(Actor, Position)
 
 	return actors.map(actor => (
-		<ActorView
-			key={actor.id()}
-			entity={actor} />
+		<ActorView key={actor.id()} entity={actor} />
 	))
-}
+})
+
+ActorRenderer.displayName = 'ActorRenderer'
