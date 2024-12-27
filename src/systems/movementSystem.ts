@@ -18,7 +18,7 @@ export function movementSystem() {
 		for (const body of entity.bodies.bodies) {
 			Body.setVelocity(body, {
 				x: entity.velocity.state.x,
-				y: entity.velocity.state.y,
+				y: entity.velocity.state.y * 0.5,
 			})
 		}
 	}
