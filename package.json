@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "@pixi/devtools": "^2.0.1",
-    "@pixi/react": "8.0.0-beta.17",
+    "@pixi/react": "8.0.0-beta.18",
     "behaviortree": "^3.0.0-beta.1",
     "matter-js": "^0.20.0",
     "miniplex": "^2.0.0",
