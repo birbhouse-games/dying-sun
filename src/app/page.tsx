@@ -76,7 +76,7 @@ export default function HomePage() {
 	} = useStore(store)
 
 	const applicationRef = useRef(null)
-	const resizeToRef = useRef(null)
+	const resizeToRef = useRef<HTMLDivElement>(null!)
 
 	const isLoadingAssets = useMemo(() => !manifest || !areAssetsInitialised || !areBundlesLoaded || !isWorldInitialised, [
 		areAssetsInitialised,
@@ -97,7 +97,6 @@ export default function HomePage() {
 				<Application
 					ref={applicationRef}
 					antialias={false}
-					attachToDevTools
 					autoDensity={true}
 					resizeTo={resizeToRef}
 					resolution={window.devicePixelRatio ?? 1}
