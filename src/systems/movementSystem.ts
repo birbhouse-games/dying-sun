@@ -21,7 +21,8 @@ export function movementSystem() {
 	world.query(Actor, Velocity).updateEach(([actor, velocity]) => {
 		Body.setVelocity(actor.bodies.bodies[0], {
 			x: velocity.x,
-			y: velocity.y,
+			y: velocity.y * 0.5,
 		})
 	})
 }
+

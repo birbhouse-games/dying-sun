@@ -1,6 +1,8 @@
 // Local imports
 import { type ActorDefinition } from '@/typedefs/ActorDefinition'
 import { COLLISION_CATEGORIES } from '@/constants/COLLISION_CATEGORIES'
+import { WanderSequence } from '@/behaviors/WanderSequence'
+
 
 
 
@@ -36,6 +38,7 @@ export const ACTOR_CATALOGUE: Record<'hero' | 'merchant', ActorDefinition> = {
 
 	'merchant': {
 		actorType: 'merchant',
+		behaviorTree: WanderSequence,
 		boundingBox: {
 			height: 25,
 			width: 38,
@@ -57,7 +60,11 @@ export const ACTOR_CATALOGUE: Record<'hero' | 'merchant', ActorDefinition> = {
 			y: 22,
 		}],
 		health: 100,
-		speed: 1,
+		idle: {
+			max: 10 * 1000,
+			min: 2 * 1000,
+		},
+		speed: 0.5,
 		zOffset: 7,
 	},
 }
