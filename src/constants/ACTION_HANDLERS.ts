@@ -89,7 +89,7 @@ export const ACTION_HANDLERS: Record<string, ActionHandler> = {
 				) {
 					attacker.continueCombo = true
 				}
-			}, { changeDetection: true })
+			})
 		},
 	},
 
@@ -102,7 +102,7 @@ export const ACTION_HANDLERS: Record<string, ActionHandler> = {
 				}
 
 				velocity.x += 1
-			}, { changeDetection: true })
+			})
 		},
 		onDeactivate() {
 			world.query(Actor, Velocity).updateEach(([actor, velocity]) => {
@@ -111,7 +111,7 @@ export const ACTION_HANDLERS: Record<string, ActionHandler> = {
 				}
 
 				velocity.x -= 1
-			}, { changeDetection: true })
+			})
 		},
 	},
 
@@ -124,7 +124,7 @@ export const ACTION_HANDLERS: Record<string, ActionHandler> = {
 				}
 
 				velocity.y -= 1
-			}, { changeDetection: true })
+			})
 		},
 		onDeactivate() {
 			world.query(Actor, Velocity).updateEach(([actor, velocity]) => {
@@ -133,7 +133,7 @@ export const ACTION_HANDLERS: Record<string, ActionHandler> = {
 				}
 
 				velocity.y += 1
-			}, { changeDetection: true })
+			})
 		},
 	},
 
@@ -146,7 +146,7 @@ export const ACTION_HANDLERS: Record<string, ActionHandler> = {
 				}
 
 				velocity.y += 1
-			}, { changeDetection: true })
+			})
 		},
 		onDeactivate() {
 			world.query(Actor, Velocity).updateEach(([actor, velocity]) => {
@@ -155,7 +155,7 @@ export const ACTION_HANDLERS: Record<string, ActionHandler> = {
 				}
 
 				velocity.y -= 1
-			}, { changeDetection: true })
+			})
 		},
 	},
 
@@ -168,7 +168,7 @@ export const ACTION_HANDLERS: Record<string, ActionHandler> = {
 				}
 
 				velocity.x -= 1
-			}, { changeDetection: true })
+			})
 		},
 		onDeactivate() {
 			world.query(Actor, Velocity).updateEach(([actor, velocity]) => {
@@ -177,7 +177,7 @@ export const ACTION_HANDLERS: Record<string, ActionHandler> = {
 				}
 
 				velocity.x += 1
-			}, { changeDetection: true })
+			})
 		},
 	},
 }

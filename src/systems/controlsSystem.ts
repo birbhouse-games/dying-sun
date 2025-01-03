@@ -28,6 +28,8 @@ export function controlsSystem() {
 			}
 
 			if (keyState.isActive) {
+				console.log(keyState)
+
 				if ((keyState.sinceLastActivated === null) || (action.isRepeatable && keyState.sinceLastActivated < (action.repeatFrequency ?? 0))) {
 					keyState.sinceLastActivated = now
 					action?.onActivate?.()
