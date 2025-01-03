@@ -69,7 +69,7 @@ TextureStyle.defaultOptions.scaleMode = 'nearest'
  * @component
  */
 export default function HomePage() {
-	const resizeToRef = useRef(null)
+	const resizeToRef = useRef<HTMLDivElement>(null!)
 	const {	isLevelLoaded } = useTrait(world, AssetRegistry)!
 
 	return (
