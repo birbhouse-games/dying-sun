@@ -10,6 +10,7 @@ import {
 	ImageTile,
 	Tilemap,
 } from 'pixi-tiled-loader'
+import BehaviorTree from 'behaviortree'
 import { createActions } from 'koota'
 
 
@@ -20,6 +21,9 @@ import { createActions } from 'koota'
 import {
 	Actor,
 	Attacker,
+	Behavior,
+	Destination,
+	Idle,
 	IsBackground,
 	IsCamera,
 	PhysicsBody,
@@ -126,6 +130,8 @@ export const actions = createActions(world => ({
 		health,
 		speed,
 		zOffset,
+		behaviorTree: tree,
+		idle,
 	}: ActorDefinition,
 	position = {
 		x: 0,
@@ -159,7 +165,7 @@ export const actions = createActions(world => ({
 
 		Composite.add(physicsEngine.world, bodies!)
 
-		return world.spawn(
+		const actor = world.spawn(
 			Actor({
 				actorType,
 				bodies,
@@ -170,6 +176,30 @@ export const actions = createActions(world => ({
 			Position(position),
 			Velocity,
 			Rendering({ zOffset }),
+			Destination,
 		)
+
+		// Add behaviors if they are in the actor definition
+		if (tree) {
+			const behaviorTree = new BehaviorTree({
+				tree,
+				blackboard: {
+					entity: actor,
+					home: {
+						x: position.x,
+						y: position.y,
+					},
+					wanderRadius: 10,
+				},
+			})
+
+			actor.add(Behavior(behaviorTree))
+		}
+
+		if (idle) {
+			actor.add(Idle(idle))
+		}
+
+		return actor
 	},
 }))

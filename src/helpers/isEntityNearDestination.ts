@@ -1,5 +1,9 @@
 // Local imports
-import { type NPCType } from '@/typedefs/NPCType'
+import {
+	Destination,
+	Position,
+} from '@/store/traits'
+import { Entity } from 'koota'
 
 
 
@@ -12,19 +16,19 @@ import { type NPCType } from '@/typedefs/NPCType'
  * @param threshold The maximum offset within which the entity will be considered near.
  * @returns Whether the entity is within the threshold of its destination.
  */
-export function isEntityNearDestination(entity: NPCType, threshold = 1) {
-	if (!entity.destination.state.value) {
+export function isEntityNearDestination(entity: Entity, threshold = 1) {
+	if (!entity.has(Destination)) {
 		throw new Error('Entity doesn\'t have a destination.')
 	}
 
 	const {
 		x: destinationX,
 		y: destinationY,
-	} = entity.destination.state.value
+	} = entity.get(Destination)!
 	const {
 		x: entityX,
 		y: entityY,
-	} = entity.position.state
+	} = entity.get(Position)!
 
 	const dx = destinationX - entityX
 	const dy = destinationY - entityY

@@ -17,8 +17,6 @@
     "behaviortree": "^3.0.0-beta.1",
     "koota": "^0.1.8",
     "matter-js": "^0.20.0",
-    "miniplex": "^2.0.0",
-    "miniplex-react": "^2.0.1",
     "next": "15.1.3",
     "pixi-ldtk-loader": "^2.3.3",
     "pixi-tiled-loader": "^1.3.1",
