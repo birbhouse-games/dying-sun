@@ -9,8 +9,12 @@ import {
 
 
 // Local imports
+import {
+	Input,
+	Time,
+} from '@/store/traits'
 import { KEY_BINDINGS } from '@/constants/KEY_BINDINGS.ts'
-import { store } from '@/store/store.ts'
+import { world } from '@/store/world'
 
 
 
@@ -25,8 +29,9 @@ export function useKeyboardStateSystem() {
 
 		event.preventDefault()
 
-		const { keyboardState } = store.state
-		let keyState = keyboardState.get(event.key)
+		const { now } = world.get(Time)!
+		const input = world.get(Input)!
+		let keyState = input.get(event.key)
 
 		if (!keyState) {
 			keyState = {
@@ -35,17 +40,17 @@ export function useKeyboardStateSystem() {
 				isActive: false,
 				sinceLastActivated: null,
 			}
-			keyboardState.set(event.key, keyState)
+			input.set(event.key, keyState)
 		}
 
 		if (keyState.isActive) {
 			return
 		}
 
-		keyState.activatedAt = store.state.now
+		keyState.activatedAt = now
 		keyState.isActive = true
 
-		store.set(() => ({ keyboardState: new Map(keyboardState) }))
+		input.set(event.key, keyState)
 	}, [])
 
 	const handleKeyUp = useCallback((event: KeyboardEvent) => {
@@ -55,17 +60,18 @@ export function useKeyboardStateSystem() {
 
 		event.preventDefault()
 
-		const { keyboardState } = store.state
-		const keyState = keyboardState.get(event.key)
+		const { now } = world.get(Time)!
+		const input = world.get(Input)!
+		const keyState = input.get(event.key)
 
 		if (!keyState) {
 			return
 		}
 
-		keyState.deactivatedAt = store.state.now
+		keyState.deactivatedAt = now
 		keyState.isActive = false
 
-		store.set(() => ({ keyboardState: new Map(keyboardState) }))
+		input.set(event.key, keyState)
 	}, [])
 
 	useEffect(() => {

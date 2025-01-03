@@ -4,14 +4,18 @@ import {
 	SUCCESS,
 	Task,
 } from 'behaviortree'
+import { Entity } from 'koota'
 
 
 
 
 
 // Local imports
-import { type NPCType } from '@/typedefs/NPCType'
-import { store } from '@/store/store'
+import {
+	Idle,
+	Time,
+} from '@/store/traits'
+import { world } from '@/store/world'
 
 
 
@@ -19,7 +23,7 @@ import { store } from '@/store/store'
 
 // Types
 interface IdleBlackboard {
-	entity: NPCType,
+	entity: Entity,
 	idleDuration?: number,
 	idleStartedAt?: number,
 }
@@ -46,7 +50,8 @@ export const IdleTask = new Task({
 	 * @returns The status of the task.
 	 */
 	run(blackboard: IdleBlackboard) {
-		if (store.state.now >= (blackboard.idleStartedAt! + blackboard.idleDuration!)) {
+		const { now } = world.get(Time)!
+		if (now >= (blackboard.idleStartedAt! + blackboard.idleDuration!)) {
 			return SUCCESS
 		}
 
@@ -62,9 +67,9 @@ export const IdleTask = new Task({
 		const {
 			max: maxIdle,
 			min: minIdle,
-		} = blackboard.entity.idle!
+		} = blackboard.entity.get(Idle)!
 
 		blackboard.idleDuration = Math.round(minIdle + ((maxIdle - minIdle) * Math.random()))
-		blackboard.idleStartedAt = store.state.now
+		blackboard.idleStartedAt = world.get(Time)!.now
 	},
 })

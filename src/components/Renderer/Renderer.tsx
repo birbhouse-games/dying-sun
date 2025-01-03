@@ -1,14 +1,21 @@
 // Module imports
-import { useStore } from 'statery'
+import {
+	useQueryFirst,
+	useTrait,
+} from 'koota/react'
+import { Entity } from 'koota'
 
 
 
 
 
 // Local imports
-import { BackgroundRenderer } from '@/components/BackgroundRenderer/BackgroundRenderer'
-import { EntitiesRenderer } from '@/components/EntitiesRenderer/EntitiesRenderer'
-import { store } from '@/store/store'
+import {
+	IsCamera,
+	Position,
+} from '@/store/traits'
+import { ActorRenderer } from '@/components/ActorRenderer/ActorRenderer'
+import { TileRenderer } from '@/components/TileRenderer/TileRenderer'
 
 
 
@@ -20,17 +27,20 @@ import { store } from '@/store/store'
  * @component
  */
 export function Renderer() {
-	const {
-		worldPositionX,
-		worldPositionY,
-	} = useStore(store)
+	// A little hack to get around useTrait requiring an entity, but in this case it might not exist
+	const camera = useQueryFirst(IsCamera, Position) ?? 11111 as Entity
+	const position = useTrait(camera, Position)
+
+	if (!position) {
+		return null
+	}
 
 	return (
 		<container
-			x={worldPositionX}
-			y={worldPositionY}>
-			<BackgroundRenderer />
-			<EntitiesRenderer />
+			x={position.x}
+			y={position.y}>
+			<TileRenderer />
+			<ActorRenderer />
 		</container>
 	)
 }

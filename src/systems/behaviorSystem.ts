@@ -1,5 +1,6 @@
 // Local imports
-import { query } from '@/helpers/ECS'
+import { Behavior } from '@/store/traits'
+import { world } from '@/store/world'
 
 
 
@@ -7,7 +8,7 @@ import { query } from '@/helpers/ECS'
 
 /** Moves actor sprites based on their physics body's position. */
 export function behaviorSystem() {
-	for (const entity of query.npc) {
-		entity.behaviorTree.step()
-	}
+	world.query(Behavior).updateEach(([behaviorTree]) => {
+		behaviorTree.step()
+	})
 }
