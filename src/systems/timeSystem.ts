@@ -8,7 +8,7 @@ import { world } from '@/store/world'
 
 /** Updates the global state with the time at the beginning of each frame. */
 export function timeSystem() {
-	const time = world.get(Time)
+	const time = world.get(Time)!
 
 	if (time.now === 0) {
 		time.now = performance.now()

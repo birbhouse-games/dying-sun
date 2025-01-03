@@ -47,5 +47,5 @@ export function attackSystem() {
 			attacker.stages = null
 			attacker.startedAt = null
 		}
-	}, { changeDetection: true })
+	})
 }

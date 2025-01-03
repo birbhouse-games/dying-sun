@@ -23,5 +23,5 @@ export function actorSystem() {
 
 		position.x = collider.bounds.min.x + ((collider.bounds.max.x - collider.bounds.min.x) / 2)
 		position.y = collider.bounds.min.y + ((collider.bounds.max.y - collider.bounds.min.y) / 2)
-	}, { changeDetection: true })
+	})
 }

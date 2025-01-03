@@ -20,5 +20,5 @@ export function cameraSystem() {
 	// Move the camera forward
 	world.query(Position, IsCamera).updateEach(([position]) => {
 		position.x -= 0.04
-	}, { changeDetection: true })
+	})
 }

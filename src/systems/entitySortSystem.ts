@@ -26,8 +26,8 @@ export function entitySortSystem() {
 	const sortedEntities = new Array<Entity>(...entities)
 
 	quicksort<Entity, number>(sortedEntities, entity => {
-		const { zOffset } = entity.get(Rendering)
-		const { y } = entity.get(Position)
+		const { zOffset } = entity.get(Rendering)!
+		const { y } = entity.get(Position)!
 		return y + zOffset
 	})
 

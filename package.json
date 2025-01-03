@@ -15,7 +15,7 @@
     "@pixi/devtools": "^2.0.1",
     "@pixi/react": "8.0.0-beta.18",
     "behaviortree": "^3.0.0-beta.1",
-    "koota": "^0.1.8",
+    "koota": "^0.1.9",
     "matter-js": "^0.20.0",
     "next": "15.1.3",
     "pixi-ldtk-loader": "^2.3.3",
