@@ -13,7 +13,7 @@
   "dependencies": {
     "@dying-sun/assets": "workspace:*",
     "@pixi/devtools": "^2.0.1",
-    "@pixi/react": "8.0.0-beta.18",
+    "@pixi/react": "8.0.0-beta.21",
     "behaviortree": "^3.0.0-beta.1",
     "matter-js": "^0.20.0",
     "miniplex": "^2.0.0",
@@ -29,9 +29,9 @@
     "uuid": "^11.0.3"
   },
   "devDependencies": {
-    "@birbhouse/eslint-config": "^1.1.1",
-    "@birbhouse/eslint-config-react": "^1.1.2",
-    "@birbhouse/eslint-config-typescript": "^1.0.2",
+    "@birbhouse/eslint-config": "^1.2.0",
+    "@birbhouse/eslint-config-react": "^1.2.0",
+    "@birbhouse/eslint-config-typescript": "^1.1.0",
     "@eslint/eslintrc": "^3.2.0",
     "@eslint/js": "^9.17.0",
     "@types/eslint-plugin-jsx-a11y": "^6.10.0",

@@ -14,7 +14,6 @@ import { useCallback } from 'react'
  * @returns The typed callback.
  */
 export function useGraphics(
-	// eslint-disable-next-line no-unused-vars
 	callback: (graphics: Graphics, ...args: unknown[]) => unknown,
 	dependencies: unknown[],
 ) {

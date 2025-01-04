@@ -266,26 +266,27 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@birbhouse/eslint-config-react@npm:^1.1.2":
-  version: 1.1.2
-  resolution: "@birbhouse/eslint-config-react@npm:1.1.2"
+"@birbhouse/eslint-config-react@npm:^1.2.0":
+  version: 1.2.0
+  resolution: "@birbhouse/eslint-config-react@npm:1.2.0"
   dependencies:
     eslint: "npm:^9.17.0"
     typescript-eslint: "npm:^8.19.0"
   peerDependencies:
     eslint-plugin-import-x: ^4.6.1
+    eslint-plugin-jsdoc: ^50.6.1
     eslint-plugin-jsx-a11y: ^6.10.2
     eslint-plugin-react: ^7.37.2
     eslint-plugin-react-hooks: ^5.1.0
     eslint-plugin-react-perf: ^3.3.3
     eslint-plugin-react-prefer-function-component: ^3.3.0
-  checksum: 10c0/42850c8b00ce41eccfae0ba89e60e294d28dd3b787cfa6cba3afc2b3724e1bfc4edbdf1121f912403ca5ada2f57f12d75a0ca5fbcf4e8735c35cab3cf909f388
+  checksum: 10c0/49d968f7fcc0f5ccfdfe1310b99a063a3912bc9bad4784c7796994ddf920e83fbde05744218ccd82b848405cd41f3804f41a2f163b98f6b07343c8d1381c34bf
   languageName: node
   linkType: hard
 
-"@birbhouse/eslint-config-typescript@npm:^1.0.2":
-  version: 1.0.2
-  resolution: "@birbhouse/eslint-config-typescript@npm:1.0.2"
+"@birbhouse/eslint-config-typescript@npm:^1.1.0":
+  version: 1.1.0
+  resolution: "@birbhouse/eslint-config-typescript@npm:1.1.0"
   dependencies:
     eslint: "npm:^9.17.0"
     eslint-import-resolver-typescript: "npm:^3.7.0"
@@ -295,13 +296,13 @@ __metadata:
     eslint-plugin-import: ^2.31.0
     eslint-plugin-jsdoc: ^50.6.1
     typescript: ^5.7.2
-  checksum: 10c0/6a916d974c8e78109f94d72b13f624c67890a7381aab8709dc50b358c5ef5ee5fab0385ffd09036e02e78951eaf2be7303876f08966ed8c514a6156f9d458d3c
+  checksum: 10c0/368b9e27447bda442b0251811df6a4ca7d70acfbedf11903fa5b1dcbf6b8bc6e326bb448511f15500664f23431778f0297bbcf219eaf470fccc1cd1e1db971fd
   languageName: node
   linkType: hard
 
-"@birbhouse/eslint-config@npm:^1.1.1":
-  version: 1.1.1
-  resolution: "@birbhouse/eslint-config@npm:1.1.1"
+"@birbhouse/eslint-config@npm:^1.2.0":
+  version: 1.2.0
+  resolution: "@birbhouse/eslint-config@npm:1.2.0"
   dependencies:
     "@eslint/eslintrc": "npm:^3.2.0"
     "@eslint/js": "npm:^9.17.0"
@@ -318,7 +319,7 @@ __metadata:
     eslint-plugin-sort-class-members: ^1.21.0
     eslint-plugin-unused-imports: ^4.1.4
     typescript: ^5.7.2
-  checksum: 10c0/7ee15c84cd85e193e765ee6b14d431f5251f597f3416bf84d5a56668bd6e0f6777888f499bf126ba20fbaf771bb942a6cfee96e8f46fa9c1c117c1dc60e2ae00
+  checksum: 10c0/891132fcc9ce91eda712f3ff129e1db01ad18db29a73729157965b835267900a097894e8dfa2013277f7c2a84efac37a0aef463f34bcee52a8b8a37a09b1e7a3
   languageName: node
   linkType: hard
 
@@ -334,14 +335,14 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@dying-sun/game@workspace:packages/game"
   dependencies:
-    "@birbhouse/eslint-config": "npm:^1.1.1"
-    "@birbhouse/eslint-config-react": "npm:^1.1.2"
-    "@birbhouse/eslint-config-typescript": "npm:^1.0.2"
+    "@birbhouse/eslint-config": "npm:^1.2.0"
+    "@birbhouse/eslint-config-react": "npm:^1.2.0"
+    "@birbhouse/eslint-config-typescript": "npm:^1.1.0"
     "@dying-sun/assets": "workspace:*"
     "@eslint/eslintrc": "npm:^3.2.0"
     "@eslint/js": "npm:^9.17.0"
     "@pixi/devtools": "npm:^2.0.1"
-    "@pixi/react": "npm:8.0.0-beta.18"
+    "@pixi/react": "npm:8.0.0-beta.21"
     "@types/eslint-plugin-jsx-a11y": "npm:^6.10.0"
     "@types/eslint__eslintrc": "npm:^2.1.2"
     "@types/matter-js": "npm:^0.19.8"
@@ -2185,16 +2186,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@pixi/react@npm:8.0.0-beta.18":
-  version: 8.0.0-beta.18
-  resolution: "@pixi/react@npm:8.0.0-beta.18"
+"@pixi/react@npm:8.0.0-beta.21":
+  version: 8.0.0-beta.21
+  resolution: "@pixi/react@npm:8.0.0-beta.21"
   dependencies:
     its-fine: "npm:^1.2.5"
     react-reconciler: "npm:0.31.0"
   peerDependencies:
     pixi.js: ^8.2.6
     react: ">=19.0.0"
-  checksum: 10c0/3b9b9c3cce7b8d598bf95d0c3182d47e4d1d4557e737f350c68e15ab9806d249e88795443a89f439871a7a1bfae140eabb0e08f53c2f0739e35b01d8a75b45e3
+  checksum: 10c0/ecc30f3e6d76cc2efc8f5773565a700977042a97e27012c2931118a80e29cfa4021f8a9837fd0d0991e5a6a008b1d280c0ec629ce5896fbd9ceb52f46d0d9d1d
   languageName: node
   linkType: hard
 

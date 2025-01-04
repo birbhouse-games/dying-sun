@@ -1,4 +1,3 @@
-/* eslint-disable no-shadow, no-unused-vars */
 export enum COLLISION_CATEGORIES {
 	PROP = 1 << 0,
 	ACTOR_COLLIDER = 1 << 1,

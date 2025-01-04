@@ -85,8 +85,8 @@ export function Game() {
 
 	return (
 		<div
-			className={styles['container']}
-			ref={resizeToRef}>
+			ref={resizeToRef}
+			className={styles['container']}>
 			{isLoadingAssets && (
 				<AssetsLoader />
 			)}
@@ -95,11 +95,10 @@ export function Game() {
 				<Application
 					ref={applicationRef}
 					antialias={false}
-					attachToDevTools
-					autoDensity={true}
+					autoDensity
 					resizeTo={resizeToRef}
 					resolution={window.devicePixelRatio ?? 1}
-					roundPixels={true}>
+					roundPixels>
 					<Suspense fallback={<pixiText text={'Loading...'} />}>
 						<Renderer />
 					</Suspense>

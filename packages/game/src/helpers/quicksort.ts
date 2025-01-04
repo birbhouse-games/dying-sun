@@ -26,7 +26,6 @@ function swap<ItemType>(
  */
 function partition<ItemType, ValueType>(
 	items: ItemType[],
-	// eslint-disable-next-line no-unused-vars
 	valueAccessor: (item: ItemType) => ValueType,
 	leftIndex: number,
 	rightIndex: number,
@@ -65,7 +64,6 @@ function partition<ItemType, ValueType>(
  */
 export function quicksort<ItemType = number, ValueType = ItemType>(
 	items: ItemType[],
-	// eslint-disable-next-line no-unused-vars
 	valueAccessor: (item: ItemType) => ValueType = item => item as unknown as ValueType,
 	leftIndex: number = 0,
 	rightIndex: number | null = null,

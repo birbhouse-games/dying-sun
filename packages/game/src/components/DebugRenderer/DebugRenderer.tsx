@@ -84,7 +84,10 @@ export function DebugRenderer() {
 				return { debugRenderers: lDebugRenderers }
 			})
 		}
-	}, [physicsEngine])
+	}, [
+		isDebugModeEnabled,
+		physicsEngine,
+	])
 
 	useEffect(() => {
 		if (debugRenderers?.length) {
@@ -97,11 +100,11 @@ export function DebugRenderer() {
 	return (
 		<>
 			<canvas
-				className={styles['wireframes']}
-				ref={wireframeCanvasRef} />
+				ref={wireframeCanvasRef}
+				className={styles['wireframes']} />
 			<canvas
-				className={styles['debug-info']}
-				ref={debugInfoCanvasRef} />
+				ref={debugInfoCanvasRef}
+				className={styles['debug-info']} />
 		</>
 	)
 }

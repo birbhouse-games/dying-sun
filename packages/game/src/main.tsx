@@ -1,6 +1,6 @@
 // Module imports
-import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
+import { StrictMode } from 'react'
 
 
 
@@ -16,7 +16,7 @@ import { Game } from '@/components/Game/Game.tsx'
 
 
 createRoot(document.getElementById('root')!).render((
-  <StrictMode>
-    <Game />
-  </StrictMode>
+	<StrictMode>
+		<Game />
+	</StrictMode>
 ))

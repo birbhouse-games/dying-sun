@@ -8,6 +8,7 @@ import { store } from '@/store/store'
 
 
 
+/** Handles creating new entities from spawns. */
 export function spawnSystem() {
 	const {
 		now,

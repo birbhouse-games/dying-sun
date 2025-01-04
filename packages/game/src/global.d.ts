@@ -1,3 +1,5 @@
+import { type UnprefixedPixiElements } from '@pixi/react'
+
 declare namespace Matter {
 	interface IBodyRenderOptionsSprite {
 		xOffset?: number
@@ -10,3 +12,7 @@ declare namespace Matter {
 }
 
 declare module 'poly-decomp'
+
+declare module '@pixi/react' {
+  interface PixiElements extends UnprefixedPixiElements {}
+}

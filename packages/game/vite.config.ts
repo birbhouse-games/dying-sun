@@ -34,12 +34,12 @@ export default defineConfig({
 		'assets',
 		'public',
 	),
-  resolve: {
-    alias: {
-      '@': path.resolve(
+	resolve: {
+		alias: {
+			'@': path.resolve(
 				__dirname,
 				'src',
 			),
-    },
-  },
+		},
+	},
 })

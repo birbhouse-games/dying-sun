@@ -25,6 +25,16 @@ import { Entity } from '@/typedefs/Entity'
 
 
 
+// Constants
+const ANCHOR = {
+	x: 0.5,
+	y: 0.5,
+}
+
+
+
+
+
 /**
  * Renders an actor entity.
  *
@@ -70,7 +80,7 @@ export function Actor(entity: With<Entity, 'actorType' | 'attack' | 'bodies' | '
 
 	const spritesheet = useMemo(() => {
 		return Assets.get<Spritesheet>(`/assets/characters/${entity.actorType}/${entity.actorType}.json`)
-	}, [])
+	}, [entity.actorType])
 
 	const currentStage = useMemo(() => stages?.[currentStageIndex!], [
 		currentStageIndex,
@@ -95,6 +105,13 @@ export function Actor(entity: With<Entity, 'actorType' | 'attack' | 'bodies' | '
 		velocityY,
 		spritesheet,
 	])
+
+	const spriteScale = useMemo(() => {
+		return {
+			x: isFlipped ? -1 : 1,
+			y: 1,
+		}
+	}, [isFlipped])
 
 	useEffect(() => {
 		if (velocityX === -1) {
@@ -121,17 +138,11 @@ export function Actor(entity: With<Entity, 'actorType' | 'attack' | 'bodies' | '
 			zIndex={zIndex}>
 			<animatedSprite
 				ref={spriteRef}
-				anchor={{
-					x: 0.5,
-					y: 0.5,
-				}}
+				anchor={ANCHOR}
 				// @ts-expect-error `animationSpeed` is missing from the Pixi React types.
 				animationSpeed={0.15}
 				loop={loop}
-				scale={{
-					x: isFlipped ? -1 : 1,
-					y: 1,
-				}}
+				scale={spriteScale}
 				textures={textures} />
 		</container>
 	)
