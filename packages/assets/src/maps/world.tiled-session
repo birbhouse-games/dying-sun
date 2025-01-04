@@ -1,0 +1,76 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "level.tmx",
+    "expandedProjectPaths": [
+        "."
+    ],
+    "fileStates": {
+        "/Users/trezy/Development/clients/birbhouse/discord-activity/assets/1 - preload/tilesets/background.tsx": {
+            "dynamicWrapping": false,
+            "scaleInEditor": 1
+        },
+        "/Users/trezy/Development/clients/birbhouse/discord-activity/assets/1 - preload/tilesets/props.tsx": {
+            "dynamicWrapping": true,
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "/Users/trezy/Development/clients/birbhouse/discord-activity/assets/1 - preload/tilesets/props/Props.tsx": {
+            "dynamicWrapping": true,
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "/Users/trezy/Development/clients/birbhouse/discord-activity/assets/tilesets/background.tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 1,
+            "scaleInEditor": 2.3396
+        },
+        "/Users/trezy/Development/clients/birbhouse/discord-activity/assets/tilesets/props.tsx": {
+            "dynamicWrapping": true,
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "level.tmx": {
+            "expandedGroupLayers": [
+                3,
+                10
+            ],
+            "scale": 7.5855,
+            "selectedLayer": 5,
+            "viewCenter": {
+                "x": 132.29187265176984,
+                "y": 188.45165117658695
+            }
+        }
+    },
+    "last.imagePath": "/Users/trezy/Development/clients/birbhouse/discord-activity/assets/1 - preload/tilesets/props",
+    "loadedWorlds": [
+        "/Users/trezy/Development/clients/birbhouse/discord-activity/assets/maps/world.world"
+    ],
+    "map.height": 15,
+    "map.lastUsedFormat": "tmx",
+    "map.tileHeight": 16,
+    "map.tileWidth": 16,
+    "map.width": 82,
+    "openFiles": [
+        "level.tmx"
+    ],
+    "project": "world.tiled-project",
+    "property.type": "int",
+    "recentFiles": [
+        "level.tmx",
+        "/Users/trezy/Development/clients/birbhouse/discord-activity/assets/tilesets/props.tsx",
+        "/Users/trezy/Development/clients/birbhouse/discord-activity/assets/tilesets/background.tsx",
+        "/Users/trezy/Development/clients/birbhouse/discord-activity/assets/1 - preload/tilesets/props.tsx",
+        "/Users/trezy/Development/clients/birbhouse/discord-activity/assets/1 - preload/tilesets/background.tsx",
+        "/Users/trezy/Development/clients/birbhouse/discord-activity/assets/1 - preload/tilesets/props/Props.tsx"
+    ],
+    "tileset.lastUsedFormat": "tsx",
+    "tileset.tileSize": {
+        "height": 16,
+        "width": 16
+    },
+    "tileset.type": 1
+}

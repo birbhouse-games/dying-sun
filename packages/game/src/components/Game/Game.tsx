@@ -1,0 +1,111 @@
+// Module imports
+import {
+	AnimatedSprite,
+	BitmapText,
+	Container,
+	extensions,
+	Graphics,
+	Sprite,
+	TextureStyle,
+} from 'pixi.js'
+import {
+	Application,
+	extend,
+} from '@pixi/react'
+import {
+	Suspense,
+	useMemo,
+	useRef,
+} from 'react'
+import {
+	TiledTilemapLoader,
+	TiledTilesetLoader,
+} from 'pixi-tiled-loader'
+import { LDTKLoader } from 'pixi-ldtk-loader'
+import { useStore } from 'statery'
+
+
+
+
+
+// Local imports
+import { AsepriteJSONLoader } from '@/helpers/AsepriteJSONLoader'
+import { AssetsLoader } from '@/components/AssetsLoader/AssetsLoader'
+import { DebugRenderer } from '@/components/DebugRenderer/DebugRenderer'
+import { Renderer } from '@/components/Renderer/Renderer'
+import { store } from '@/store/store'
+
+import styles from './Game.module.scss'
+
+
+
+
+
+extend({
+	AnimatedSprite,
+	BitmapText,
+	Container,
+	Graphics,
+	Sprite,
+})
+
+extensions.add(AsepriteJSONLoader)
+extensions.add(LDTKLoader)
+extensions.add(TiledTilemapLoader({ loadTilesets: true }))
+extensions.add(TiledTilesetLoader({ loadImages: true }))
+
+
+
+
+
+TextureStyle.defaultOptions.scaleMode = 'nearest'
+
+/**
+ * The main page.
+ *
+ * @component
+ */
+export function Game() {
+	const {
+		areAssetsInitialised,
+		areBundlesLoaded,
+		isWorldInitialised,
+		manifest,
+	} = useStore(store)
+
+	const applicationRef = useRef(null)
+	const resizeToRef = useRef<HTMLDivElement>(null!)
+
+	const isLoadingAssets = useMemo(() => !manifest || !areAssetsInitialised || !areBundlesLoaded || !isWorldInitialised, [
+		areAssetsInitialised,
+		areBundlesLoaded,
+		isWorldInitialised,
+		manifest,
+	])
+
+	return (
+		<div
+			ref={resizeToRef}
+			className={styles['container']}>
+			{isLoadingAssets && (
+				<AssetsLoader />
+			)}
+
+			{!isLoadingAssets && (
+				<Application
+					ref={applicationRef}
+					antialias={false}
+					autoDensity
+					resizeTo={resizeToRef}
+					resolution={window.devicePixelRatio ?? 1}
+					roundPixels>
+					<Suspense fallback={<pixiText text={'Loading...'} />}>
+						<Renderer />
+					</Suspense>
+				</Application>
+			)}
+
+			<DebugRenderer />
+		</div>
+	)
+}
