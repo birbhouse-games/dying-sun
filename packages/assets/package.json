@@ -1,0 +1,12 @@
+{
+  "name": "@dying-sun/assets",
+  "private": true,
+  "version": "0.0.0-development",
+  "type": "module",
+  "scripts": {
+    "build": "assetpack"
+  },
+  "devDependencies": {
+    "@assetpack/core": "^1.2.3"
+  }
+}
