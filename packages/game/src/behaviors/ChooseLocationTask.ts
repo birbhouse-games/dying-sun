@@ -46,7 +46,12 @@ export const ChooseLocationTask = new Task({
 		const xDirection = Math.random() > 0.5 ? 1 : -1
 		const yDirection = Math.random() > 0.5 ? 1 : -1
 
-		entity.add(Destination)
+		// If the entity doesn't have a destination, add one
+		if (!entity.has(Destination)) {
+			entity.add(Destination)
+		}
+
+		// Set the destination to a random location within the wander radius of the entity
 		entity.set(Destination, {
 			x: Math.round(((Math.random() * wanderRadius) * xDirection) + home.x),
 			y: Math.round(((Math.random() * wanderRadius) * yDirection) + home.y),
