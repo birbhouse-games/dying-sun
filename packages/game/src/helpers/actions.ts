@@ -11,7 +11,7 @@ import {
 	ImageTile,
 	Tilemap,
 } from 'pixi-tiled-loader'
-import BehaviorTree from 'behaviortree'
+import { BehaviorTree } from 'behaviortree'
 import { createActions } from 'koota'
 
 
@@ -215,5 +215,5 @@ export const actions = createActions(world => ({
 
 		// Reset the physics engine
 		Engine.clear(world.get(PhysicsEngine)!)
-	}
+	},
 }))
