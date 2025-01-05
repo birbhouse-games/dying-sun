@@ -2,8 +2,7 @@ _Dying Sun_ is a JavaScript app. The current tech stack:
 * [**Next.js**](https://nextjs.org/) - Server and UI framework
 * [**Pixi.js**](https://pixijs.com/) - Rendering engine
 * [**Matter.js**](https://brm.io/matter-js/) - Physics engine
-* [**Miniplex**](https://github.com/hmans/miniplex) - ECS
-* [**Statery**](https://github.com/hmans/statery) - Global state management
+* [**Koota**](https://github.com/pmndrs/koota) - State management
 
 We also use these apps to edit the game assets:
 * [**Aseprite**](https://aseprite.org/) - Pixel art and animation (JSON exports)

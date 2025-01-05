@@ -94,13 +94,8 @@ export const ActorView = memo(({ entity }: { entity: Entity }) => {
 	}, [bodies, entityPositionX, entityPositionY, isFlipped])
 
 	const spritesheet = useMemo(() => {
-<<<<<<<< HEAD:src/components/ActorView/ActorView.tsx
 		return Assets.get<Spritesheet>(`/assets/characters/${actorType}/${actorType}.json`)
 	}, [actorType])
-========
-		return Assets.get<Spritesheet>(`/assets/characters/${entity.actorType}/${entity.actorType}.json`)
-	}, [entity.actorType])
->>>>>>>> main:packages/game/src/components/Actor/Actor.tsx
 
 	const currentStage = useMemo(() => stages?.[currentStageIndex!], [
 		currentStageIndex,
@@ -158,16 +153,8 @@ export const ActorView = memo(({ entity }: { entity: Entity }) => {
 			zIndex={zIndex}>
 			<animatedSprite
 				ref={spriteRef}
-<<<<<<<< HEAD:src/components/ActorView/ActorView.tsx
-				anchor={{
-					x: 0.5,
-					y: 0.5,
-				}}
-				// @ts-expect-error - `animationSpeed` is missing from the Pixi React types.
-========
 				anchor={ANCHOR}
 				// @ts-expect-error `animationSpeed` is missing from the Pixi React types.
->>>>>>>> main:packages/game/src/components/Actor/Actor.tsx
 				animationSpeed={0.15}
 				loop={loop}
 				scale={spriteScale}
