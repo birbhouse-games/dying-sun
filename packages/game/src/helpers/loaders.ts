@@ -18,14 +18,12 @@ import {
 	AssetRegistry,
 	PhysicsEngine,
 } from '@/store/traits'
-import {
-	getBackgroundsFromTilemap,
-	getBoundariesFromTilemap,
-	getPropsFromTilemap,
-	getSpawnPointsFromTilemap,
-} from '@/helpers/tilemapUtils'
 import { actions } from './actions'
 import { createPhysicsBody } from '@/helpers/createPhysicsBody'
+import { getBackgroundsFromTilemap } from '@/helpers/getBackgroundsFromTilemap'
+import { getBoundariesFromTilemap } from '@/helpers/getBoundariesFromTilemap'
+import { getPropsFromTilemap } from '@/helpers/getPropsFromTilemap'
+import { getSpawnPointsFromTilemap } from '@/helpers/getSpawnPointsFromTilemap'
 
 
 
