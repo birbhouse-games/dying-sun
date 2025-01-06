@@ -1,22 +1,52 @@
-import { World } from 'koota'
-import { AssetRegistry, PhysicsEngine } from '@/store/traits'
+// Module imports
+import {
+	Common,
+	Composite,
+} from 'matter-js'
 import { Assets } from 'pixi.js'
-import { actions } from './actions'
-import { Common, Composite } from 'matter-js'
 // @ts-expect-error - `poly-decomp` has no types
 import decomp from 'poly-decomp'
 import { Tilemap } from 'pixi-tiled-loader'
-import { getBackgroundsFromTilemap, getBoundariesFromTilemap, getPropsFromTilemap, getSpawnPointsFromTilemap } from '@/helpers/tilemapUtils'
+import { World } from 'koota'
+
+
+
+
+
+// Local imports
+import {
+	AssetRegistry,
+	PhysicsEngine,
+} from '@/store/traits'
+import {
+	getBackgroundsFromTilemap,
+	getBoundariesFromTilemap,
+	getPropsFromTilemap,
+	getSpawnPointsFromTilemap,
+} from '@/helpers/tilemapUtils'
+import { actions } from './actions'
 import { createPhysicsBody } from '@/helpers/createPhysicsBody'
 
 
+
+
+
+/**
+ * Loads the manifest file.
+ *
+ * @param world The Koota world.
+ */
 export async function loadManifest(world: World) {
 	const response = await fetch('/assets/manifest.json')
 	const result = await response.json()
 	world.set(AssetRegistry, { manifest: result })
 }
 
-/** Parses asset bundles from the manifest and loads all relevant files. */
+/**
+ * Parses asset bundles from the manifest and loads all relevant files.
+ *
+ * @param world The Koota world.
+ */
 export async function loadAssetBundles(world: World) {
 	const assetRegistry = world.get(AssetRegistry)!
 
@@ -49,7 +79,11 @@ export async function loadAssetBundles(world: World) {
 	}
 }
 
-
+/**
+ * Prepares a level for use.
+ *
+ * @param world The Koota world.
+ */
 export function loadLevel(world: World) {
 	const {
 		createPropEntity,

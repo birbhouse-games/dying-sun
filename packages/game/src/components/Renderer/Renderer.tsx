@@ -3,7 +3,6 @@ import {
 	useQueryFirst,
 	useTrait,
 } from 'koota/react'
-import { Entity } from 'koota'
 
 
 

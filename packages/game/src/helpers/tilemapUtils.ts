@@ -1,7 +1,27 @@
-import { SpawnPoint } from "@/typedefs/SpawnPoint"
-import { Cell, GridTile, GroupLayer, ImageTile, isPoint, Layer, ObjectLayer, TiledObjectGroup, Tilemap } from "pixi-tiled-loader"
+// Module imports
+import {
+	Cell,
+	GridTile,
+	GroupLayer,
+	ImageTile,
+	isPoint,
+	Layer,
+	ObjectLayer,
+	TiledObjectGroup,
+	Tilemap,
+} from 'pixi-tiled-loader'
+import { SpawnPoint } from '@/typedefs/SpawnPoint'
 
+
+
+
+
+// Types
 type TileData = [Cell, GridTile | ImageTile, Tilemap]
+
+
+
+
 
 /**
  * Gets the props from the tilemap.

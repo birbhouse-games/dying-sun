@@ -1,4 +1,3 @@
-/* eslint-disable jsdoc/require-jsdoc */
 // Module imports
 import { trait } from 'koota'
 
@@ -18,4 +17,3 @@ export const Attacker = trait<Pick<AttackState, keyof AttackState>>({
 	stages: null,
 	startedAt: null,
 })
-

@@ -25,7 +25,11 @@ import { TileView } from '@/components/TileView/TileView'
 export const TileRenderer = memo(() => {
 	const tiles = useQuery(Position, Rendering)
 
-	return tiles.map(tile => <TileView key={tile.id()} entity={tile} />)
+	return tiles.map(tile => (
+		<TileView
+			key={tile.id()}
+			entity={tile} />
+	))
 })
 
 TileRenderer.displayName = 'TileRenderer'

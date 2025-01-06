@@ -1,5 +1,5 @@
 // Module imports
-import BehaviorTree from 'behaviortree'
+import { BehaviorTree } from 'behaviortree'
 import { trait } from 'koota'
 
 

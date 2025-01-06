@@ -26,7 +26,9 @@ export const ActorRenderer = memo(() => {
 	const actors = useQuery(Actor, Position)
 
 	return actors.map(actor => (
-		<ActorView key={actor.id()} entity={actor} />
+		<ActorView
+			key={actor.id()}
+			entity={actor} />
 	))
 })
 
