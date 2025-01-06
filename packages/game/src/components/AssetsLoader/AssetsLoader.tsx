@@ -6,17 +6,19 @@ import { useWorld } from 'koota/react'
 
 
 // Local imports
-import {
-	loadAssetBundles,
-	loadLevel,
-	loadManifest,
-} from '@/helpers/loaders'
+import { loadAssetBundles } from '@/helpers/loadAssetBundles'
+import { loadLevel } from '@/helpers/loadLevel'
+import { loadManifest } from '@/helpers/loadManifest'
 
 
 
 
 
+// Variables
 let promise: Promise<unknown>
+
+
+
 
 
 /**

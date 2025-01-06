@@ -30,54 +30,6 @@ import { getSpawnPointsFromTilemap } from '@/helpers/getSpawnPointsFromTilemap'
 
 
 /**
- * Loads the manifest file.
- *
- * @param world The Koota world.
- */
-export async function loadManifest(world: World) {
-	const response = await fetch('/assets/manifest.json')
-	const result = await response.json()
-	world.set(AssetRegistry, { manifest: result })
-}
-
-/**
- * Parses asset bundles from the manifest and loads all relevant files.
- *
- * @param world The Koota world.
- */
-export async function loadAssetBundles(world: World) {
-	const assetRegistry = world.get(AssetRegistry)!
-
-	// Initialise bundle registry
-	if (assetRegistry.manifest && !assetRegistry.areBundlesInitialised) {
-		await Assets.init({
-			basePath: '/assets',
-			manifest: assetRegistry.manifest,
-		})
-
-		assetRegistry.areBundlesInitialised = true
-
-		assetRegistry.bundles = Object.fromEntries(
-			assetRegistry.manifest.bundles.map(bundle => [bundle.name, null]),
-		)
-
-		world.set(AssetRegistry, assetRegistry)
-	}
-
-	// Load bundles
-	if (assetRegistry.areBundlesInitialised) {
-		for (const bundleName in assetRegistry.bundles) {
-			const bundle = await Assets.loadBundle(bundleName)
-			assetRegistry.bundles[bundleName] = bundle
-		}
-
-		assetRegistry.areBundlesLoaded = true
-
-		world.set(AssetRegistry, assetRegistry)
-	}
-}
-
-/**
  * Prepares a level for use.
  *
  * @param world The Koota world.
