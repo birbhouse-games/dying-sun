@@ -36,6 +36,7 @@ import { AsepriteJSONLoader } from '@/helpers/AsepriteJSONLoader'
 import { AssetRegistry } from '@/store/traits'
 import { AssetsLoader } from '@/components/AssetsLoader/AssetsLoader'
 import { DebugRenderer } from '@/components/DebugRenderer/DebugRenderer'
+import { UIWrapper } from '@/components/UIWrapper/UIWrapper'
 import { world } from '@/store/world'
 
 import styles from './Game.module.scss'
@@ -64,7 +65,7 @@ extensions.add(TiledTilesetLoader({ loadImages: true }))
 TextureStyle.defaultOptions.scaleMode = 'nearest'
 
 /**
- * The main page.
+ * The game renderer.
  *
  * @component
  */
@@ -83,17 +84,21 @@ export function Game() {
 					)}
 
 					{isLevelLoaded && (
-						<Application
-							antialias={false}
-							attachToDevTools
-							autoDensity
-							resizeTo={resizeToRef}
-							resolution={window.devicePixelRatio ?? 1}
-							roundPixels>
-							<Suspense fallback={<pixiText text={'Loading...'} />}>
-								<ApplicationEntryPoint />
-							</Suspense>
-						</Application>
+						<>
+							<Application
+								antialias={false}
+								attachToDevTools
+								autoDensity
+								resizeTo={resizeToRef}
+								resolution={window.devicePixelRatio ?? 1}
+								roundPixels>
+								<Suspense fallback={<pixiText text={'Loading...'} />}>
+									<ApplicationEntryPoint />
+								</Suspense>
+							</Application>
+
+							<UIWrapper />
+						</>
 					)}
 
 					<DebugRenderer />
