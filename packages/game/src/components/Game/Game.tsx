@@ -14,26 +14,29 @@ import {
 } from '@pixi/react'
 import {
 	Suspense,
-	useMemo,
 	useRef,
 } from 'react'
 import {
 	TiledTilemapLoader,
 	TiledTilesetLoader,
 } from 'pixi-tiled-loader'
+import {
+	useTrait,
+	WorldProvider,
+} from 'koota/react'
 import { LDTKLoader } from 'pixi-ldtk-loader'
-import { useStore } from 'statery'
 
 
 
 
 
 // Local imports
+import { ApplicationEntryPoint } from './ApplicationEntryPoint'
 import { AsepriteJSONLoader } from '@/helpers/AsepriteJSONLoader'
+import { AssetRegistry } from '@/store/traits'
 import { AssetsLoader } from '@/components/AssetsLoader/AssetsLoader'
 import { DebugRenderer } from '@/components/DebugRenderer/DebugRenderer'
-import { Renderer } from '@/components/Renderer/Renderer'
-import { store } from '@/store/store'
+import { world } from '@/store/world'
 
 import styles from './Game.module.scss'
 
@@ -66,46 +69,36 @@ TextureStyle.defaultOptions.scaleMode = 'nearest'
  * @component
  */
 export function Game() {
-	const {
-		areAssetsInitialised,
-		areBundlesLoaded,
-		isWorldInitialised,
-		manifest,
-	} = useStore(store)
-
-	const applicationRef = useRef(null)
 	const resizeToRef = useRef<HTMLDivElement>(null!)
-
-	const isLoadingAssets = useMemo(() => !manifest || !areAssetsInitialised || !areBundlesLoaded || !isWorldInitialised, [
-		areAssetsInitialised,
-		areBundlesLoaded,
-		isWorldInitialised,
-		manifest,
-	])
+	const {	isLevelLoaded } = useTrait(world, AssetRegistry)!
 
 	return (
-		<div
-			ref={resizeToRef}
-			className={styles['container']}>
-			{isLoadingAssets && (
-				<AssetsLoader />
-			)}
+		<WorldProvider world={world}>
+			<main
+				ref={resizeToRef}
+				className={styles['container']}>
+				<Suspense>
+					{!isLevelLoaded && (
+						<AssetsLoader />
+					)}
 
-			{!isLoadingAssets && (
-				<Application
-					ref={applicationRef}
-					antialias={false}
-					autoDensity
-					resizeTo={resizeToRef}
-					resolution={window.devicePixelRatio ?? 1}
-					roundPixels>
-					<Suspense fallback={<pixiText text={'Loading...'} />}>
-						<Renderer />
-					</Suspense>
-				</Application>
-			)}
+					{isLevelLoaded && (
+						<Application
+							antialias={false}
+							attachToDevTools
+							autoDensity
+							resizeTo={resizeToRef}
+							resolution={window.devicePixelRatio ?? 1}
+							roundPixels>
+							<Suspense fallback={<pixiText text={'Loading...'} />}>
+								<ApplicationEntryPoint />
+							</Suspense>
+						</Application>
+					)}
 
-			<DebugRenderer />
-		</div>
+					<DebugRenderer />
+				</Suspense>
+			</main>
+		</WorldProvider>
 	)
 }

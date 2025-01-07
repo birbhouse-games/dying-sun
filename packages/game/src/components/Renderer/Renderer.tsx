@@ -1,61 +1,44 @@
 // Module imports
 import {
-	useApplication,
-	useTick,
-} from '@pixi/react'
-import { initDevtools } from '@pixi/devtools'
-import { useEffect } from 'react'
-import { useStore } from 'statery'
+	useQueryFirst,
+	useTrait,
+} from 'koota/react'
 
 
 
 
 
 // Local imports
-import { BackgroundRenderer } from '@/components/BackgroundRenderer/BackgroundRenderer'
-import { EntitiesRenderer } from '@/components/EntitiesRenderer/EntitiesRenderer'
-import { runSystems } from '@/helpers/runSystems'
-import { store } from '@/store/store'
-
-import { useKeyboardStateSystem } from '@/hooks/useKeyboardStateSystem'
+import {
+	IsCamera,
+	Position,
+} from '@/store/traits'
+import { ActorRenderer } from '../ActorRenderer/ActorRenderer'
+import { TileRenderer } from '@/components/TileRenderer/TileRenderer'
 
 
 
 
 
 /**
- * Main game component. owns the renderer and runs all systems.
+ * World container that owns all subrenderers.
  *
  * @component
  */
 export function Renderer() {
-	const { app } = useApplication()
-	const {
-		worldPositionX,
-		worldPositionY,
-	} = useStore(store)
+	const camera = useQueryFirst(IsCamera, Position)
+	const position = useTrait(camera, Position)
 
-	useEffect(() => {
-		app.stage.updateTransform({
-			scaleX: 4,
-			scaleY: 4,
-		})
-	}, [app])
-
-	useEffect(() => {
-		initDevtools({ app })
-	}, [app])
-
-	useTick({ callback: runSystems })
-
-	useKeyboardStateSystem()
+	if (!position) {
+		return null
+	}
 
 	return (
 		<container
-			x={worldPositionX}
-			y={worldPositionY}>
-			<BackgroundRenderer />
-			<EntitiesRenderer />
+			x={position.x}
+			y={position.y}>
+			<TileRenderer />
+			<ActorRenderer />
 		</container>
 	)
 }

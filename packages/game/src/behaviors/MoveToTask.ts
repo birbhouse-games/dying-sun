@@ -11,8 +11,14 @@ import {
 
 
 // Local imports
+import {
+	Actor,
+	Destination,
+	Position,
+	Velocity,
+} from '@/store/traits'
+import { Entity } from 'koota'
 import { isEntityNearDestination } from '@/helpers/isEntityNearDestination'
-import { type NPCType } from '@/typedefs/NPCType'
 
 
 
@@ -20,7 +26,7 @@ import { type NPCType } from '@/typedefs/NPCType'
 
 // Types
 type MoveToBlackboard = {
-	entity: NPCType,
+	entity: Entity,
 }
 
 
@@ -36,11 +42,11 @@ export const MoveToTask = new Task({
 	end(blackboard: MoveToBlackboard) {
 		const { entity } = blackboard
 
-		entity.destination.set(() => ({ value: null }))
-		entity.velocity.set(() => ({
+		entity.remove(Destination)
+		entity.set(Velocity, {
 			x: 0,
 			y: 0,
-		}))
+		})
 	},
 
 	/**
@@ -52,7 +58,7 @@ export const MoveToTask = new Task({
 	run(blackboard: MoveToBlackboard) {
 		const { entity } = blackboard
 
-		if (!entity.destination.state.value) {
+		if (!entity.has(Destination)) {
 			return FAILURE
 		}
 
@@ -63,21 +69,22 @@ export const MoveToTask = new Task({
 		const {
 			x: entityX,
 			y: entityY,
-		} = entity.position.state
+		} = entity.get(Position)!
 		const {
 			x: destinationX,
 			y: destinationY,
-		} = entity.destination.state.value
+		} = entity.get(Destination)!
 
 		const dx = destinationX - entityX
 		const dy = destinationY - entityY
 
 		const magnitude = Math.sqrt((dx ** 2) + (dy ** 2))
+		const { speed } = entity.get(Actor)!
 
-		entity.velocity.set(() => ({
-			x: (dx / magnitude) * entity.speed,
-			y: (dy / magnitude) * entity.speed,
-		}))
+		entity.set(Velocity, {
+			x: (dx / magnitude) * speed,
+			y: (dy / magnitude) * speed,
+		})
 
 		return RUNNING
 	},

@@ -1,29 +1,41 @@
 // Local imports
-import { createActorEntity } from '@/helpers/createActorEntity'
-import { ENTITY_CATALOGUE } from '@/constants/ENTITY_CATALOGUE'
-import { query } from '@/helpers/ECS'
-import { store } from '@/store/store'
+import {
+	IsCamera,
+	Position,
+	Spawner,
+	Time,
+	Viewport,
+} from '@/store/traits'
+import { actions } from '@/helpers/actions'
+import { ACTOR_CATALOGUE } from '@/constants/ACTOR_CATALOGUE'
+import { world } from '@/store/world'
 
 
 
 
 
-/** Handles creating new entities from spawns. */
+/** Spawns entities based on the spawn entity's state. */
 export function spawnSystem() {
-	const {
-		now,
-		viewport,
-		worldPositionX,
-		worldPositionY,
-	} = store.state
+	// Get world state
+	const { now } = world.get(Time)!
+	const viewport = world.get(Viewport)!
 
-	const spawnEntities = query.spawn
+	// Get camera state
+	const camera = world.queryFirst(IsCamera, Position)
 
-	for (const spawnEntity of spawnEntities) {
-		const {
-			x: spawnX,
-			y: spawnY,
-		} = spawnEntity.position.state
+	// Skip if there is no camera
+	if (!camera) {
+		return
+	}
+
+	// Get camera position
+	const cameraPosition = camera.get(Position)!
+
+	// Get bound action
+	const { createActorEntity } = actions(world)
+
+	// Run spawner logic for each spawner
+	world.query(Spawner, Position).updateEach(([spawner, spawnPosition]) => {
 		const {
 			delay,
 			entityCount,
@@ -31,37 +43,35 @@ export function spawnSystem() {
 			lastSpawnAt,
 			maxEntityCount,
 			spawnsOn,
-		} = spawnEntity.spawn.state
+		} = spawner
 
 		// Skip if we have the maximum number of entities for this spawn
 		if (maxEntityCount <= entityCount) {
-			continue
+			return
 		}
 
+		const isOffScreen = (
+			spawnPosition.x < cameraPosition.x
+			|| spawnPosition.x > cameraPosition.x + viewport.width
+			|| spawnPosition.y < cameraPosition.y
+			|| spawnPosition.y > cameraPosition.y + viewport.height
+		)
+
 		// Skip if the spawn isn't on screen but starts on visible
-		if (spawnsOn === 'visible') {
-			if (
-				spawnX < worldPositionX
-				|| spawnX > worldPositionX + viewport.width
-				|| spawnY < worldPositionY
-				|| spawnY > worldPositionY + viewport.height
-			) {
-				continue
-			}
+		if (spawnsOn === 'visible' && isOffScreen) {
+			return
 		}
 
 		// Skip if not enough time has passed since the last time this spawn created an entity
 		if (now < lastSpawnAt + (entityCount > 0 ? delay : 0)) {
-			continue
+			return
 		}
 
-		const entityDefinition = ENTITY_CATALOGUE[entityType]
+		// Create the actor from its definition at the spawner's position
+		createActorEntity(ACTOR_CATALOGUE[entityType], spawnPosition)
 
-		createActorEntity(entityDefinition, spawnX, spawnY)
-
-		spawnEntity.spawn.set(previousState => ({
-			entityCount: previousState.entityCount + 1,
-			lastSpawnAt: now,
-		}))
-	}
+		// Update the spawner's state
+		spawner.entityCount = entityCount + 1
+		spawner.lastSpawnAt = now
+	})
 }

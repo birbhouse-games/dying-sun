@@ -1,12 +1,21 @@
 // Module imports
-import { Suspense } from 'react'
+import { useWorld } from 'koota/react'
 
 
 
 
 
 // Local imports
-import { ManifestLoader } from '@/components/ManifestLoader/ManifestLoader.tsx'
+import { loadAssetBundles } from '@/helpers/loadAssetBundles'
+import { loadLevel } from '@/helpers/loadLevel'
+import { loadManifest } from '@/helpers/loadManifest'
+
+
+
+
+
+// Variables
+let promise: Promise<unknown>
 
 
 
@@ -18,9 +27,13 @@ import { ManifestLoader } from '@/components/ManifestLoader/ManifestLoader.tsx'
  * @component
  */
 export function AssetsLoader() {
-	return (
-		<Suspense fallback={'Loading asset manifest...'}>
-			<ManifestLoader />
-		</Suspense>
-	)
+	const world = useWorld()
+
+	if (!promise) {
+		promise = loadManifest(world)
+			.then(() => loadAssetBundles(world))
+			.then(() => loadLevel(world))
+	}
+
+	return null
 }

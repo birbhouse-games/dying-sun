@@ -1,49 +1,51 @@
 // Module imports
 import { Assets } from 'pixi.js'
+import { World } from 'koota'
 
 
 
 
 
 // Local imports
-import { store } from '@/store/store'
+import { AssetRegistry } from '@/store/traits'
 
 
 
 
 
-/** Parses asset bundles from the manifest and loads all relevant files. */
-export async function loadAssetBundles() {
-	if (store.state.manifest && !store.state.areAssetsInitialised) {
+/**
+ * Parses asset bundles from the manifest and loads all relevant files.
+ *
+ * @param world The Koota world.
+ */
+export async function loadAssetBundles(world: World) {
+	const assetRegistry = world.get(AssetRegistry)!
+
+	// Initialise bundle registry
+	if (assetRegistry.manifest && !assetRegistry.areBundlesInitialised) {
 		await Assets.init({
 			basePath: '/assets',
-			manifest: store.state.manifest,
+			manifest: assetRegistry.manifest,
 		})
 
-		store.set(previousState => ({
-			areAssetsInitialised: true,
-			bundles: store.state.manifest!.bundles.reduce((accumulator, bundle) => {
-				if (!(bundle.name in accumulator)) {
-					accumulator[bundle.name] = null
-				}
+		assetRegistry.areBundlesInitialised = true
 
-				return accumulator
-			}, { ...previousState.bundles }),
-		}))
+		assetRegistry.bundles = Object.fromEntries(
+			assetRegistry.manifest.bundles.map(bundle => [bundle.name, null]),
+		)
+
+		world.set(AssetRegistry, assetRegistry)
 	}
 
-	if (store.state.areAssetsInitialised) {
-		for (const bundleName in store.state.bundles) {
+	// Load bundles
+	if (assetRegistry.areBundlesInitialised) {
+		for (const bundleName in assetRegistry.bundles) {
 			const bundle = await Assets.loadBundle(bundleName)
-
-			store.set(previousState => ({
-				bundles: {
-					...previousState.bundles,
-					[bundleName]: bundle,
-				},
-			}))
+			assetRegistry.bundles[bundleName] = bundle
 		}
 
-		store.set(() => ({ areBundlesLoaded: true }))
+		assetRegistry.areBundlesLoaded = true
+
+		world.set(AssetRegistry, assetRegistry)
 	}
 }

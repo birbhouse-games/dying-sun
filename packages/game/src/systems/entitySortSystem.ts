@@ -1,21 +1,20 @@
 // Module imports
-import { type With } from 'miniplex'
-
+import {
+	Entity,
+	Not,
+} from 'koota'
 
 
 
 
 // Local imports
-import { type Entity } from '@/typedefs/Entity'
-import { query } from '@/helpers/ECS'
+import {
+	IsBackground,
+	Position,
+	Rendering,
+} from '@/store/traits'
 import { quicksort } from '@/helpers/quicksort'
-
-
-
-
-
-// Types
-type EntityWithComponents = With<Entity, 'position' | 'zIndex' | 'zOffset'>
+import { world } from '@/store/world'
 
 
 
@@ -23,20 +22,20 @@ type EntityWithComponents = With<Entity, 'position' | 'zIndex' | 'zOffset'>
 
 /** Sorts sprites based on where they should overlap. */
 export function entitySortSystem() {
-	const sortedEntities = quicksort<EntityWithComponents, number>(
-		query.sortable.entities,
-		entity => entity.position.state.y + entity.zOffset,
-	)
+	const entities = world.query(Rendering, Position, Not(IsBackground))
+	const sortedEntities = new Array<Entity>(...entities)
+
+	quicksort<Entity, number>(sortedEntities, entity => {
+		const { zOffset } = entity.get(Rendering)!
+		const { y } = entity.get(Position)!
+		return y + zOffset
+	})
 
 	let index = sortedEntities.length - 1
 
 	while (index >= 0) {
 		const entity = sortedEntities[index]
-
-		entity.zIndex.set(() => ({
-			value: index,
-		}))
-
+		entity.set(Rendering, { zIndex: index })
 		index -= 1
 	}
 }

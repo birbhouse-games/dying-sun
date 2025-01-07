@@ -19,6 +19,9 @@ interface AttackStage {
 	name: string,
 }
 
+// Changed from interface to type to get around an index signature issue with TS
+// https://github.com/microsoft/TypeScript/issues/15300
+// I'll look to fix this in Koota and switch back to interface.
 export interface AttackState {
 	/** @description Whether to continue to the next attack stage. */
 	continueCombo: boolean | null,
