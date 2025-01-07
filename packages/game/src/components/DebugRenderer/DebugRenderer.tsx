@@ -46,7 +46,7 @@ export function DebugRenderer() {
 	}, [])
 
 	// Create debug renderers
-	// This is very hacky and should be refactored
+	// TODO: This is very hacky and should be refactored
 	useEffect(() => {
 		if (!debug || debug.renderers?.length || !searchParams) {
 			return
