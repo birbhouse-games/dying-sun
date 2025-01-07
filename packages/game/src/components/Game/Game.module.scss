@@ -1,9 +1,36 @@
+@font-face {
+	font-family: 'Micro Chat';
+	font-style: normal;
+	font-weight: normal;
+	src: url('/typefaces/micro-chat.woff2') format('woff2');
+}
+
+@font-face {
+	font-family: 'Space Contract';
+	font-style: normal;
+	font-weight: bold;
+	src: url('/typefaces/space-contract.woff2') format('woff2');
+}
+
+@font-face {
+	font-family: 'Tiny Talk';
+	font-style: normal;
+	font-weight: normal;
+	src: url('/typefaces/tiny-talk.woff2') format('woff2');
+}
+
+@font-face {
+	font-family: 'Tiny Talk';
+	font-style: normal;
+	font-weight: bold;
+	src: url('/typefaces/tiny-talk.bold.woff2') format('woff2');
+}
+
 .container {
+	--scale: 4;
+
+	font-size: 8px;
 	inset: 0;
-	height: 100vh;
-	position: fixed;
-	width: 100vw;
-	left: 0;
-	top: 0;
+	line-height: 1;
 	position: absolute;
 }
