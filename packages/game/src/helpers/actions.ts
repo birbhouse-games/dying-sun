@@ -36,6 +36,7 @@ import {
 } from '@/store/traits'
 import { ActorDefinition } from '@/typedefs/ActorDefinition'
 import { createPhysicsBody } from '@/helpers/createPhysicsBody'
+import { CurrentPlayer } from '@/store/traits/CurrentPlayer'
 import { DEFAULT_BODY_OPTIONS } from '@/constants/DEFAULT_BODY_OPTIONS'
 import { Player } from '@/store/traits/Player'
 import { SpawnPoint } from '@/typedefs/SpawnPoint'
@@ -186,7 +187,7 @@ export const actions = createActions(world => ({
 		)
 
 		if (isPlayer) {
-			actor.add(Player)
+			actor.add(CurrentPlayer, Player)
 		}
 
 		// Add behaviors if they are in the actor definition

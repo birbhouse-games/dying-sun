@@ -9,7 +9,7 @@ import {
 import { ACTION_NAMES } from '@/constants/ACTION_NAMES.ts'
 import { type ActionHandler } from '@/typedefs/ActionHandler.ts'
 import { COMBO_CONTINUE_WINDOW } from '@/constants/COMBO_CONTINUE_WINDOW'
-import { Player } from '@/store/traits/Player'
+import { CurrentPlayer } from '@/store/traits/CurrentPlayer'
 import { world } from '@/store/world'
 
 
@@ -29,31 +29,24 @@ export const ACTION_HANDLERS: Record<string, ActionHandler> = {
 		onActivate() {
 			const { now } = world.get(Time)!
 
-			world.query(Player, Attacker).updateEach(traits => {
-				const [
-					{ isCurrentPlayer },
-					attacker,
-				] = traits
+			const entity = world.queryFirst(Attacker, CurrentPlayer)!
 
-				if (!isCurrentPlayer) {
-					return
-				}
+			const {
+				continueCombo,
+				currentStageIndex,
+				stages,
+				startedAt,
+			} = entity.get(Attacker)!
 
-				const {
-					continueCombo,
-					currentStageIndex,
-					stages,
-					startedAt,
-				} = attacker
+			const currentStage = stages?.[currentStageIndex!]
 
-				const currentStage = stages?.[currentStageIndex!]
-
-				// Starting a new attack combo
-				if (startedAt === null) {
-					attacker.startedAt = now
-					attacker.continueCombo = false
-					attacker.currentStageIndex = 0
-					attacker.stages = [
+			// Starting a new attack combo
+			if (startedAt === null) {
+				entity.set(Attacker, {
+					startedAt: now,
+					continueCombo: false,
+					currentStageIndex: 0,
+					stages: [
 						{
 							duration: FRAME_DURATION * 7,
 							hitBoxes: [{
@@ -84,121 +77,73 @@ export const ACTION_HANDLERS: Record<string, ActionHandler> = {
 							}],
 							name: 'attack-3',
 						},
-					]
-				} else if (
-					currentStage !== null
-					&& continueCombo !== true
-					&& currentStageIndex! < (stages!.length - 1)
-					&& now <= ((startedAt + currentStage!.duration) + COMBO_CONTINUE_WINDOW)
-					&& now >= ((startedAt + currentStage!.duration) - COMBO_CONTINUE_WINDOW)
-				) {
-					attacker.continueCombo = true
-				}
-			})
+					],
+				})
+			} else if (
+				currentStage !== null
+				&& continueCombo !== true
+				&& currentStageIndex! < (stages!.length - 1)
+				&& now <= ((startedAt + currentStage!.duration) + COMBO_CONTINUE_WINDOW)
+				&& now >= ((startedAt + currentStage!.duration) - COMBO_CONTINUE_WINDOW)
+			) {
+				entity.set(Attacker, { continueCombo: true })
+			}
 		},
 	},
 
 	[ACTION_NAMES.MOVE_EAST]: {
 		isRepeatable: false,
 		onActivate() {
-			world.query(Player, Velocity).updateEach(traits => {
-				const [{ isCurrentPlayer }, velocity] = traits
-
-				if (!isCurrentPlayer) {
-					return
-				}
-
-				velocity.x += 1
-			})
+			world
+				.queryFirst(CurrentPlayer, Velocity)!
+				.set(Velocity, previousState => ({ x: previousState.x + 1 }))
 		},
 		onDeactivate() {
-			world.query(Player, Velocity).updateEach(traits => {
-				const [{ isCurrentPlayer }, velocity] = traits
-
-				if (!isCurrentPlayer) {
-					return
-				}
-
-				velocity.x -= 1
-			})
+			world
+				.queryFirst(CurrentPlayer, Velocity)!
+				.set(Velocity, previousState => ({ x: previousState.x - 1 }))
 		},
 	},
 
 	[ACTION_NAMES.MOVE_NORTH]: {
 		isRepeatable: false,
 		onActivate() {
-			world.query(Player, Velocity).updateEach(traits => {
-				const [{ isCurrentPlayer }, velocity] = traits
-
-				if (!isCurrentPlayer) {
-					return
-				}
-
-				velocity.y -= 1
-			})
+			world
+				.queryFirst(CurrentPlayer, Velocity)!
+				.set(Velocity, previousState => ({ y: previousState.y - 1 }))
 		},
 		onDeactivate() {
-			world.query(Player, Velocity).updateEach(traits => {
-				const [{ isCurrentPlayer }, velocity] = traits
-
-				if (!isCurrentPlayer) {
-					return
-				}
-
-				velocity.y += 1
-			})
+			world
+				.queryFirst(CurrentPlayer, Velocity)!
+				.set(Velocity, previousState => ({ y: previousState.y + 1 }))
 		},
 	},
 
 	[ACTION_NAMES.MOVE_SOUTH]: {
 		isRepeatable: false,
 		onActivate() {
-			world.query(Player, Velocity).updateEach(traits => {
-				const [{ isCurrentPlayer }, velocity] = traits
-
-				if (!isCurrentPlayer) {
-					return
-				}
-
-				velocity.y += 1
-			})
+			world
+				.queryFirst(CurrentPlayer, Velocity)!
+				.set(Velocity, previousState => ({ y: previousState.y + 1 }))
 		},
 		onDeactivate() {
-			world.query(Player, Velocity).updateEach(traits => {
-				const [{ isCurrentPlayer }, velocity] = traits
-
-				if (!isCurrentPlayer) {
-					return
-				}
-
-				velocity.y -= 1
-			})
+			world
+				.queryFirst(CurrentPlayer, Velocity)!
+				.set(Velocity, previousState => ({ y: previousState.y - 1 }))
 		},
 	},
 
 	[ACTION_NAMES.MOVE_WEST]: {
 		isRepeatable: false,
 		onActivate() {
-			world.query(Player, Velocity).updateEach(traits => {
-				const [{ isCurrentPlayer }, velocity] = traits
-
-				if (!isCurrentPlayer) {
-					return
-				}
-
-				velocity.x -= 1
-			})
+			world
+				.queryFirst(CurrentPlayer, Velocity)!
+				.set(Velocity, previousState => ({ x: previousState.x - 1 }))
 		},
 		onDeactivate() {
-			world.query(Player, Velocity).updateEach(traits => {
-				const [{ isCurrentPlayer }, velocity] = traits
-
-				if (!isCurrentPlayer) {
-					return
-				}
-
-				velocity.x += 1
-			})
+			world
+				.queryFirst(CurrentPlayer, Velocity)!
+				.set(Velocity, previousState => ({ x: previousState.x + 1 }))
 		},
 	},
 }

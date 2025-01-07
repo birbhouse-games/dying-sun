@@ -5,4 +5,4 @@ import { trait } from 'koota'
 
 
 
-export const Player = trait()
+export const CurrentPlayer = trait()
