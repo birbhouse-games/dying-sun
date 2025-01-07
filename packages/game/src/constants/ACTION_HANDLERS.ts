@@ -2,7 +2,6 @@
 
 // Local imports
 import {
-	Actor,
 	Attacker,
 	Time,
 	Velocity,
@@ -10,6 +9,7 @@ import {
 import { ACTION_NAMES } from '@/constants/ACTION_NAMES.ts'
 import { type ActionHandler } from '@/typedefs/ActionHandler.ts'
 import { COMBO_CONTINUE_WINDOW } from '@/constants/COMBO_CONTINUE_WINDOW'
+import { Player } from '@/store/traits/Player'
 import { world } from '@/store/world'
 
 
@@ -29,8 +29,13 @@ export const ACTION_HANDLERS: Record<string, ActionHandler> = {
 		onActivate() {
 			const { now } = world.get(Time)!
 
-			world.query(Actor, Attacker).updateEach(([{ actorType }, attacker]) => {
-				if (actorType !== 'hero') {
+			world.query(Player, Attacker).updateEach(traits => {
+				const [
+					{ isCurrentPlayer },
+					attacker,
+				] = traits
+
+				if (!isCurrentPlayer) {
 					return
 				}
 
@@ -96,8 +101,10 @@ export const ACTION_HANDLERS: Record<string, ActionHandler> = {
 	[ACTION_NAMES.MOVE_EAST]: {
 		isRepeatable: false,
 		onActivate() {
-			world.query(Actor, Velocity).updateEach(([actor, velocity]) => {
-				if (actor.actorType !== 'hero') {
+			world.query(Player, Velocity).updateEach(traits => {
+				const [{ isCurrentPlayer }, velocity] = traits
+
+				if (!isCurrentPlayer) {
 					return
 				}
 
@@ -105,8 +112,10 @@ export const ACTION_HANDLERS: Record<string, ActionHandler> = {
 			})
 		},
 		onDeactivate() {
-			world.query(Actor, Velocity).updateEach(([actor, velocity]) => {
-				if (actor.actorType !== 'hero') {
+			world.query(Player, Velocity).updateEach(traits => {
+				const [{ isCurrentPlayer }, velocity] = traits
+
+				if (!isCurrentPlayer) {
 					return
 				}
 
@@ -118,8 +127,10 @@ export const ACTION_HANDLERS: Record<string, ActionHandler> = {
 	[ACTION_NAMES.MOVE_NORTH]: {
 		isRepeatable: false,
 		onActivate() {
-			world.query(Actor, Velocity).updateEach(([actor, velocity]) => {
-				if (actor.actorType !== 'hero') {
+			world.query(Player, Velocity).updateEach(traits => {
+				const [{ isCurrentPlayer }, velocity] = traits
+
+				if (!isCurrentPlayer) {
 					return
 				}
 
@@ -127,8 +138,10 @@ export const ACTION_HANDLERS: Record<string, ActionHandler> = {
 			})
 		},
 		onDeactivate() {
-			world.query(Actor, Velocity).updateEach(([actor, velocity]) => {
-				if (actor.actorType !== 'hero') {
+			world.query(Player, Velocity).updateEach(traits => {
+				const [{ isCurrentPlayer }, velocity] = traits
+
+				if (!isCurrentPlayer) {
 					return
 				}
 
@@ -140,8 +153,10 @@ export const ACTION_HANDLERS: Record<string, ActionHandler> = {
 	[ACTION_NAMES.MOVE_SOUTH]: {
 		isRepeatable: false,
 		onActivate() {
-			world.query(Actor, Velocity).updateEach(([actor, velocity]) => {
-				if (actor.actorType !== 'hero') {
+			world.query(Player, Velocity).updateEach(traits => {
+				const [{ isCurrentPlayer }, velocity] = traits
+
+				if (!isCurrentPlayer) {
 					return
 				}
 
@@ -149,8 +164,10 @@ export const ACTION_HANDLERS: Record<string, ActionHandler> = {
 			})
 		},
 		onDeactivate() {
-			world.query(Actor, Velocity).updateEach(([actor, velocity]) => {
-				if (actor.actorType !== 'hero') {
+			world.query(Player, Velocity).updateEach(traits => {
+				const [{ isCurrentPlayer }, velocity] = traits
+
+				if (!isCurrentPlayer) {
 					return
 				}
 
@@ -162,8 +179,10 @@ export const ACTION_HANDLERS: Record<string, ActionHandler> = {
 	[ACTION_NAMES.MOVE_WEST]: {
 		isRepeatable: false,
 		onActivate() {
-			world.query(Actor, Velocity).updateEach(([actor, velocity]) => {
-				if (actor.actorType !== 'hero') {
+			world.query(Player, Velocity).updateEach(traits => {
+				const [{ isCurrentPlayer }, velocity] = traits
+
+				if (!isCurrentPlayer) {
 					return
 				}
 
@@ -171,8 +190,10 @@ export const ACTION_HANDLERS: Record<string, ActionHandler> = {
 			})
 		},
 		onDeactivate() {
-			world.query(Actor, Velocity).updateEach(([actor, velocity]) => {
-				if (actor.actorType !== 'hero') {
+			world.query(Player, Velocity).updateEach(traits => {
+				const [{ isCurrentPlayer }, velocity] = traits
+
+				if (!isCurrentPlayer) {
 					return
 				}
 

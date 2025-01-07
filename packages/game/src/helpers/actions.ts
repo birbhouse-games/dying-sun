@@ -37,6 +37,7 @@ import {
 import { ActorDefinition } from '@/typedefs/ActorDefinition'
 import { createPhysicsBody } from '@/helpers/createPhysicsBody'
 import { DEFAULT_BODY_OPTIONS } from '@/constants/DEFAULT_BODY_OPTIONS'
+import { Player } from '@/store/traits/Player'
 import { SpawnPoint } from '@/typedefs/SpawnPoint'
 
 
@@ -114,6 +115,7 @@ export const actions = createActions(world => ({
 				delay: customProperties.delay?.value ?? 5000,
 				entityType: customProperties.entityType.value,
 				frequency: customProperties.frequency?.value ?? 0,
+				isPlayer: customProperties.isPlayer?.value ?? false,
 				maxEntityCount: customProperties.maxEntityCount?.value ?? 10,
 				spawnsOn: customProperties.spawnsOn.value,
 			}),
@@ -125,19 +127,22 @@ export const actions = createActions(world => ({
 	}) => {
 		return world.spawn(IsCamera, Position(initialPosition))
 	},
-	createActorEntity: ({
-		actorType,
-		colliders,
-		health,
-		speed,
-		zOffset,
-		behaviorTree: tree,
-		idle,
-	}: ActorDefinition,
-	position = {
-		x: 0,
-		y: 0,
-	}) => {
+	createActorEntity: (
+		{
+			actorType,
+			colliders,
+			health,
+			speed,
+			zOffset,
+			behaviorTree: tree,
+			idle,
+		}: ActorDefinition,
+		position = {
+			x: 0,
+			y: 0,
+		},
+		isPlayer = false,
+	) => {
 		const physicsEngine = world.get(PhysicsEngine)!
 		const bodies = Composite.create()
 
@@ -179,6 +184,10 @@ export const actions = createActions(world => ({
 			Rendering({ zOffset }),
 			Destination,
 		)
+
+		if (isPlayer) {
+			actor.add(Player)
+		}
 
 		// Add behaviors if they are in the actor definition
 		if (tree) {

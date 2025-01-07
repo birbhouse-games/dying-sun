@@ -12,6 +12,7 @@ export const Spawner = trait({
 	entityCount: 0,
 	entityType: '' as keyof typeof ACTOR_CATALOGUE,
 	frequency: 0,
+	isPlayer: false,
 	maxEntityCount: 0,
 	spawnsOn: '' as SpawnsOnType,
 	lastSpawnAt: 0,
