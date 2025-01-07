@@ -1,4 +1,3 @@
-/* eslint-disable jsdoc/require-jsdoc */
 // Module imports
 import { trait } from 'koota'
 
@@ -16,8 +15,8 @@ import { Composite } from 'matter-js'
 
 export const Actor = trait({
 	actorType: 'hero' as keyof typeof ACTOR_CATALOGUE,
+	// eslint-disable-next-line jsdoc/require-jsdoc
 	bodies: () => Composite.create(),
 	health: 0,
 	speed: 0,
 })
-
