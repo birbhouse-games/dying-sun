@@ -1,7 +1,7 @@
 // Module imports
 import {
 	useCallback,
-	useEffect,
+	useMemo,
 } from 'react'
 
 
@@ -14,6 +14,7 @@ import {
 	Time,
 } from '@/store/traits'
 import { KEY_BINDINGS } from '@/constants/KEY_BINDINGS.ts'
+import { useKeyEvent } from '@/hooks/useKeyEvent'
 import { world } from '@/store/world'
 
 
@@ -23,10 +24,6 @@ import { world } from '@/store/world'
 /** Tracks changes to the keyboard state. */
 export function useKeyboardStateSystem() {
 	const handleKeyDown = useCallback((event: KeyboardEvent) => {
-		if (KEY_BINDINGS[event.key] === null) {
-			return
-		}
-
 		event.preventDefault()
 
 		const { now } = world.get(Time)!
@@ -54,10 +51,6 @@ export function useKeyboardStateSystem() {
 	}, [])
 
 	const handleKeyUp = useCallback((event: KeyboardEvent) => {
-		if (KEY_BINDINGS[event.key] === null) {
-			return
-		}
-
 		event.preventDefault()
 
 		const { now } = world.get(Time)!
@@ -74,16 +67,8 @@ export function useKeyboardStateSystem() {
 		input.set(event.key, keyState)
 	}, [])
 
-	useEffect(() => {
-		document.addEventListener('keydown', handleKeyDown)
-		document.addEventListener('keyup', handleKeyUp)
+	const keyFilter = useMemo(() => Object.keys(KEY_BINDINGS), [])
 
-		return () => {
-			document.removeEventListener('keydown', handleKeyDown)
-			document.removeEventListener('keyup', handleKeyUp)
-		}
-	}, [
-		handleKeyDown,
-		handleKeyUp,
-	])
+	useKeyEvent('down', handleKeyDown, keyFilter)
+	useKeyEvent('up', handleKeyUp, keyFilter)
 }
