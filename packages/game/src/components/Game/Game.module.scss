@@ -26,11 +26,31 @@
 	src: url('/typefaces/tiny-talk.bold.woff2') format('woff2');
 }
 
-.container {
-	--scale: 4;
+:root {
+	--ds--global--font-size--small: 8px;
+	--ds--global--font-size--medium: 12px;
+	--ds--global--font-size--large: 16px;
+	--ds--global--font-size--extra-large: 20px;
+	--ds--global--ui-scale: 4;
+}
 
-	font-size: 8px;
+.container {
+	inset: 0;
+	position: absolute;
+	z-index: 1;
+}
+
+.wrapper {
+	font-family: 'Tiny Talk';
+	font-size: var(--ds--global--font-size--small);
+	height: 100%;
+	image-rendering: pixelated;
 	inset: 0;
 	line-height: 1;
-	position: absolute;
+	position: relative;
+	width: 100%;
+
+	* {
+		box-sizing: border-box;
+	}
 }

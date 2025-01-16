@@ -37,7 +37,7 @@ export function MainPlayerDetails() {
 	return (
 		<div className={styles['container']}>
 			<div className={styles['name']}>
-				{'Character Name'}
+				{'Maeve'}
 			</div>
 
 			<ResourceGauge

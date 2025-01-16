@@ -1,0 +1,7 @@
+.container {
+	height: 95vh;
+	margin-left: calc(-10px * var(--ds--global--ui-scale));
+	padding: calc(10px * var(--ds--global--ui-scale));
+	padding-left: calc(30px * var(--ds--global--ui-scale));
+	width: 60vw;
+}

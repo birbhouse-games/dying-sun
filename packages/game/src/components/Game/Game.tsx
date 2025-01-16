@@ -74,36 +74,38 @@ export function Game() {
 	const {	isLevelLoaded } = useTrait(world, AssetRegistry)!
 
 	return (
-		<WorldProvider world={world}>
-			<main
-				ref={resizeToRef}
-				className={styles['container']}>
-				<Suspense>
-					{!isLevelLoaded && (
-						<AssetsLoader />
-					)}
+		<div className={styles['wrapper']}>
+			<WorldProvider world={world}>
+				<main
+					ref={resizeToRef}
+					className={styles['container']}>
+					<Suspense>
+						{!isLevelLoaded && (
+							<AssetsLoader />
+						)}
 
-					{isLevelLoaded && (
-						<>
-							<Application
-								antialias={false}
-								attachToDevTools
-								autoDensity
-								resizeTo={resizeToRef}
-								resolution={window.devicePixelRatio ?? 1}
-								roundPixels>
-								<Suspense fallback={<pixiText text={'Loading...'} />}>
-									<ApplicationEntryPoint />
-								</Suspense>
-							</Application>
+						{isLevelLoaded && (
+							<>
+								<Application
+									antialias={false}
+									attachToDevTools
+									autoDensity
+									resizeTo={resizeToRef}
+									resolution={window.devicePixelRatio ?? 1}
+									roundPixels>
+									<Suspense fallback={<pixiText text={'Loading...'} />}>
+										<ApplicationEntryPoint />
+									</Suspense>
+								</Application>
 
-							<UIWrapper />
-						</>
-					)}
+								<UIWrapper />
+							</>
+						)}
 
-					<DebugRenderer />
-				</Suspense>
-			</main>
-		</WorldProvider>
+						<DebugRenderer />
+					</Suspense>
+				</main>
+			</WorldProvider>
+		</div>
 	)
 }

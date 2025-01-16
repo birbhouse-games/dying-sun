@@ -6,7 +6,7 @@
 	position: absolute;
 
 	.indicator {
-		--indicator-line-gap: calc(3px * var(--scale));
+		--indicator-line-gap: calc(3px * var(--ds--global--ui-scale));
 
 		position: relative;
 
@@ -15,10 +15,10 @@
 			background-color: black;
 			content: '';
 			display: block;
-			height: calc(1px * var(--scale));
+			height: calc(1px * var(--ds--global--ui-scale));
 			position: absolute;
 			top: 50%;
-			width: calc(20px * var(--scale));
+			width: calc(20px * var(--ds--global--ui-scale));
 		}
 
 		&:after {

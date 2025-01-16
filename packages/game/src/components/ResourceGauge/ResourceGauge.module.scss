@@ -1,8 +1,7 @@
 .container {
 	align-items: end;
-	row-gap: calc(2px * var(--scale));
+	row-gap: calc(2px * var(--ds--global--ui-scale));
 	display: grid;
-	font-size: 8px;
 	grid-template-areas:
 		'label value'
 		'meter meter';
@@ -11,6 +10,7 @@
 
 	.label {
 		grid-area: label;
+		margin-right: calc(10px * var(--ds--global--ui-scale));
 	}
 
 	.value {
@@ -19,7 +19,7 @@
 		grid-area: value;
 
 		.current {
-			font-size: 12px;
+			font-size: var(--ds--global--font-size--medium);
 		}
 
 		.max {
@@ -38,7 +38,7 @@
 		border-radius: 0;
 		box-shadow: none;
 		grid-area: meter;
-		height: calc(2px * var(--scale));
+		height: calc(2px * var(--ds--global--ui-scale));
 		width: 100%;
 
 		&::-webkit-meter-bar {

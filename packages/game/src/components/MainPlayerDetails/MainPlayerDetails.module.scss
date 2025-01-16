@@ -6,7 +6,7 @@
 
 	.name {
 		font-family: 'Micro Chat';
-		font-size: 16px;
-		margin-bottom: calc(4px * var(--scale));
+		font-size: var(--ds--global--font-size--large);
+		margin-bottom: calc(4px * var(--ds--global--ui-scale));
 	}
 }
