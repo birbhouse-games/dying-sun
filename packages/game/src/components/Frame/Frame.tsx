@@ -1,5 +1,11 @@
 // Module imports
 import {
+	motion,
+	type Transition,
+	type VariantLabels,
+	type Variants,
+} from 'motion/react'
+import {
 	type PropsWithChildren,
 	useMemo,
 } from 'react'
@@ -18,7 +24,12 @@ import styles from './Frame.module.scss'
 
 // Types
 type Props = PropsWithChildren<{
+	animate?: VariantLabels
 	className?: string
+	exit?: VariantLabels
+	initial?: VariantLabels
+	transition?: Transition
+	variants?: Variants
 }>
 
 
@@ -28,8 +39,13 @@ type Props = PropsWithChildren<{
 /** @type {React.FunctionComponent} */
 export function Frame(props: Props) {
 	const {
+		animate,
 		children,
 		className,
+		exit,
+		initial,
+		transition,
+		variants,
 	} = props
 
 	const compiledClassName = useMemo(() => {
@@ -37,8 +53,14 @@ export function Frame(props: Props) {
 	}, [className])
 
 	return (
-		<div className={compiledClassName}>
+		<motion.div
+			animate={animate}
+			className={compiledClassName}
+			exit={exit}
+			initial={initial}
+			transition={transition}
+			variants={variants}>
 			{children}
-		</div>
+		</motion.div>
 	)
 }

@@ -1,4 +1,8 @@
 // Module imports
+import {
+	type Transition,
+	type Variants,
+} from 'motion/react'
 import { type PropsWithChildren } from 'react'
 
 
@@ -15,7 +19,28 @@ import styles from './SubMenu.module.scss'
 
 
 // Types
-type Props = PropsWithChildren<{ label: string }>
+type Props = PropsWithChildren<{
+	label: string
+}>
+
+
+
+
+
+// Constants
+const SUBMENU_TRANSITION: Transition = {
+	bounce: 0.2,
+	duration: 0.5,
+	type: 'spring',
+}
+const SUBMENU_VARIANTS: Variants = {
+	hidden: {
+		x: '-100%',
+	},
+	visible: {
+		x: '0%',
+	},
+}
 
 
 
@@ -29,7 +54,13 @@ export function SubMenu(props: Props) {
 	} = props
 
 	return (
-		<Frame className={styles['container']}>
+		<Frame
+			animate={'visible'}
+			className={styles['container']}
+			exit={'hidden'}
+			initial={'hidden'}
+			transition={SUBMENU_TRANSITION}
+			variants={SUBMENU_VARIANTS}>
 			<header>
 				{label}
 			</header>

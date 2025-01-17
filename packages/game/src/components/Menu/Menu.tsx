@@ -50,10 +50,10 @@ const SUBMENU_TRANSITION: Transition = {
 }
 const SUBMENU_VARIANTS: Variants = {
 	hidden: {
-		x: '-100%',
+		x: '-100vw',
 	},
 	visible: {
-		x: '0%',
+		x: '0vw',
 	},
 }
 const TOP_LEVEL_MENU_TRANSITION: Transition = {
@@ -112,19 +112,17 @@ export function Menu(props: Props) {
 				</div>
 			</motion.div>
 
-			<AnimatePresence>
-				{Boolean(submenu) && (
-					<motion.div
-						animate={'visible'}
-						className={styles['submenu-wrapper']}
-						exit={'hidden'}
-						initial={'hidden'}
-						transition={SUBMENU_TRANSITION}
-						variants={SUBMENU_VARIANTS}>
-						{submenu}
-					</motion.div>
-				)}
-			</AnimatePresence>
+			<motion.div
+				animate={'visible'}
+				className={styles['submenu-wrapper']}
+				exit={'hidden'}
+				initial={'hidden'}
+				transition={SUBMENU_TRANSITION}
+				variants={SUBMENU_VARIANTS}>
+				<AnimatePresence>
+					{Boolean(submenu) && submenu}
+				</AnimatePresence>
+			</motion.div>
 		</div>
 	)
 }

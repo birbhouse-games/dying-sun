@@ -18,6 +18,11 @@
 		z-index: 1;
 	}
 
+	.submenu-wrapper {
+		position: relative;
+		z-index: 2;
+	}
+
 	.top-level {
 		height: 100%;
 		margin-left: calc(-5px * var(--ds--global--ui-scale));
@@ -25,7 +30,7 @@
 		padding-top: calc(20px * var(--ds--global--ui-scale));
 		position: relative;
 		width: calc(90px * var(--ds--global--ui-scale));
-		z-index: 2;
+		z-index: 3;
 
 		> .background {
 			background-image: url('assets/ui/menu.background.png');
