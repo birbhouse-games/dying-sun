@@ -61,7 +61,7 @@ export function SubMenu(props: Props) {
 			initial={'hidden'}
 			transition={SUBMENU_TRANSITION}
 			variants={SUBMENU_VARIANTS}>
-			<header>
+			<header className={styles['label']}>
 				{label}
 			</header>
 

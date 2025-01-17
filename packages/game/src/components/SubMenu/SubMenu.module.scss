@@ -4,4 +4,9 @@
 	padding: calc(10px * var(--ds--global--ui-scale));
 	padding-left: calc(30px * var(--ds--global--ui-scale));
 	width: 60vw;
+
+	.label {
+		font-family: 'Micro Chat';
+		font-size: var(--ds--global--font-size--large);
+	}
 }
