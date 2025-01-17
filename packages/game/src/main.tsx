@@ -7,9 +7,9 @@ import { StrictMode } from 'react'
 
 
 // Local imports
-import { Game } from '@/components/Game/Game.tsx'
+import { Game } from '@/components/Game/Game'
 
-// import './index.css'
+import './main.scss'
 
 
 

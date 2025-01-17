@@ -1,0 +1,9 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	gap: calc(3px * var(--ds--global--ui-scale));
+
+	&.is-full-width {
+		width: 100%;
+	}
+}

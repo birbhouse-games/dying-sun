@@ -36,6 +36,7 @@ import { AsepriteJSONLoader } from '@/helpers/AsepriteJSONLoader'
 import { AssetRegistry } from '@/store/traits'
 import { AssetsLoader } from '@/components/AssetsLoader/AssetsLoader'
 import { DebugRenderer } from '@/components/DebugRenderer/DebugRenderer'
+import { UIWrapper } from '@/components/UIWrapper/UIWrapper'
 import { world } from '@/store/world'
 
 import styles from './Game.module.scss'
@@ -64,7 +65,7 @@ extensions.add(TiledTilesetLoader({ loadImages: true }))
 TextureStyle.defaultOptions.scaleMode = 'nearest'
 
 /**
- * The main page.
+ * The game renderer.
  *
  * @component
  */
@@ -73,32 +74,38 @@ export function Game() {
 	const {	isLevelLoaded } = useTrait(world, AssetRegistry)!
 
 	return (
-		<WorldProvider world={world}>
-			<main
-				ref={resizeToRef}
-				className={styles['container']}>
-				<Suspense>
-					{!isLevelLoaded && (
-						<AssetsLoader />
-					)}
+		<div className={styles['wrapper']}>
+			<WorldProvider world={world}>
+				<main
+					ref={resizeToRef}
+					className={styles['container']}>
+					<Suspense>
+						{!isLevelLoaded && (
+							<AssetsLoader />
+						)}
 
-					{isLevelLoaded && (
-						<Application
-							antialias={false}
-							attachToDevTools
-							autoDensity
-							resizeTo={resizeToRef}
-							resolution={window.devicePixelRatio ?? 1}
-							roundPixels>
-							<Suspense fallback={<pixiText text={'Loading...'} />}>
-								<ApplicationEntryPoint />
-							</Suspense>
-						</Application>
-					)}
+						{isLevelLoaded && (
+							<>
+								<Application
+									antialias={false}
+									attachToDevTools
+									autoDensity
+									resizeTo={resizeToRef}
+									resolution={window.devicePixelRatio ?? 1}
+									roundPixels>
+									<Suspense fallback={<pixiText text={'Loading...'} />}>
+										<ApplicationEntryPoint />
+									</Suspense>
+								</Application>
 
-					<DebugRenderer />
-				</Suspense>
-			</main>
-		</WorldProvider>
+								<UIWrapper />
+							</>
+						)}
+
+						<DebugRenderer />
+					</Suspense>
+				</main>
+			</WorldProvider>
+		</div>
 	)
 }

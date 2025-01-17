@@ -1,0 +1,58 @@
+.container {
+	align-items: end;
+	row-gap: calc(2px * var(--ds--global--ui-scale));
+	display: grid;
+	grid-template-areas:
+		'label value'
+		'meter meter';
+	grid-template-columns: 1fr auto;
+	grid-template-rows: repeat(2, auto);
+
+	.label {
+		grid-area: label;
+		margin-right: calc(10px * var(--ds--global--ui-scale));
+	}
+
+	.value {
+		align-items: flex-end;
+		display: flex;
+		grid-area: value;
+
+		.current {
+			font-size: var(--ds--global--font-size--medium);
+		}
+
+		.max {
+			&:before {
+				content: '/';
+			}
+		}
+	}
+
+	.meter {
+		-webkit-appearance: none;
+		appearance: none;
+		background-color: transparent;
+		background-image: none;
+		border: none;
+		border-radius: 0;
+		box-shadow: none;
+		grid-area: meter;
+		height: calc(2px * var(--ds--global--ui-scale));
+		width: 100%;
+
+		&::-webkit-meter-bar {
+			background: none;
+			background-color: white;
+		}
+
+		&::-webkit-meter-inner-element {
+			display: block;
+		}
+
+		&::-webkit-meter-optimum-value {
+			background: none;
+			background-color: #c86969;
+		}
+	}
+}

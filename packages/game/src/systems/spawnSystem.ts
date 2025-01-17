@@ -40,6 +40,7 @@ export function spawnSystem() {
 			delay,
 			entityCount,
 			entityType,
+			isPlayer,
 			lastSpawnAt,
 			maxEntityCount,
 			spawnsOn,
@@ -68,7 +69,7 @@ export function spawnSystem() {
 		}
 
 		// Create the actor from its definition at the spawner's position
-		createActorEntity(ACTOR_CATALOGUE[entityType], spawnPosition)
+		createActorEntity(ACTOR_CATALOGUE[entityType], spawnPosition, isPlayer)
 
 		// Update the spawner's state
 		spawner.entityCount = entityCount + 1
