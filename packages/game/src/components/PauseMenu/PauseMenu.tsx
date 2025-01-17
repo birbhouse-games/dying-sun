@@ -56,8 +56,8 @@ export function PauseMenu(props: Props) {
 
 	return (
 		<Menu
-			submenu={submenu}
-			title={'Paused'}>
+			label={'Paused'}
+			submenu={submenu}>
 			<ButtonList isFullWidth>
 				<Button
 					isFullWidth

@@ -3,6 +3,13 @@ import {
 	useCallback,
 	useState,
 } from 'react'
+import { AnimatePresence } from 'motion/react'
+
+
+
+
+
+// Local imports
 import { Button } from '@/components/Button/Button'
 import { PauseMenu } from '@/components/PauseMenu/PauseMenu'
 
@@ -23,9 +30,13 @@ export function MenuControl() {
 				{'Menu'}
 			</Button>
 
-			{isOpen && (
-				<PauseMenu onClose={handleHide} />
-			)}
+			<AnimatePresence mode={'wait'}>
+				{isOpen && (
+					<PauseMenu
+						key={'pause-menu'}
+						onClose={handleHide} />
+				)}
+			</AnimatePresence>
 		</>
 	)
 }
