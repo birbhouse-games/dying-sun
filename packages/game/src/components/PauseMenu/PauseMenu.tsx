@@ -10,10 +10,14 @@ import {
 
 
 // Local imports
+import { AccessibilitySubMenu } from '@/components/AccessibilitySubMenu/AccessibilitySubMenu'
+import { AudioSubMenu } from '@/components/AudioSubMenu/AudioSubMenu'
 import { Button } from '@/components/Button/Button'
 import { ButtonList } from '@/components/ButtonList/ButtonList'
+import { ControlsSubMenu } from '@/components/ControlsSubMenu/ControlsSubMenu'
+import { GraphicsSubMenu } from '@/components/GraphicsSubMenu/GraphicsSubMenu'
+import { KeybindsSubMenu } from '@/components/KeybindsSubMenu/KeybindsSubMenu'
 import { Menu } from '@/components/Menu/Menu'
-import { Settings } from '@/components/Settings/Settings'
 
 import styles from './PauseMenu.module.scss'
 
@@ -50,19 +54,19 @@ export function PauseMenu(props: Props) {
 	const submenu = useMemo(() => {
 		switch (submenuKey) {
 			case 'accessibility':
-				return <Settings key={'accessibility-submenu'} />
+				return <AccessibilitySubMenu key={'accessibility-submenu'} />
 
 			case 'audio':
-				return <Settings key={'audio-submenu'} />
+				return <AudioSubMenu key={'audio-submenu'} />
 
 			case 'controls':
-				return <Settings key={'controls-submenu'} />
+				return <ControlsSubMenu key={'controls-submenu'} />
 
 			case 'graphics':
-				return <Settings key={'graphics-submenu'} />
+				return <GraphicsSubMenu key={'graphics-submenu'} />
 
 			case 'keybinds':
-				return <Settings key={'keybinds-submenu'} />
+				return <KeybindsSubMenu key={'keybinds-submenu'} />
 
 			default:
 				return null

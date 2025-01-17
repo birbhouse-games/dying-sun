@@ -6,10 +6,8 @@ import { SubMenu } from '@/components/SubMenu/SubMenu'
 
 
 /** @type {React.FunctionComponent} */
-export function Settings() {
+export function ControlsSubMenu() {
 	return (
-		<SubMenu label={'Settings'}>
-			{'SETTINGS GO HERE'}
-		</SubMenu>
+		<SubMenu label={'Controls'} />
 	)
 }
