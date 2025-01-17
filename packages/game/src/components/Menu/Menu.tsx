@@ -8,7 +8,9 @@ import {
 import {
 	type PropsWithChildren,
 	type ReactNode,
+	useMemo,
 } from 'react'
+import classnames from 'classnames'
 
 
 
@@ -23,8 +25,9 @@ import styles from './Menu.module.scss'
 
 // Types
 type Props = PropsWithChildren<{
-	label: string,
-	submenu?: ReactNode,
+	className?: string
+	label: string
+	submenu?: ReactNode
 }>
 
 
@@ -80,12 +83,17 @@ const TOP_LEVEL_MENU_VARIANTS: Variants = {
 export function Menu(props: Props) {
 	const {
 		children,
+		className,
 		label,
 		submenu,
 	} = props
 
+	const compiledClassName = useMemo(() => {
+		return classnames(styles['container'], className)
+	}, [className])
+
 	return (
-		<div className={styles['container']}>
+		<div className={compiledClassName}>
 			<motion.div
 				animate={'visible'}
 				className={styles['background']}
@@ -119,7 +127,7 @@ export function Menu(props: Props) {
 				initial={'hidden'}
 				transition={SUBMENU_TRANSITION}
 				variants={SUBMENU_VARIANTS}>
-				<AnimatePresence>
+				<AnimatePresence mode={'wait'}>
 					{Boolean(submenu) && submenu}
 				</AnimatePresence>
 			</motion.div>

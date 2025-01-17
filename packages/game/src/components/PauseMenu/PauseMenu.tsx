@@ -15,6 +15,8 @@ import { ButtonList } from '@/components/ButtonList/ButtonList'
 import { Menu } from '@/components/Menu/Menu'
 import { Settings } from '@/components/Settings/Settings'
 
+import styles from './PauseMenu.module.scss'
+
 
 
 
@@ -23,6 +25,7 @@ import { Settings } from '@/components/Settings/Settings'
 interface Props {
 	onClose: () => void
 }
+type SubMenuKey = 'accessibility' | 'audio' | 'controls' | 'graphics' | 'keybinds' | null
 
 
 
@@ -34,41 +37,82 @@ interface Props {
 export function PauseMenu(props: Props) {
 	const { onClose } = props
 
-	const [submenuKey, setSubmenuKey] = useState<'settings' | null>(null)
+	const [submenuKey, setSubmenuKey] = useState<SubMenuKey>(null)
 
-	const handleSettingsClick = useCallback(() => {
-		if (submenuKey === 'settings') {
+	const handleSubMenuOpen = useCallback((newMenuKey: SubMenuKey) => () => {
+		if (submenuKey === newMenuKey) {
 			setSubmenuKey(null)
 		} else {
-			setSubmenuKey('settings')
+			setSubmenuKey(newMenuKey)
 		}
 	}, [submenuKey])
 
 	const submenu = useMemo(() => {
-		if (submenuKey === 'settings') {
-			return (
-				<Settings />
-			)
-		}
+		switch (submenuKey) {
+			case 'accessibility':
+				return <Settings key={'accessibility-submenu'} />
 
-		return null
+			case 'audio':
+				return <Settings key={'audio-submenu'} />
+
+			case 'controls':
+				return <Settings key={'controls-submenu'} />
+
+			case 'graphics':
+				return <Settings key={'graphics-submenu'} />
+
+			case 'keybinds':
+				return <Settings key={'keybinds-submenu'} />
+
+			default:
+				return null
+		}
 	}, [submenuKey])
 
 	return (
 		<Menu
+			className={styles['container']}
 			label={'Paused'}
 			submenu={submenu}>
 			<ButtonList isFullWidth>
 				<Button
 					isFullWidth
-					onClick={onClose}>
-					{'Resume'}
+					onClick={handleSubMenuOpen('graphics')}>
+					{'Graphics'}
 				</Button>
 
 				<Button
 					isFullWidth
-					onClick={handleSettingsClick}>
-					{'Settings'}
+					onClick={handleSubMenuOpen('audio')}>
+					{'Audio'}
+				</Button>
+
+				<Button
+					isFullWidth
+					onClick={handleSubMenuOpen('controls')}>
+					{'Controls'}
+				</Button>
+
+				<Button
+					isFullWidth
+					onClick={handleSubMenuOpen('keybinds')}>
+					{'Keybinds'}
+				</Button>
+
+				<Button
+					isFullWidth
+					onClick={handleSubMenuOpen('accessibility')}>
+					{'Accessibility'}
+				</Button>
+			</ButtonList>
+
+			<ButtonList
+				className={styles['bottom']}
+				isFullWidth>
+				<Button
+					isFullWidth
+					onClick={onClose}>
+					{'Resume'}
 				</Button>
 
 				<Button

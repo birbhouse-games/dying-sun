@@ -18,7 +18,8 @@ import styles from './ButtonList.module.scss'
 
 // Types
 type Props = PropsWithChildren<{
-	isFullWidth?: boolean,
+	className?: string
+	isFullWidth?: boolean
 }>
 
 
@@ -29,15 +30,19 @@ type Props = PropsWithChildren<{
 export function ButtonList(props: Props) {
 	const {
 		children,
+		className,
 		isFullWidth,
 	} = props
 
 	const compiledClassName = useMemo(() => {
-		return classnames({
+		return classnames(className, {
 			[styles['container']]: true,
 			[styles['is-full-width']]: isFullWidth,
 		})
-	}, [isFullWidth])
+	}, [
+		className,
+		isFullWidth,
+	])
 
 	return (
 		<div className={compiledClassName}>

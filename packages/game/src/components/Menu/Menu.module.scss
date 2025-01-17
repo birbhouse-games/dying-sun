@@ -24,8 +24,12 @@
 	}
 
 	.top-level {
+		align-content: stretch;
+		display: flex;
+		flex-direction: column;
 		height: 100%;
 		margin-left: calc(-5px * var(--ds--global--ui-scale));
+		padding-bottom: calc(5px * var(--ds--global--ui-scale));
 		padding-left: calc(10px * var(--ds--global--ui-scale));
 		padding-top: calc(20px * var(--ds--global--ui-scale));
 		position: relative;
@@ -54,6 +58,9 @@
 		}
 
 		> .content {
+			display: flex;
+			flex-direction: column;
+			flex-grow: 1;
 			position: relative;
 			z-index: 2;
 		}
