@@ -1,6 +1,6 @@
 // Module imports
 import {
-	type JSX,
+	type ComponentProps,
 	type PropsWithChildren,
 	useMemo,
 } from 'react'
@@ -18,7 +18,7 @@ import styles from './Button.module.scss'
 
 
 // Types
-type Props = PropsWithChildren<JSX.IntrinsicElements['button'] & {
+type Props = PropsWithChildren<ComponentProps<'button'> & {
 	isDisabled?: boolean,
 	isFullWidth?: boolean,
 	variant?: 'default' | 'danger',

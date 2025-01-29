@@ -18,6 +18,7 @@ import { useEffect } from 'react'
 import { actions } from '@/helpers/actions'
 import { Renderer } from '@/components/Renderer/Renderer'
 import { runSystems } from '@/helpers/runSystems'
+import { SoundSystem } from '@/components/SoundSystem/SoundSystem'
 import { useKeyboardStateSystem } from '@/hooks/useKeyboardStateSystem'
 import { Viewport } from '@/store/traits'
 
@@ -70,6 +71,9 @@ export function ApplicationEntryPoint() {
 	useKeyboardStateSystem()
 
 	return (
-		<Renderer />
+		<>
+			<SoundSystem />
+			<Renderer />
+		</>
 	)
 }

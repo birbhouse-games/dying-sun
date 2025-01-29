@@ -343,6 +343,7 @@ __metadata:
     "@eslint/js": "npm:^9.17.0"
     "@pixi/devtools": "npm:^2.0.1"
     "@pixi/react": "npm:8.0.0-beta.21"
+    "@pixi/sound": "npm:^6.0.1"
     "@types/eslint-plugin-jsx-a11y": "npm:^6.10.0"
     "@types/eslint__eslintrc": "npm:^2.1.2"
     "@types/matter-js": "npm:^0.19.8"
@@ -2151,6 +2152,15 @@ __metadata:
   version: 7.4.2
   resolution: "@pixi/runner@npm:7.4.2"
   checksum: 10c0/839f36ab55e6bf01e53683186a85c827137214d34c87245a096d4795fa1304a73cf1d85206ab7598b6929cf48b411ba73bd5407e6ab352d53ecac5f873986bcf
+  languageName: node
+  linkType: hard
+
+"@pixi/sound@npm:^6.0.1":
+  version: 6.0.1
+  resolution: "@pixi/sound@npm:6.0.1"
+  peerDependencies:
+    pixi.js: ^8.0.0
+  checksum: 10c0/03c0aca4cb9484b9d90b100a4e80efc2257c40f0e610aa7a6deeb079f8b3e4f84bfda02ae0032c8e2f9f16a942958f240daa139743819af8c40813928c4edaf0
   languageName: node
   linkType: hard
 
@@ -6974,8 +6984,8 @@ __metadata:
   linkType: hard
 
 "pixi.js@npm:^8.6.6":
-  version: 8.6.6
-  resolution: "pixi.js@npm:8.6.6"
+  version: 8.7.2
+  resolution: "pixi.js@npm:8.7.2"
   dependencies:
     "@pixi/colord": "npm:^2.9.6"
     "@types/css-font-loading-module": "npm:^0.0.12"
@@ -6986,7 +6996,7 @@ __metadata:
     eventemitter3: "npm:^5.0.1"
     ismobilejs: "npm:^1.1.1"
     parse-svg-path: "npm:^0.1.2"
-  checksum: 10c0/3623ca517ffd9ae1a371c03ac0ef4bf5ee3f9572a304e2ea113811572d2eaf7fbffd58c7e7529f5adca5d3db0c8757df8971f2f82a1941d8c53a7617453c6d84
+  checksum: 10c0/6b8d0588957e60a0cb096aa507c01f39266e7e122eb0491a9dfc65f6b1e07bab9c584cd82c7d06cd5f8a9f26773c7f4660f27f0c8c7c5360faa09c6df0479911
   languageName: node
   linkType: hard
 

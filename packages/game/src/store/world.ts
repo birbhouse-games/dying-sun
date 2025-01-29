@@ -13,9 +13,17 @@ import {
 	Time,
 	Viewport,
 } from './traits'
+import { AudioRegistry } from '@/store/traits/AudioRegistry'
 
 
 
 
 
-export const world = createWorld(AssetRegistry, Time, PhysicsEngine, Viewport, Input)
+export const world = createWorld(
+	AssetRegistry,
+	AudioRegistry,
+	Time,
+	PhysicsEngine,
+	Viewport,
+	Input,
+)

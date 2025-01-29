@@ -14,6 +14,7 @@ import {
 } from '@pixi/react'
 import {
 	Suspense,
+	useEffect,
 	useRef,
 } from 'react'
 import {
@@ -24,7 +25,7 @@ import {
 	useTrait,
 	WorldProvider,
 } from 'koota/react'
-import { LDTKLoader } from 'pixi-ldtk-loader'
+import { sound } from '@pixi/sound'
 
 
 
@@ -53,16 +54,9 @@ extend({
 	Sprite,
 })
 
-extensions.add(AsepriteJSONLoader)
-extensions.add(LDTKLoader)
-extensions.add(TiledTilemapLoader({ loadTilesets: true }))
-extensions.add(TiledTilesetLoader({ loadImages: true }))
 
 
 
-
-
-TextureStyle.defaultOptions.scaleMode = 'nearest'
 
 /**
  * The game renderer.
@@ -72,6 +66,25 @@ TextureStyle.defaultOptions.scaleMode = 'nearest'
 export function Game() {
 	const resizeToRef = useRef<HTMLDivElement>(null!)
 	const {	isLevelLoaded } = useTrait(world, AssetRegistry)!
+
+	useEffect(() => {
+		const tiledTilemapLoader = TiledTilemapLoader({ loadTilesets: true })
+		const tiledTilesetLoader = TiledTilesetLoader({ loadImages: true })
+
+		extensions.add(AsepriteJSONLoader)
+		extensions.add(tiledTilemapLoader)
+		extensions.add(tiledTilesetLoader)
+
+		sound.disableAutoPause = true
+
+		TextureStyle.defaultOptions.scaleMode = 'nearest'
+
+		return () => {
+			extensions.remove(AsepriteJSONLoader)
+			extensions.remove(tiledTilemapLoader)
+			extensions.remove(tiledTilesetLoader)
+		}
+	}, [])
 
 	return (
 		<div className={styles['wrapper']}>
