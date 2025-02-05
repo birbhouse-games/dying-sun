@@ -37,12 +37,12 @@
 		z-index: 3;
 
 		> .background {
-			background-image: url('assets/ui/menu.background.png');
+			background-image: url('/assets/ui/menu.background.png');
 			background-size: calc(64px * var(--ds--global--ui-scale));
 			border-image-outset: var(--ds-c--menu--border-width);
 			border-image-repeat: repeat;
 			border-image-slice: 15 fill;
-			border-image-source: url('assets/ui/menu.border.png');
+			border-image-source: url('/assets/ui/menu.border.png');
 			border-image-width: var(--ds-c--menu--border-width);
 			border-right-width: var(--ds-c--menu--border-width);
 			border-width: 0;
@@ -68,7 +68,7 @@
 		> .label {
 			border-image-repeat: repeat;
 			border-image-slice: var(--ds-c--menu--title--border-size) fill;
-			border-image-source: url('assets/ui/menu.title.frame.png');
+			border-image-source: url('/assets/ui/menu.title.frame.png');
 			border-image-width: var(--ds-c--menu--title--border-width);
 			font-family: 'Micro Chat';
 			font-size: var(--ds--global--font-size--large);

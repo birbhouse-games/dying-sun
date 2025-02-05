@@ -2,11 +2,11 @@
 	--ds-c--frame--border-size: 5;
 	--ds-c--frame--border-width: calc(var(--ds-c--frame--border-size) * var(--ds--global--ui-scale) * 1px);
 
-	background-image: url('assets/ui/frame.background.default.png');
+	background-image: url('/assets/ui/frame.background.default.png');
 	background-size: calc(64px * var(--ds--global--ui-scale));
 	border-image-outset: calc(1px * var(--ds--global--ui-scale));
 	border-image-slice: var(--ds-c--frame--border-size);
-	border-image-source: url('assets/ui/frame.border.default.png');
+	border-image-source: url('/assets/ui/frame.border.default.png');
 	border-image-repeat: repeat;
 	border-image-width: var(--ds-c--frame--border-width);
 	color: black;

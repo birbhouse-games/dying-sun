@@ -30,7 +30,7 @@
 				var(--ds-c--slider--border-size-y)
 				var(--ds-c--slider--border-size-x)
 				fill;
-			border-image-source: url('assets/ui/slider.background.png');
+			border-image-source: url('/assets/ui/slider.background.png');
 			border-image-repeat: repeat;
 			border-image-width:
 				var(--ds-c--slider--border-width-y)
@@ -41,7 +41,7 @@
 		&::-webkit-slider-thumb {
 			-webkit-appearance: none;
 			appearance: none;
-			background-image: url('assets/ui/slider.thumb.png');
+			background-image: url('/assets/ui/slider.thumb.png');
 			background-size: cover;
 			cursor: pointer;
 			height: calc(9px * var(--ds--global--ui-scale));

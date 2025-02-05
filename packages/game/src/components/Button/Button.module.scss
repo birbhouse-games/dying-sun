@@ -39,7 +39,7 @@
 
 	.background {
 		border-image-slice: var(--ds-c--button--border-size) fill;
-		border-image-source: url('assets/ui/button.png');
+		border-image-source: url('/assets/ui/button.png');
 		border-image-repeat: repeat;
 		border-image-width: var(--ds-c--button--border-width);
 		filter: brightness(1);
