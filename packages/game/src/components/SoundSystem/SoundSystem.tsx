@@ -1,6 +1,9 @@
 // Module imports
+import {
+	useEffect,
+	useState,
+} from 'react'
 import { sound } from '@pixi/sound'
-import { useEffect } from 'react'
 import { useTrait } from 'koota/react'
 
 
@@ -23,33 +26,72 @@ import { world } from '@/store/world'
 export function SoundSystem() {
 	const {
 		globalVolume,
+		isMusicEnabled,
+		isSFXEnabled,
 		musicRegistry,
 		musicVolume,
 		sfxRegistry,
 		sfxVolume,
 	} = useTrait(world, AudioRegistry)!
 
-	useEffect(() => {
-		sound.volumeAll = globalVolume
-	}, [globalVolume])
+	const [isLoaded, setIsLoaded] = useState(false)
 
 	useEffect(() => {
-		for (const soundItem of Object.values(musicRegistry)) {
-			soundItem.volume = musicVolume
+		if (isLoaded) {
+			sound.volumeAll = globalVolume
+			localStorage.setItem('globalVolume', JSON.stringify(globalVolume))
 		}
 	}, [
+		globalVolume,
+		isLoaded,
+	])
+
+	useEffect(() => {
+		if (isLoaded) {
+			for (const soundItem of Object.values(musicRegistry)) {
+				soundItem.volume = isMusicEnabled ? musicVolume : 0
+			}
+
+			localStorage.setItem('isMusicEnabled', JSON.stringify(isMusicEnabled))
+			localStorage.setItem('musicVolume', JSON.stringify(musicVolume))
+		}
+	}, [
+		isLoaded,
+		isMusicEnabled,
 		musicRegistry,
 		musicVolume,
 	])
 
 	useEffect(() => {
-		for (const soundItem of Object.values(sfxRegistry)) {
-			soundItem.volume = sfxVolume
+		if (isLoaded) {
+			if (isSFXEnabled) {
+				for (const soundItem of Object.values(sfxRegistry)) {
+					soundItem.volume = isSFXEnabled ? sfxVolume : 0
+				}
+			}
+
+			localStorage.setItem('isSFXEnabled', JSON.stringify(isSFXEnabled))
+			localStorage.setItem('sfxVolume', JSON.stringify(sfxVolume))
 		}
 	}, [
+		isLoaded,
+		isSFXEnabled,
 		sfxRegistry,
 		sfxVolume,
 	])
+
+	useEffect(() => {
+		if (!isLoaded) {
+			world.set(AudioRegistry, {
+				globalVolume: JSON.parse(localStorage.getItem('globalVolume') ?? '0.8'),
+				isMusicEnabled: JSON.parse(localStorage.getItem('isMusicEnabled') ?? 'true'),
+				isSFXEnabled: JSON.parse(localStorage.getItem('isSFXEnabled') ?? 'true'),
+				musicVolume: JSON.parse(localStorage.getItem('musicVolume') ?? '0.8'),
+				sfxVolume: JSON.parse(localStorage.getItem('sfxVolume') ?? '0.8'),
+			})
+			setIsLoaded(true)
+		}
+	}, [isLoaded])
 
 	return null
 }

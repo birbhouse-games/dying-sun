@@ -16,6 +16,7 @@ import { world } from '@/store/world'
 /** Plays sounds when appropriate. */
 export function audioSystem() {
 	const {
+		isMusicEnabled,
 		musicRegistry,
 		musicVolume,
 	} = world.get(AudioRegistry)!
@@ -25,7 +26,7 @@ export function audioSystem() {
 	if (!backgroundMusic) {
 		backgroundMusic = Assets.get('audio/main-theme')!
 		musicRegistry.backgroundMusic = backgroundMusic
-		backgroundMusic.volume = musicVolume
+		backgroundMusic.volume = isMusicEnabled ? musicVolume : 0
 		backgroundMusic.play({ loop: true })
 	}
 }
