@@ -1,5 +1,6 @@
 // Module imports
 import {
+	type CustomBool,
 	type CustomInt,
 	type CustomString,
 	type Point,
@@ -21,6 +22,7 @@ export type SpawnPoint = Point<{
 	delay?: CustomInt,
 	entityType: CustomString<keyof typeof ACTOR_CATALOGUE>,
 	frequency?: CustomInt,
+	isPlayer?: CustomBool,
 	maxEntityCount?: CustomInt,
 	spawnsOn: CustomString<SpawnsOnType>,
 }>

@@ -343,6 +343,7 @@ __metadata:
     "@eslint/js": "npm:^9.17.0"
     "@pixi/devtools": "npm:^2.0.1"
     "@pixi/react": "npm:8.0.0-beta.21"
+    "@pixi/sound": "npm:^6.0.1"
     "@types/eslint-plugin-jsx-a11y": "npm:^6.10.0"
     "@types/eslint__eslintrc": "npm:^2.1.2"
     "@types/matter-js": "npm:^0.19.8"
@@ -353,6 +354,7 @@ __metadata:
     "@typescript-eslint/parser": "npm:8.19.0"
     "@vitejs/plugin-react": "npm:^4.3.4"
     behaviortree: "npm:^3.0.0-beta.1"
+    classnames: "npm:^2.5.1"
     eslint: "npm:^9.17.0"
     eslint-plugin-editorconfig: "npm:^4.0.3"
     eslint-plugin-import: "npm:^2.31.0"
@@ -372,6 +374,7 @@ __metadata:
     globals: "npm:^15.14.0"
     koota: "npm:^0.1.12"
     matter-js: "npm:^0.20.0"
+    motion: "npm:^11.18.0"
     pixi-ldtk-loader: "npm:^2.3.3"
     pixi-tiled-loader: "npm:^1.3.1"
     pixi.js: "npm:^8.6.6"
@@ -2152,6 +2155,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@pixi/sound@npm:^6.0.1":
+  version: 6.0.1
+  resolution: "@pixi/sound@npm:6.0.1"
+  peerDependencies:
+    pixi.js: ^8.0.0
+  checksum: 10c0/03c0aca4cb9484b9d90b100a4e80efc2257c40f0e610aa7a6deeb079f8b3e4f84bfda02ae0032c8e2f9f16a942958f240daa139743819af8c40813928c4edaf0
+  languageName: node
+  linkType: hard
+
 "@pkgjs/parseargs@npm:^0.11.0":
   version: 0.11.0
   resolution: "@pkgjs/parseargs@npm:0.11.0"
@@ -3318,6 +3330,13 @@ __metadata:
   version: 2.0.0
   resolution: "ci-info@npm:2.0.0"
   checksum: 10c0/8c5fa3830a2bcee2b53c2e5018226f0141db9ec9f7b1e27a5c57db5512332cde8a0beb769bcbaf0d8775a78afbf2bb841928feca4ea6219638a5b088f9884b46
+  languageName: node
+  linkType: hard
+
+"classnames@npm:^2.5.1":
+  version: 2.5.1
+  resolution: "classnames@npm:2.5.1"
+  checksum: 10c0/afff4f77e62cea2d79c39962980bf316bacb0d7c49e13a21adaadb9221e1c6b9d3cdb829d8bb1b23c406f4e740507f37e1dcf506f7e3b7113d17c5bab787aa69
   languageName: node
   linkType: hard
 
@@ -4782,6 +4801,28 @@ __metadata:
     cross-spawn: "npm:^7.0.0"
     signal-exit: "npm:^4.0.1"
   checksum: 10c0/028f1d41000553fcfa6c4bb5c372963bf3d9bf0b1f25a87d1a6253014343fb69dfb1b42d9625d7cf44c8ba429940f3d0ff718b62105d4d4a4f6ef8ca0a53faa2
+  languageName: node
+  linkType: hard
+
+"framer-motion@npm:^11.18.0":
+  version: 11.18.0
+  resolution: "framer-motion@npm:11.18.0"
+  dependencies:
+    motion-dom: "npm:^11.16.4"
+    motion-utils: "npm:^11.16.0"
+    tslib: "npm:^2.4.0"
+  peerDependencies:
+    "@emotion/is-prop-valid": "*"
+    react: ^18.0.0 || ^19.0.0
+    react-dom: ^18.0.0 || ^19.0.0
+  peerDependenciesMeta:
+    "@emotion/is-prop-valid":
+      optional: true
+    react:
+      optional: true
+    react-dom:
+      optional: true
+  checksum: 10c0/7f3c1e420bca2d920b7f48dfb54b072938771f9237feed02d576884398f4a68ccb2d1ae36b28cf2410dbfe2db6edb4c03429a1d896e789d08a972360c6ad82b1
   languageName: node
   linkType: hard
 
@@ -6301,6 +6342,43 @@ __metadata:
   languageName: node
   linkType: hard
 
+"motion-dom@npm:^11.16.4":
+  version: 11.16.4
+  resolution: "motion-dom@npm:11.16.4"
+  dependencies:
+    motion-utils: "npm:^11.16.0"
+  checksum: 10c0/66de6d40aef59d3004aaf17e39c7c2d2c679306207fdb28c73917d6a05e8c962747fea53d2e516c25d994109d38e127943a759fed18a0fadfc2572a3335fc0d2
+  languageName: node
+  linkType: hard
+
+"motion-utils@npm:^11.16.0":
+  version: 11.16.0
+  resolution: "motion-utils@npm:11.16.0"
+  checksum: 10c0/e68efa08b9546a2fb065537cedcbab1a416d43cdc5773e02ea01408c276e56bbea9ef76d330e80d8536a6ac585b0bbb6f4f2b9d97637d8d36418483e4492ddff
+  languageName: node
+  linkType: hard
+
+"motion@npm:^11.18.0":
+  version: 11.18.0
+  resolution: "motion@npm:11.18.0"
+  dependencies:
+    framer-motion: "npm:^11.18.0"
+    tslib: "npm:^2.4.0"
+  peerDependencies:
+    "@emotion/is-prop-valid": "*"
+    react: ^18.0.0 || ^19.0.0
+    react-dom: ^18.0.0 || ^19.0.0
+  peerDependenciesMeta:
+    "@emotion/is-prop-valid":
+      optional: true
+    react:
+      optional: true
+    react-dom:
+      optional: true
+  checksum: 10c0/2c482d37faa76581a14c5670db193a98d541d333f19500cf5176ae460089969e96986a62a9922f14f9e184b8073b98687d412847dd976c6654b340892216eae7
+  languageName: node
+  linkType: hard
+
 "ms@npm:^2.1.1, ms@npm:^2.1.3":
   version: 2.1.3
   resolution: "ms@npm:2.1.3"
@@ -6906,8 +6984,8 @@ __metadata:
   linkType: hard
 
 "pixi.js@npm:^8.6.6":
-  version: 8.6.6
-  resolution: "pixi.js@npm:8.6.6"
+  version: 8.7.2
+  resolution: "pixi.js@npm:8.7.2"
   dependencies:
     "@pixi/colord": "npm:^2.9.6"
     "@types/css-font-loading-module": "npm:^0.0.12"
@@ -6918,7 +6996,7 @@ __metadata:
     eventemitter3: "npm:^5.0.1"
     ismobilejs: "npm:^1.1.1"
     parse-svg-path: "npm:^0.1.2"
-  checksum: 10c0/3623ca517ffd9ae1a371c03ac0ef4bf5ee3f9572a304e2ea113811572d2eaf7fbffd58c7e7529f5adca5d3db0c8757df8971f2f82a1941d8c53a7617453c6d84
+  checksum: 10c0/6b8d0588957e60a0cb096aa507c01f39266e7e122eb0491a9dfc65f6b1e07bab9c584cd82c7d06cd5f8a9f26773c7f4660f27f0c8c7c5360faa09c6df0479911
   languageName: node
   linkType: hard
 

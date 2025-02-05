@@ -14,6 +14,7 @@ import {
 } from '@pixi/react'
 import {
 	Suspense,
+	useEffect,
 	useRef,
 } from 'react'
 import {
@@ -24,7 +25,7 @@ import {
 	useTrait,
 	WorldProvider,
 } from 'koota/react'
-import { LDTKLoader } from 'pixi-ldtk-loader'
+import { sound } from '@pixi/sound'
 
 
 
@@ -36,6 +37,7 @@ import { AsepriteJSONLoader } from '@/helpers/AsepriteJSONLoader'
 import { AssetRegistry } from '@/store/traits'
 import { AssetsLoader } from '@/components/AssetsLoader/AssetsLoader'
 import { DebugRenderer } from '@/components/DebugRenderer/DebugRenderer'
+import { UIWrapper } from '@/components/UIWrapper/UIWrapper'
 import { world } from '@/store/world'
 
 import styles from './Game.module.scss'
@@ -52,19 +54,12 @@ extend({
 	Sprite,
 })
 
-extensions.add(AsepriteJSONLoader)
-extensions.add(LDTKLoader)
-extensions.add(TiledTilemapLoader({ loadTilesets: true }))
-extensions.add(TiledTilesetLoader({ loadImages: true }))
 
 
 
-
-
-TextureStyle.defaultOptions.scaleMode = 'nearest'
 
 /**
- * The main page.
+ * The game renderer.
  *
  * @component
  */
@@ -72,33 +67,58 @@ export function Game() {
 	const resizeToRef = useRef<HTMLDivElement>(null!)
 	const {	isLevelLoaded } = useTrait(world, AssetRegistry)!
 
+	useEffect(() => {
+		const tiledTilemapLoader = TiledTilemapLoader({ loadTilesets: true })
+		const tiledTilesetLoader = TiledTilesetLoader({ loadImages: true })
+
+		extensions.add(AsepriteJSONLoader)
+		extensions.add(tiledTilemapLoader)
+		extensions.add(tiledTilesetLoader)
+
+		sound.disableAutoPause = true
+
+		TextureStyle.defaultOptions.scaleMode = 'nearest'
+
+		return () => {
+			extensions.remove(AsepriteJSONLoader)
+			extensions.remove(tiledTilemapLoader)
+			extensions.remove(tiledTilesetLoader)
+		}
+	}, [])
+
 	return (
-		<WorldProvider world={world}>
-			<main
-				ref={resizeToRef}
-				className={styles['container']}>
-				<Suspense>
-					{!isLevelLoaded && (
-						<AssetsLoader />
-					)}
+		<div className={styles['wrapper']}>
+			<WorldProvider world={world}>
+				<main
+					ref={resizeToRef}
+					className={styles['container']}>
+					<Suspense>
+						{!isLevelLoaded && (
+							<AssetsLoader />
+						)}
 
-					{isLevelLoaded && (
-						<Application
-							antialias={false}
-							attachToDevTools
-							autoDensity
-							resizeTo={resizeToRef}
-							resolution={window.devicePixelRatio ?? 1}
-							roundPixels>
-							<Suspense fallback={<pixiText text={'Loading...'} />}>
-								<ApplicationEntryPoint />
-							</Suspense>
-						</Application>
-					)}
+						{isLevelLoaded && (
+							<>
+								<Application
+									antialias={false}
+									attachToDevTools
+									autoDensity
+									resizeTo={resizeToRef}
+									resolution={window.devicePixelRatio ?? 1}
+									roundPixels>
+									<Suspense fallback={<pixiText text={'Loading...'} />}>
+										<ApplicationEntryPoint />
+									</Suspense>
+								</Application>
 
-					<DebugRenderer />
-				</Suspense>
-			</main>
-		</WorldProvider>
+								<UIWrapper />
+							</>
+						)}
+
+						<DebugRenderer />
+					</Suspense>
+				</main>
+			</WorldProvider>
+		</div>
 	)
 }

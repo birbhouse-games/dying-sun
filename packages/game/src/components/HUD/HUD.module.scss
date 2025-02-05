@@ -1,0 +1,12 @@
+.container {
+	display: grid;
+	grid-template-areas:
+		'main-player-details . .'
+		'. . .'
+		'party-details . meta-controls';
+	grid-template-columns: auto 1fr auto;
+	grid-template-rows: auto 1fr auto;
+	inset: 0;
+	padding: calc(2px * var(--ds--global--ui-scale));
+	position: absolute;
+}

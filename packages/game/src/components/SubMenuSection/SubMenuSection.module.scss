@@ -1,0 +1,28 @@
+.container {
+	+ .container {
+		margin-top: calc(10px * var(--ds--global--ui-scale));
+	}
+
+	.content {
+		column-gap: calc(4px * var(--ds--global--ui-scale));
+		display: grid;
+		grid-template-columns: auto 1fr;
+		justify-content: flex-end;
+		padding-left: calc(4px * var(--ds--global--ui-scale));
+		padding-top: calc(4px * var(--ds--global--ui-scale));
+	}
+
+	.label {
+		display: flex;
+		font-size: var(--ds--global--font-size--medium);
+
+		&::after {
+			background-color: black;
+			content: '';
+			flex-grow: 1;
+			height: calc(1px * var(--ds--global--ui-scale));
+			margin-left: calc(4px * var(--ds--global--ui-scale));
+			margin-top: calc(1px * var(--ds--global--ui-scale));
+		}
+	}
+}

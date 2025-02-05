@@ -1,0 +1,19 @@
+.container {
+	height: 95vh;
+	margin-left: calc(-10px * var(--ds--global--ui-scale));
+	padding: calc(10px * var(--ds--global--ui-scale));
+	padding-left: calc(30px * var(--ds--global--ui-scale));
+	width: 60vw;
+
+	.content {
+		display: flex;
+		flex-direction: column;
+		gap: calc(4px * var(--ds--global--ui-scale));
+	}
+
+	.label {
+		margin-bottom: calc(4px * var(--ds--global--ui-scale));
+		font-family: 'Micro Chat';
+		font-size: var(--ds--global--font-size--large);
+	}
+}

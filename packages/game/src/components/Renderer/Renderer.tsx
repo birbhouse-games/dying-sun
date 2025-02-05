@@ -13,7 +13,8 @@ import {
 	IsCamera,
 	Position,
 } from '@/store/traits'
-import { ActorRenderer } from '../ActorRenderer/ActorRenderer'
+import { ActorRenderer } from '@/components/ActorRenderer/ActorRenderer'
+import { BloodMoon } from '@/components/BloodMoon/BloodMoon'
 import { TileRenderer } from '@/components/TileRenderer/TileRenderer'
 
 
@@ -38,6 +39,7 @@ export function Renderer() {
 			x={position.x}
 			y={position.y}>
 			<TileRenderer />
+			<BloodMoon />
 			<ActorRenderer />
 		</container>
 	)

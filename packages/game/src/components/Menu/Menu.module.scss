@@ -1,0 +1,83 @@
+.container {
+	--ds-c--menu--border-width: calc(15px * var(--ds--global--ui-scale));
+
+	--ds-c--menu--title--border-size: 5;
+	--ds-c--menu--title--border-width: calc(var(--ds-c--menu--title--border-size) * var(--ds--global--ui-scale) * 1px);
+	--ds-c--menu--title--padding: calc(6px * var(--ds--global--ui-scale));
+
+	align-items: center;
+	color: white;
+	display: flex;
+	inset: 0;
+	position: absolute;
+
+	> .background {
+		background-color: rgba(black, 0.8);
+		inset: 0;
+		position: absolute;
+		z-index: 1;
+	}
+
+	.submenu-wrapper {
+		position: relative;
+		z-index: 2;
+	}
+
+	.top-level {
+		align-content: stretch;
+		display: flex;
+		flex-direction: column;
+		height: 100%;
+		margin-left: calc(-5px * var(--ds--global--ui-scale));
+		padding-bottom: calc(5px * var(--ds--global--ui-scale));
+		padding-left: calc(10px * var(--ds--global--ui-scale));
+		padding-top: calc(20px * var(--ds--global--ui-scale));
+		position: relative;
+		width: calc(90px * var(--ds--global--ui-scale));
+		z-index: 3;
+
+		> .background {
+			background-image: url('assets/ui/menu.background.png');
+			background-size: calc(64px * var(--ds--global--ui-scale));
+			border-image-outset: var(--ds-c--menu--border-width);
+			border-image-repeat: repeat;
+			border-image-slice: 15 fill;
+			border-image-source: url('assets/ui/menu.border.png');
+			border-image-width: var(--ds-c--menu--border-width);
+			border-right-width: var(--ds-c--menu--border-width);
+			border-width: 0;
+			bottom: 0;
+			content: '';
+			display: block;
+			left: 0;
+			position: absolute;
+			right: calc(8px * var(--ds--global--ui-scale));
+			right: 0;
+			top: 0;
+			z-index: 1;
+		}
+
+		> .content {
+			display: flex;
+			flex-direction: column;
+			flex-grow: 1;
+			position: relative;
+			z-index: 2;
+		}
+
+		> .label {
+			border-image-repeat: repeat;
+			border-image-slice: var(--ds-c--menu--title--border-size) fill;
+			border-image-source: url('assets/ui/menu.title.frame.png');
+			border-image-width: var(--ds-c--menu--title--border-width);
+			font-family: 'Micro Chat';
+			font-size: var(--ds--global--font-size--large);
+			margin-bottom: calc(10px * var(--ds--global--ui-scale));
+			padding: var(--ds-c--menu--title--padding);
+			position: relative;
+			text-align: center;
+			width: 100%;
+			z-index: 2;
+		}
+	}
+}

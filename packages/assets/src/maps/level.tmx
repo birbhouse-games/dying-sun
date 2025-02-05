@@ -104,6 +104,7 @@
    <object id="1" type="spawn" x="48" y="144">
     <properties>
      <property name="entityType" value="hero"/>
+     <property name="isPlayer" type="bool" value="true"/>
      <property name="maxEntityCount" type="int" value="1"/>
      <property name="spawnsOn" value="instant"/>
     </properties>

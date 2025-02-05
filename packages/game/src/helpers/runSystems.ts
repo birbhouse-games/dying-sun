@@ -8,6 +8,7 @@ import { Ticker } from 'pixi.js'
 // Local imports
 import { actorSystem } from '@/systems/actorSystem'
 import { attackSystem } from '@/systems/attackSystem'
+import { audioSystem } from '@/systems/audioSystem'
 import { behaviorSystem } from '@/systems/behaviorSystem'
 import { cameraSystem } from '@/systems/cameraSystem'
 import { controlsSystem } from '@/systems/controlsSystem'
@@ -37,4 +38,5 @@ export function runSystems(ticker: Ticker) {
 	actorSystem()
 	entitySortSystem()
 	cameraSystem()
+	audioSystem()
 }

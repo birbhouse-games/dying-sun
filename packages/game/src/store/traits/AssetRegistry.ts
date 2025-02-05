@@ -19,4 +19,3 @@ export const AssetRegistry = trait({
 		[key: string]: DefaultAssetsBundle | AssetsBundle | null,
 	},
 })
-

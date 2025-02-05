@@ -1,0 +1,12 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	font-family: 'Tiny Talk';
+	grid-area: main-player-details;
+
+	.name {
+		font-family: 'Micro Chat';
+		font-size: var(--ds--global--font-size--large);
+		margin-bottom: calc(4px * var(--ds--global--ui-scale));
+	}
+}
