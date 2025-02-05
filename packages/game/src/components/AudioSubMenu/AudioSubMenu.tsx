@@ -2,7 +2,6 @@
 import {
 	type ChangeEventHandler,
 	useCallback,
-	useState,
 } from 'react'
 import { useTrait } from 'koota/react'
 
@@ -37,12 +36,11 @@ const SFX_VOLUME_ID = 'sfx-volume'
 export function AudioSubMenu() {
 	const {
 		globalVolume,
+		isMusicEnabled,
+		isSFXEnabled,
 		musicVolume,
 		sfxVolume,
 	} = useTrait(world, AudioRegistry)!
-
-	const [isMusicEnabled, setIsMusicEnabled] = useState(true)
-	const [isSFXEnabled, setIsSFXEnabled] = useState(true)
 
 	const handleGlobalVolumeChange = useCallback<ChangeEventHandler<HTMLInputElement>>(event => {
 		world.set(AudioRegistry, {
@@ -51,7 +49,9 @@ export function AudioSubMenu() {
 	}, [])
 
 	const handleIsMusicEnabledChange = useCallback<ChangeEventHandler<HTMLInputElement>>(event => {
-		setIsMusicEnabled(event.target.checked)
+		world.set(AudioRegistry, {
+			isMusicEnabled: event.target.checked,
+		})
 	}, [])
 
 	const handleMusicVolumeChange = useCallback<ChangeEventHandler<HTMLInputElement>>(event => {
@@ -61,7 +61,9 @@ export function AudioSubMenu() {
 	}, [])
 
 	const handleIsSFXEnabledChange = useCallback<ChangeEventHandler<HTMLInputElement>>(event => {
-		setIsSFXEnabled(event.target.checked)
+		world.set(AudioRegistry, {
+			isSFXEnabled: event.target.checked,
+		})
 	}, [])
 
 	const handleSFXVolumeChange = useCallback<ChangeEventHandler<HTMLInputElement>>(event => {

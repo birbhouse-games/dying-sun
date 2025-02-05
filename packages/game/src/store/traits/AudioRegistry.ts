@@ -7,9 +7,11 @@ import { trait } from 'koota'
 
 
 export const AudioRegistry = trait({
-	globalVolume: 0.5,
+	globalVolume: 0.8,
+	isMusicEnabled: true,
+	isSFXEnabled: true,
 	musicRegistry: {} as Record<string, Sound>,
-	musicVolume: 0.5,
+	musicVolume: 0.8,
 	sfxRegistry: {} as Record<string, Sound>,
-	sfxVolume: 0.5,
+	sfxVolume: 0.8,
 })
