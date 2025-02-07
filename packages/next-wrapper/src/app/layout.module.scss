@@ -1,0 +1,16 @@
+:root {
+	&,
+	& body {
+		min-height: 100vh;
+		width: 100vw;
+	}
+
+	body {
+		align-items: stretch;
+		display: flex;
+		position: relative;
+		margin: 0;
+		height: 100vh;
+		width: 100vw;
+	}
+}

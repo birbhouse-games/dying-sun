@@ -1,16 +1,7 @@
 'use client'
 
 // Module imports
-import { Game } from '@dying-sun/game'
-import { useRef } from 'react'
-
-
-
-
-
-// Local imports
-
-import styles from './page.module.scss'
+import { EntryPoint } from '@dying-sun/game'
 
 
 
@@ -22,13 +13,7 @@ import styles from './page.module.scss'
  * @component
  */
 export default function HomePage() {
-	const resizeToRef = useRef(null)
-
 	return (
-		<main
-			className={styles['container']}
-			ref={resizeToRef}>
-			<Game />
-		</main>
+		<EntryPoint />
 	)
 }

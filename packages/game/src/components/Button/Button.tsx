@@ -1,7 +1,11 @@
 // Module imports
 import {
+	AnimatePresence,
+	motion,
+	MotionProps,
+} from 'motion/react'
+import {
 	type ComponentProps,
-	type PropsWithChildren,
 	useMemo,
 } from 'react'
 import classnames from 'classnames'
@@ -11,6 +15,8 @@ import classnames from 'classnames'
 
 
 // Local imports
+import { LoadingIcon } from '@/components/LoadingIcon/LoadingIcon'
+
 import styles from './Button.module.scss'
 
 
@@ -18,11 +24,35 @@ import styles from './Button.module.scss'
 
 
 // Types
-type Props = PropsWithChildren<ComponentProps<'button'> & {
+type ButtonProps = ComponentProps<'button'> & MotionProps
+type Props = ButtonProps & {
 	isDisabled?: boolean,
+	isLoading?: boolean,
 	isFullWidth?: boolean,
 	variant?: 'default' | 'danger',
-}>
+}
+
+
+
+
+
+// Constants
+const CONTENT_VARIANTS = {
+	hidden: {
+		opacity: 0,
+	},
+	visible: {
+		opacity: 1,
+	},
+}
+const LOADING_VARIANTS = {
+	hidden: {
+		opacity: 0,
+	},
+	visible: {
+		opacity: 1,
+	},
+}
 
 
 
@@ -34,7 +64,9 @@ export function Button(props: Props) {
 		children,
 		className,
 		isDisabled,
+		isLoading,
 		isFullWidth,
+		type = 'button',
 		variant = 'default',
 	} = props
 
@@ -42,39 +74,66 @@ export function Button(props: Props) {
 		return classnames({
 			[styles['button']]: true,
 			[styles['is-disabled']]: isDisabled,
+			[styles['is-loading']]: isLoading,
 			[styles['is-full-width']]: isFullWidth,
 			[styles[variant]]: true,
 		}, className)
 	}, [
 		className,
 		isDisabled,
+		isLoading,
 		isFullWidth,
 		variant,
 	])
 
-	const domProps = useMemo(() => {
-		/* eslint-disable no-shadow, @typescript-eslint/no-unused-vars */
-		const {
-			isDisabled,
-			isFullWidth,
-			...otherProps
-		} = props
-		/* eslint-enable no-shadow, @typescript-eslint/no-unused-vars */
+	const htmlProps = useMemo<ButtonProps>(() => {
+		const result = { ...props }
 
-		return otherProps
+		delete result.isDisabled
+		delete result.isLoading
+		delete result.isFullWidth
+		delete result.type
+
+		return result
 	}, [props])
 
 	return (
-		// eslint-disable-next-line react/forbid-elements
-		<button
-			{...domProps}
+		<motion.button
+			{...htmlProps}
 			className={compiledClassName}
-			disabled={isDisabled}>
+			disabled={isDisabled}
+			type={type}>
 			<div className={styles['shadow']} />
 			<div className={styles['background']} />
-			<div className={styles['content']}>
-				{children}
-			</div>
-		</button>
+			<AnimatePresence mode={'popLayout'}>
+				{!isLoading && (
+					<motion.div
+						key={'not-loading'}
+						animate={'visible'}
+						className={styles['content']}
+						exit={'hidden'}
+						initial={'hidden'}
+						layoutId={'not-loading'}
+						variants={CONTENT_VARIANTS}>
+						{children}
+					</motion.div>
+				)}
+
+				{isLoading && (
+					<motion.div
+						key={'loading'}
+						animate={'visible'}
+						className={styles['content']}
+						exit={'hidden'}
+						initial={'hidden'}
+						layoutId={'loading'}
+						variants={LOADING_VARIANTS}>
+						<LoadingIcon
+							className={styles['loading-icon']}
+							isDark />
+					</motion.div>
+				)}
+			</AnimatePresence>
+		</motion.button>
 	)
 }

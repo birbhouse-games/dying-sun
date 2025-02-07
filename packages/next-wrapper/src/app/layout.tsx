@@ -6,6 +6,13 @@ import { PropsWithChildren } from 'react'
 
 
 
+// Local imports
+import styles from './layout.module.scss'
+
+
+
+
+
 // Types
 type Props = PropsWithChildren
 
@@ -31,7 +38,9 @@ export default function RootLayout(props: Props) {
 	const { children } = props
 
 	return (
-		<html lang='en'>
+		<html
+			className={styles['container']}
+			lang='en'>
 			<body>
 				{children}
 			</body>
