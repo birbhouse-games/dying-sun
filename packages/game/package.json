@@ -19,6 +19,7 @@
     "@pixi/sound": "^6.0.1",
     "behaviortree": "^3.0.0-beta.1",
     "classnames": "^2.5.1",
+    "gamestats.js": "^1.0.7",
     "koota": "^0.3.1",
     "matter-js": "^0.20.0",
     "motion": "^12.3.1",

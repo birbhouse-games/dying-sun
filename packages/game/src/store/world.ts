@@ -15,6 +15,7 @@ import {
 } from './traits'
 import { AudioRegistry } from '@/store/traits/AudioRegistry'
 import { CurrentUser } from '@/store/traits/CurrentUser'
+import { PerformanceStats } from '@/store/traits/PerformanceStats'
 
 
 
@@ -25,6 +26,7 @@ export const world = createWorld(
 	AudioRegistry,
 	CurrentUser,
 	Time,
+	PerformanceStats,
 	PhysicsEngine,
 	Viewport,
 	Input,
