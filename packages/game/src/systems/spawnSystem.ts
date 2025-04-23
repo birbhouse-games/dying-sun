@@ -8,6 +8,7 @@ import {
 } from '@/store/traits'
 import { actions } from '@/helpers/actions'
 import { ACTOR_CATALOGUE } from '@/constants/ACTOR_CATALOGUE'
+import { type SystemRunner } from '@/typedefs/SystemRunner'
 import { world } from '@/store/world'
 
 
@@ -15,7 +16,7 @@ import { world } from '@/store/world'
 
 
 /** Spawns entities based on the spawn entity's state. */
-export function spawnSystem() {
+export const spawnSystem: SystemRunner = function spawnSystem() {
 	// Get world state
 	const { now } = world.get(Time)!
 	const viewport = world.get(Viewport)!

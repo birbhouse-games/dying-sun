@@ -4,7 +4,8 @@ import {
 	Time,
 } from '@/store/traits'
 import { ACTION_HANDLERS } from '@/constants/ACTION_HANDLERS'
-import { KEY_BINDINGS } from '@/constants/KEY_BINDINGS.ts'
+import { KEY_BINDINGS } from '@/constants/KEY_BINDINGS'
+import { type SystemRunner } from '@/typedefs/SystemRunner'
 import { world } from '@/store/world'
 
 
@@ -12,7 +13,7 @@ import { world } from '@/store/world'
 
 
 /** Updates the state of input controls based on the current keyboard/gamepad state. */
-export function controlsSystem() {
+export const controlsSystem: SystemRunner = function controlsSystem() {
 	const boundKeys = Object.keys(KEY_BINDINGS)
 	const { now } = world.get(Time)!
 	const input = world.get(Input)!

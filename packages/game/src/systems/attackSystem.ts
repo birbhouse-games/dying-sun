@@ -3,6 +3,7 @@ import {
 	Attacker,
 	Time,
 } from '@/store/traits'
+import { type SystemRunner } from '@/typedefs/SystemRunner'
 import { world } from '@/store/world'
 
 
@@ -10,7 +11,7 @@ import { world } from '@/store/world'
 
 
 /** Moves physics bodies based on their owner entity's velocity. */
-export function attackSystem() {
+export const attackSystem: SystemRunner = function attackSystem() {
 	const { now } = world.get(Time)!
 
 	world.query(Attacker).updateEach(([attacker]) => {

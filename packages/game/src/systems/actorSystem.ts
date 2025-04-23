@@ -10,6 +10,7 @@ import {
 	Actor,
 	Position,
 } from '@/store/traits'
+import { type SystemRunner } from '@/typedefs/SystemRunner'
 import { world } from '@/store/world'
 
 
@@ -17,7 +18,7 @@ import { world } from '@/store/world'
 
 
 /** Moves actor sprites based on their physics body's position. */
-export function actorSystem() {
+export const actorSystem: SystemRunner = function actorSystem() {
 	world.query(Actor, Position).updateEach(([actor, position]) => {
 		const collider = Composite.allBodies(actor.bodies).find(body => body.label === 'collider')!
 

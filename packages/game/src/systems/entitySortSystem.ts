@@ -14,6 +14,7 @@ import {
 	Rendering,
 } from '@/store/traits'
 import { quicksort } from '@/helpers/quicksort'
+import { type SystemRunner } from '@/typedefs/SystemRunner'
 import { world } from '@/store/world'
 
 
@@ -21,7 +22,7 @@ import { world } from '@/store/world'
 
 
 /** Sorts sprites based on where they should overlap. */
-export function entitySortSystem() {
+export const entitySortSystem: SystemRunner = function entitySortSystem() {
 	const entities = world.query(Rendering, Position, Not(IsBackground))
 	const sortedEntities = new Array<Entity>(...entities)
 

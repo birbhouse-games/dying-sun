@@ -7,6 +7,7 @@ import { Assets } from 'pixi.js'
 
 // Local imports
 import { AudioRegistry } from '@/store/traits/AudioRegistry'
+import { type SystemRunner } from '@/typedefs/SystemRunner'
 import { world } from '@/store/world'
 
 
@@ -14,7 +15,7 @@ import { world } from '@/store/world'
 
 
 /** Plays sounds when appropriate. */
-export function audioSystem() {
+export const audioSystem: SystemRunner = function audioSystem() {
 	const {
 		isMusicEnabled,
 		musicRegistry,
