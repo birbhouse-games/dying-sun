@@ -11,7 +11,9 @@ import {
 // Local imports
 import { Actor } from '@/store/traits'
 import { CurrentPlayer } from '@/store/traits/CurrentPlayer'
+import { CurrentUser } from '@/store/traits/CurrentUser'
 import { ResourceGauge } from '@/components/ResourceGauge/ResourceGauge'
+import { world } from '@/store/world'
 
 import styles from './MainPlayerDetails.module.scss'
 
@@ -27,8 +29,9 @@ import styles from './MainPlayerDetails.module.scss'
 export function MainPlayerDetails() {
 	const entity = useQueryFirst(CurrentPlayer, Actor)
 	const actorTrait = useTrait(entity, Actor)!
+	const currentUser = useTrait(world, CurrentUser)!
 
-	if (!entity || !actorTrait) {
+	if (!entity || !actorTrait || !currentUser.character) {
 		return null
 	}
 
@@ -37,12 +40,12 @@ export function MainPlayerDetails() {
 	return (
 		<div className={styles['container']}>
 			<div className={styles['name']}>
-				{'Maeve'}
+				{currentUser.character.name}
 			</div>
 
 			<ResourceGauge
 				current={health}
-				max={100}
+				max={currentUser.character.maxHealth}
 				title={'Health'} />
 		</div>
 	)

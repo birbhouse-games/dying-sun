@@ -154,7 +154,6 @@ export const ActorView = memo(({ entity }: { entity: Entity }) => {
 			<animatedSprite
 				ref={spriteRef}
 				anchor={ANCHOR}
-				// @ts-expect-error `animationSpeed` is missing from the Pixi React types.
 				animationSpeed={0.15}
 				loop={loop}
 				scale={spriteScale}

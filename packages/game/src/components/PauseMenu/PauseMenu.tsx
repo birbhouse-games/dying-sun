@@ -1,5 +1,11 @@
 // Module imports
 import {
+	Button,
+	ButtonList,
+	Menu,
+	SceneManager,
+} from '@dying-sun/shared-components'
+import {
 	useCallback,
 	useMemo,
 	useState,
@@ -12,12 +18,11 @@ import {
 // Local imports
 import { AccessibilitySubMenu } from '@/components/AccessibilitySubMenu/AccessibilitySubMenu'
 import { AudioSubMenu } from '@/components/AudioSubMenu/AudioSubMenu'
-import { Button } from '@/components/Button/Button'
-import { ButtonList } from '@/components/ButtonList/ButtonList'
 import { ControlsSubMenu } from '@/components/ControlsSubMenu/ControlsSubMenu'
+import { CurrentUser } from '@/store/traits/CurrentUser'
 import { GraphicsSubMenu } from '@/components/GraphicsSubMenu/GraphicsSubMenu'
 import { KeybindsSubMenu } from '@/components/KeybindsSubMenu/KeybindsSubMenu'
-import { Menu } from '@/components/Menu/Menu'
+import { world } from '@/store/world'
 
 import styles from './PauseMenu.module.scss'
 
@@ -42,6 +47,11 @@ export function PauseMenu(props: Props) {
 	const { onClose } = props
 
 	const [submenuKey, setSubmenuKey] = useState<SubMenuKey>(null)
+
+	const handleSaveAndExit = useCallback(() => {
+		SceneManager.activateScene('character-select')
+		world.set(CurrentUser, { character: null })
+	}, [])
 
 	const handleSubMenuOpen = useCallback((newMenuKey: SubMenuKey) => () => {
 		if (submenuKey === newMenuKey) {
@@ -121,6 +131,7 @@ export function PauseMenu(props: Props) {
 
 				<Button
 					isFullWidth
+					onClick={handleSaveAndExit}
 					variant={'danger'}>
 					{'Exit'}
 				</Button>

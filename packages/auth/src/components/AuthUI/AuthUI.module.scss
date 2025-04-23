@@ -1,0 +1,17 @@
+.wrapper {
+	align-items: center;
+	display: flex;
+	flex-direction: column;
+	flex-grow: 1;
+	justify-content: center;
+	min-height: 100%;
+	position: relative;
+	width: 100%;
+
+	.success-message {
+		line-height: 2;
+		min-width: 100%;
+		text-align: center;
+		width: 0;
+	}
+}

@@ -1,4 +1,8 @@
 // Module imports
+import {
+	Scene,
+	SceneManager,
+} from '@dying-sun/shared-components'
 import { useCallback } from 'react'
 
 
@@ -7,8 +11,6 @@ import { useCallback } from 'react'
 
 // Local imports
 import { AssetsLoader } from '@/components/AssetsLoader/AssetsLoader'
-import { Scene } from '@/components/Scene/Scene'
-import { useSceneManagerContext } from '@/components/SceneManager/SceneManagerContext'
 
 import styles from './LoadingScene.module.scss'
 
@@ -22,11 +24,9 @@ import styles from './LoadingScene.module.scss'
  * @type {React.FunctionComponent}
  */
 export function LoadingScene() {
-	const { activateScene } = useSceneManagerContext()
-
 	const handleComplete = useCallback(() => {
-		activateScene('login')
-	}, [activateScene])
+		SceneManager.activateScene('auth')
+	}, [])
 
 	return (
 		<Scene

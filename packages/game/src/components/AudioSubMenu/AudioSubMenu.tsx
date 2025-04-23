@@ -3,6 +3,10 @@ import {
 	type ChangeEventHandler,
 	useCallback,
 } from 'react'
+import {
+	Slider,
+	Switch,
+} from '@dying-sun/shared-components'
 import { useTrait } from 'koota/react'
 
 
@@ -11,10 +15,8 @@ import { useTrait } from 'koota/react'
 
 // Local imports
 import { AudioRegistry } from '@/store/traits/AudioRegistry'
-import { Slider } from '@/components/Slider/Slider'
 import { SubMenu } from '@/components/SubMenu/SubMenu'
 import { SubMenuSection } from '@/components/SubMenuSection/SubMenuSection'
-import { Switch } from '@/components/Switch/Switch'
 import { world } from '@/store/world'
 
 

@@ -14,6 +14,7 @@ import {
 	Viewport,
 } from './traits'
 import { AudioRegistry } from '@/store/traits/AudioRegistry'
+import { CurrentUser } from '@/store/traits/CurrentUser'
 
 
 
@@ -22,6 +23,7 @@ import { AudioRegistry } from '@/store/traits/AudioRegistry'
 export const world = createWorld(
 	AssetRegistry,
 	AudioRegistry,
+	CurrentUser,
 	Time,
 	PhysicsEngine,
 	Viewport,

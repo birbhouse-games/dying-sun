@@ -9,6 +9,7 @@ import {
 	TiledTilemapLoader,
 	TiledTilesetLoader,
 } from 'pixi-tiled-loader'
+import { SceneManager } from '@dying-sun/shared-components'
 import { sound } from '@pixi/sound'
 import { useLayoutEffect } from 'react'
 import { WorldProvider } from 'koota/react'
@@ -19,13 +20,11 @@ import { WorldProvider } from 'koota/react'
 
 // Local imports
 import { AsepriteJSONLoader } from '@/helpers/AsepriteJSONLoader'
+import { AuthScene } from '@/components/AuthScene/AuthScene'
+import { CharacterSelectScene } from '@/components/CharacterSelectScene/CharacterSelectScene'
 import { GameScene } from '@/components/GameScene/GameScene'
 import { LoadingScene } from '@/components/LoadingScene/LoadingScene'
-import { LoginScene } from '../LoginScene/LoginScene'
-import { SceneManager } from '@/components/SceneManager/SceneManager'
 import { world } from '@/store/world'
-
-import styles from './EntryPoint.module.scss'
 
 
 
@@ -57,14 +56,13 @@ export function EntryPoint() {
 	}, [])
 
 	return (
-		<div className={styles['container']}>
-			<WorldProvider world={world}>
-				<SceneManager>
-					<LoadingScene key={'scene::loading'} />
-					<LoginScene key={'scene::login'} />
-					<GameScene key={'scene::game'} />
-				</SceneManager>
-			</WorldProvider>
-		</div>
+		<WorldProvider world={world}>
+			<SceneManager>
+				<AuthScene key={'scene::login'} />
+				<CharacterSelectScene key={'scene::character-select'} />
+				<GameScene key={'scene::game'} />
+				<LoadingScene key={'scene::loading'} />
+			</SceneManager>
+		</WorldProvider>
 	)
 }

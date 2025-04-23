@@ -3,6 +3,7 @@ import {
 	type Transition,
 	type Variants,
 } from 'motion/react'
+import { Frame } from '@dying-sun/shared-components'
 import { type PropsWithChildren } from 'react'
 
 
@@ -10,7 +11,6 @@ import { type PropsWithChildren } from 'react'
 
 
 // Local imports
-import { Frame } from '@/components/Frame/Frame'
 
 import styles from './SubMenu.module.scss'
 

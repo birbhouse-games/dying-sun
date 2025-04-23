@@ -1,0 +1,16 @@
+.container {
+	border-color: transparent;
+	border-style: solid;
+	border-width: 1px;
+	padding: calc(4px * var(--ds--global--ui-scale));
+
+	.character-name {
+		font-family: 'Micro Chat';
+		font-size: var(--ds--global--font-size--large);
+		margin-bottom: calc(4px * var(--ds--global--ui-scale));
+	}
+
+	&.is-active {
+		border-color: red;
+	}
+}

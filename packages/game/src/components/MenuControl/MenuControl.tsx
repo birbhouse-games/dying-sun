@@ -4,13 +4,13 @@ import {
 	useState,
 } from 'react'
 import { AnimatePresence } from 'motion/react'
+import { Button } from '@dying-sun/shared-components'
 
 
 
 
 
 // Local imports
-import { Button } from '@/components/Button/Button'
 import { PauseMenu } from '@/components/PauseMenu/PauseMenu'
 
 

@@ -1,6 +1,12 @@
+// Module imports
+import { Scene } from '@dying-sun/shared-components'
+
+
+
+
+
 // Local imports
 import { Game } from '@/components/Game/Game'
-import { Scene } from '@/components/Scene/Scene'
 
 import styles from './GameScene.module.scss'
 

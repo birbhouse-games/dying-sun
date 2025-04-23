@@ -2,6 +2,7 @@
 
 // Module imports
 import { EntryPoint } from '@dying-sun/game'
+import { GlobalStyles } from '@dying-sun/shared-components'
 
 
 
@@ -14,6 +15,8 @@ import { EntryPoint } from '@dying-sun/game'
  */
 export default function HomePage() {
 	return (
-		<EntryPoint />
+		<GlobalStyles>
+			<EntryPoint />
+		</GlobalStyles>
 	)
 }

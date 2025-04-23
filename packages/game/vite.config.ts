@@ -1,45 +1,22 @@
 // Module imports
+import {
+	fileURLToPath,
+	URL,
+} from 'node:url'
 import { defineConfig } from 'vite'
-import path from 'node:path'
 import react from '@vitejs/plugin-react'
+import tsconfigPaths from 'vite-tsconfig-paths'
 
 
 
 
 
 export default defineConfig({
-	build: {
-		copyPublicDir: false,
-		lib: {
-			entry: path.resolve(
-				__dirname,
-				'src',
-				'components',
-				'Game',
-				'Game.tsx',
-			),
-			formats: ['es'],
-		},
-		rollupOptions: {
-			external: [
-				'react',
-				'react/jsx-runtime',
-			],
-		},
-	},
-	plugins: [react()],
-	publicDir: path.resolve(
-		__dirname,
-		'..',
-		'assets',
-		'public',
-	),
+	plugins: [react(), tsconfigPaths()],
+	publicDir: fileURLToPath(new URL('../assets/public', import.meta.url)),
 	resolve: {
 		alias: {
-			'@': path.resolve(
-				__dirname,
-				'src',
-			),
+			'@': fileURLToPath(new URL('./src', import.meta.url)),
 		},
 	},
 })
