@@ -1,0 +1,149 @@
+:root {
+	--ds-c--input--border-size: 3;
+	--ds-c--input--border-width: calc(var(--ds-c--input--border-size) * var(--ds--global--ui-scale) * 1px);
+	--ds-c--input--padding-x: calc(8px * var(--ds--global--ui-scale));
+	--ds-c--input--padding-y: calc(5px * var(--ds--global--ui-scale));
+	--ds-c--input--light-up--duration: 0.5s;
+
+	--ds-c--input--default--inactive--accent-color: #9badb7;
+	--ds-c--input--default--focus--accent-color: #2eb4ff;
+	--ds-c--input--error--focus--accent-color: red;
+	--ds-c--input--success--focus--accent-color: green;
+}
+
+.container {
+	--bars-accent-color: var(--ds-c--input--default--inactive--accent-color);
+	--text-accent-color: var(--ds-c--input--default--inactive--accent-color);
+
+	display: flex;
+	flex-direction: column;
+	font-size: var(--ds--global--font-size--medium);
+	gap: calc(2px * var(--ds--global--ui-scale));
+	line-height: 1;
+
+	.validation-messages {
+		color: #da1708;
+	}
+
+	.wrapper {
+		align-items: center;
+		display: flex;
+		justify-content: center;
+		position: relative;
+		transform:
+			translateX(0px)
+			translateY(0px);
+		transition-duration: var(--ds-c--input--light-up--duration);
+		transition-property:
+			color,
+			transform;
+
+		.background {
+			border-image-slice: var(--ds-c--input--border-size) fill;
+			border-image-source: url('/assets/ui/button.png');
+			border-image-repeat: repeat;
+			border-image-width: var(--ds-c--input--border-width);
+			filter: brightness(1);
+			inset: 0;
+			position: absolute;
+			transition-duration: var(--ds-c--input--light-up--duration);
+			transition-property: filter;
+			z-index: 2;
+
+			&:after,
+			&:before {
+				background-color: var(--bars-accent-color);
+				bottom: calc(4px * var(--ds--global--ui-scale));
+				content: '';
+				position: absolute;
+				top: calc(4px * var(--ds--global--ui-scale));
+				transition-duration: var(--ds-c--input--light-up--duration);
+				transition-property:
+					background-color,
+					box-shadow;
+				width: calc(1px * var(--ds--global--ui-scale));
+			}
+
+			&:after {
+				box-shadow: calc(-2px * var(--ds--global--ui-scale)) 0 var(--bars-accent-color);
+				right: calc(2px * var(--ds--global--ui-scale));
+			}
+
+			&:before {
+				box-shadow: calc(2px * var(--ds--global--ui-scale)) 0 var(--bars-accent-color);
+				left: calc(2px * var(--ds--global--ui-scale));
+			}
+		}
+
+		.input {
+			-webkit-appearance: none;
+			appearance: none;
+			background: none;
+			border: none;
+			color: var(--text-accent-color);
+			font-family: inherit;
+			font-size: inherit;
+			line-height: inherit;
+			outline: none;
+			padding:
+				var(--ds-c--input--padding-y)
+				var(--ds-c--input--padding-x);
+			position: relative;
+			transition: inherit;
+			z-index: 3;
+
+			&::placeholder {
+				opacity: 0.5;
+			}
+		}
+
+		.checkmark,
+		.x-mark {
+			background-size: cover;
+			height: calc(16px * var(--ds--global--ui-scale));
+			left: calc(100%);
+			position: absolute;
+			transform: translateY(-50%);
+			top: 50%;
+			width: calc(16px * var(--ds--global--ui-scale));
+		}
+
+		.checkmark {
+			background-image: url('/assets/ui/checkmark.png');
+		}
+
+		.x-mark {
+			background-image: url('/assets/ui/x-mark.png');
+		}
+	}
+
+	&.is-disabled {
+		filter: brightness(0.8);
+	}
+
+	&:not(.is-disabled) {
+		&:focus-within,
+		&:hover {
+			--bars-accent-color: var(--ds-c--input--default--focus--accent-color);
+			--text-accent-color: var(--ds-c--input--default--focus--accent-color);
+		}
+
+		&.is-invalid {
+			--bars-accent-color: var(--ds-c--input--error--focus--accent-color);
+
+			&:focus-within,
+			&:hover {
+				--text-accent-color: var(--ds-c--input--error--focus--accent-color);
+			}
+		}
+
+		&.is-valid {
+			--bars-accent-color: var(--ds-c--input--success--focus--accent-color);
+
+			&:focus-within,
+			&:hover {
+				--text-accent-color: var(--ds-c--input--success--focus--accent-color);
+			}
+		}
+	}
+}

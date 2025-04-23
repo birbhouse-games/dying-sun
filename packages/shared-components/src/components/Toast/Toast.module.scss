@@ -1,0 +1,90 @@
+:root {
+	--ds-c--toast--default--text-color: #9badb7;
+}
+
+.container {
+	color: var(--ds-c--toast--default--text-color);
+	display: flex;
+	gap: calc(2px * var(--ds--global--ui-scale));
+	line-height: 1;
+	padding:
+		calc(1px * var(--ds--global--ui-scale))
+		calc(2px * var(--ds--global--ui-scale));
+	position: relative;
+
+	.background {
+		background-color: white;
+		clip-path: polygon(
+			0 calc(1px * var(--ds--global--ui-scale)),
+			calc(1px * var(--ds--global--ui-scale)) calc(1px * var(--ds--global--ui-scale)),
+			calc(1px * var(--ds--global--ui-scale)) 0,
+			100% 0,
+			100% 100%,
+			calc(1px * var(--ds--global--ui-scale)) 100%,
+			calc(1px * var(--ds--global--ui-scale)) calc(100% - (1px * var(--ds--global--ui-scale))),
+			0 calc(100% - (1px * var(--ds--global--ui-scale))),
+		);
+		inset: 0;
+		overflow: hidden;
+		position: absolute;
+		z-index: 1;
+	}
+
+	.content {
+		line-height: 2;
+		position: relative;
+		z-index: 2;
+	}
+
+	.icon {
+		--size: calc((16px / 2) * var(--ds--global--ui-scale));
+
+		height: var(--size);
+		background-repeat: no-repeat;
+		background-size: var(--size) var(--size);
+		flex-shrink: 0;
+		width: var(--size);
+		z-index: 2;
+	}
+
+	.shadow {
+		background-color: #a49b93;
+		bottom: calc(-1px * var(--ds--global--ui-scale));
+		clip-path: polygon(
+			0 calc(1px * var(--ds--global--ui-scale)),
+			calc(1px * var(--ds--global--ui-scale)) calc(1px * var(--ds--global--ui-scale)),
+			calc(1px * var(--ds--global--ui-scale)) 0,
+			100% 0,
+			100% 100%,
+			calc(1px * var(--ds--global--ui-scale)) 100%,
+			calc(1px * var(--ds--global--ui-scale)) calc(100% - (1px * var(--ds--global--ui-scale))),
+			0 calc(100% - (1px * var(--ds--global--ui-scale))),
+		);
+		content: '';
+		left: 0;
+		right: calc(-1px * var(--ds--global--ui-scale));
+		position: absolute;
+		top: 0;
+		transition-duration: var(--ds-c--button--press--duration);
+		transition-property:
+			bottom,
+			right;
+		z-index: 1;
+	}
+
+	&.is-default .icon {
+		background-image: url('/assets/ui/square-circle.png');
+	}
+
+	&.is-error .icon {
+		background-image: url('/assets/ui/square-x-mark.png');
+	}
+
+	&.is-info .icon {
+		background-image: url('/assets/ui/square-info.png');
+	}
+
+	&.is-success .icon {
+		background-image: url('/assets/ui/square-checkmark.png');
+	}
+}

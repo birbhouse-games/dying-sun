@@ -1,0 +1,24 @@
+@use '../../styles/vars';
+@use '../../styles/fonts';
+
+.container {
+	align-content: stretch;
+	align-items: center;
+	color: white;
+	display: flex;
+	font-family: 'Tiny Talk';
+	font-size: var(--ds--global--font-size--small);
+	image-rendering: pixelated;
+	inset: 0;
+	line-height: 1;
+	overflow: hidden;
+	position: relative;
+	width: 100%;
+
+	justify-content: center;
+	min-height: 100vh;
+
+	* {
+		box-sizing: border-box;
+	}
+}

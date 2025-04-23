@@ -1,0 +1,12 @@
+.container {
+	--ds-c--toast--offset: calc(4px * var(--ds--global--ui-scale));
+
+	bottom: var(--ds-c--toast--offset);
+	display: flex;
+	flex-direction: column;
+	gap: var(--ds-c--toast--offset);
+	max-width: calc(80px * var(--ds--global--ui-scale));
+	position: absolute;
+	right: 0;
+	z-index: 100;
+}

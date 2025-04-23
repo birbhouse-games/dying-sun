@@ -1,0 +1,12 @@
+.container {
+	align-items: center;
+	background-color: black;
+	display: flex;
+	flex-direction: column;
+	flex-grow: 1;
+	font-size: var(--ds--global--font-size--medium);
+	justify-content: center;
+	min-height: 100%;
+	position: relative;
+	width: 100%;
+}
